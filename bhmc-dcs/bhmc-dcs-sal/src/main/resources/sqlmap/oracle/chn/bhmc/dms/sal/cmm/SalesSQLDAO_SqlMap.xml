@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="chn.bhmc.dms.sal.cmm.service.dao.SalesSQLDAO">
+
+    <!-- 딜러 정보 목록을 조회한다. -->
+    <select id="selectDealersByCondition" parameterType="SaleSQLViewVO" resultType="DealerVO">
+        /* [chn.bhmc.dms.sal.cmm.service.dao.SalesSQLDAO.selectDealersByCondition] */
+        SELECT * FROM CM_0101T@BHDMSOP
+        <where>
+            <if test='sOpenFromDt != null and sOpenFromDt != ""'>
+                AND OPEN_DT <![CDATA[>=]]> #{sOpenFromDt}
+            </if>
+            <if test='sOpenToDt != null and sOpenToDt != ""'>
+                AND OPEN_DT <![CDATA[<=]]> #{sOpenToDt}
+            </if>
+
+        </where>
+        ORDER BY DLR_CD ASC
+    </select>
+
+</mapper>

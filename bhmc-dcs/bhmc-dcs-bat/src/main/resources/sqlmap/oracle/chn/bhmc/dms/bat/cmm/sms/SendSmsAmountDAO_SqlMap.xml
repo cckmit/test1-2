@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="chn.bhmc.dms.bat.cmm.sms.service.dao.SendSmsAmountDAO">
+
+    <!--  Relay 서버에 SMS 전송할 메시지 조회한다. -->
+    <select id="selectDlrAllList" resultType="SendSmsAmountVO">
+
+        /* [chn.bhmc.dms.bat.cmm.sms.service.dao.SendSmsAmountDAO.selectDlrAllList] */
+        SELECT DLR_CD
+          FROM CM_0101T
+         WHERE DMS_USE_YN = 'Y'
+
+    </select>
+
+    <!-- 딜러별 예치금 잔액 저장한다. -->
+    <update id="updateSmsDlrAmount" parameterType="map" >
+        /* [chn.bhmc.dms.bat.cmm.sms.service.dao.SendSmsMessageDAO.updateSmsDlrAmount] */
+        UPDATE CM_0101T
+           SET SMS_REMAIN_AMOUNT = #{smsRemainAmount}
+             , SMS_REMAIN_CNT = #{smsRemainCnt}
+         WHERE DLR_CD = #{dlrCd}
+           AND DMS_USE_YN = 'Y'
+    </update>
+
+    <!-- z. -->
+    <update id="updateSmsDlrAmountIF" parameterType="map" >
+        /* [chn.bhmc.dms.bat.cmm.sms.service.dao.SendSmsMessageDAO.updateSmsDlrAmountIF] */
+        UPDATE CM_0101IS
+           SET SMS_REMAIN_AMOUNT = #{smsRemainAmount}
+             , SMS_REMAIN_CNT = #{smsRemainCnt}
+         WHERE DLR_CD = #{dlrCd}
+           AND DMS_USE_YN = 'Y'
+    </update>
+
+</mapper>

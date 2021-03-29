@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="chn.bhmc.dms.bat.crm.cif.service.dao.CustomerInfoToFmsDAO">
+
+    <select id="insertCustomerInfoToFms" statementType="CALLABLE">
+         {call SP_CRM_DCS_FMS_CR_0101I ()}
+    </select>
+</mapper>
