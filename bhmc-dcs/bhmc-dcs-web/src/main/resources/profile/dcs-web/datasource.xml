@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DatasourceManager xmlVersion="20151125" releaseVersion="8.0.0">
+<ConnectionMap>
+	<Connection name="BHDMS" class="com.fr.data.impl.JDBCDatabaseConnection">
+		<DatabaseAttr/>
+		<JDBCDatabaseAttr url="jdbc:oracle:thin:@10.125.211.137:1521:BHDMSOP" driver="oracle.jdbc.driver.OracleDriver" user="DMSDB" password="___00510006004e00420037008a000800260023007f0039" encryptPassword="true">
+			<DBCPAttr/>
+		</JDBCDatabaseAttr>
+	</Connection>
+</ConnectionMap>
+</DatasourceManager>
