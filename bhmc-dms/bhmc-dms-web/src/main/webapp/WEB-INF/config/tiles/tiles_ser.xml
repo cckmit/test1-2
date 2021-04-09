@@ -94,6 +94,7 @@
     </definition>
 
     <!-- 클레임 요청 메인 -->
+    <!-- 索赔申请 -->
     <definition name="/ser/wac/claimReq/selectClaimRequestMain" extends="defaultTemplate">
         <put-attribute name="body" value="/WEB-INF/jsp/ser/wac/claimReq/selectClaimRequestMain.jsp" />
     </definition>
@@ -1217,5 +1218,10 @@
      <!-- 优惠券明细查询 -->
     <definition name="/ser/cal/coupon/selectCouponMain" extends="defaultPopupTemplate">
         <put-attribute name="body" value="/WEB-INF/jsp/ser/cal/coupon/selectCouponMain.jsp" />
+    </definition>
+    
+    <!-- 保修工单确认申请-->
+    <definition name="/ser/wac/special/selectSpecialRequestMain" extends="defaultTemplate">
+        <put-attribute name="body" value="/WEB-INF/jsp/ser/wac/special/selectSpecialRequestMain.jsp" />
     </definition>
 </tiles-definitions>
