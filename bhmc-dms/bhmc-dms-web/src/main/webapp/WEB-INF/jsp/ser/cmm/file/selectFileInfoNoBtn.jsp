@@ -29,7 +29,8 @@
         <ul class="resumable-list"></ul>
     </div>
 </section>
-<input type="hidden" id="fileKeyNm" name="fileKeyNm" data-json-obj="true"/> <!-- File key -->
+ <input type="hidden" id="fileKeyNm" name="fileKeyNm" data-json-obj="true"/> 
+ <!-- <input id="fileKeyNm" name="fileKeyNm" data-json-obj="true"/> --> <!-- 文件的主id -->
 
 <script type="text/javascript">
 

@@ -1044,7 +1044,7 @@ pwaRequiSearchPopupWindow = function(){
 		                         getRequisitionFile(fileKeyNmVal,pwaDocNoVal);
 		                    }
 		                     //CSR 74 PWA申请单据，PWA类型1字段选择了延保索赔结算类型，文件子表也要继承延保索赔申请类型的 贾明 2020-4-20 end
-		                    //console.log("PWA申请文件编号",pwaInfos["fileKeyNm"]);
+		                    console.log("PWA申请文件编号",pwaInfos["fileKeyNm"]);
                             calTotAmt();
                      }
                 }

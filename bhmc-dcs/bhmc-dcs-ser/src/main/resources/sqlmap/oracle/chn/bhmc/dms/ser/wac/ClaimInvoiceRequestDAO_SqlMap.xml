@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+    SQL File Name : ClaimInvoiceRequestServiceDao.xml
+    Description : 삼보 요청 에 관한 데이터처리
+    author wangc
+    since 2021年4月8日
+    version 1.0
+-->
+
+
+<mapper namespace="chn.bhmc.dms.ser.wac.service.dao.ClaimInvoiceReceptionDao">
+
+
+
+</mapper>

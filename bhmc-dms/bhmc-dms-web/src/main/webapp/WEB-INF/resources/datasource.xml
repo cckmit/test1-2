@@ -3,7 +3,7 @@
 <ConnectionMap>
 	<Connection name="BHDMS" class="com.fr.data.impl.JDBCDatabaseConnection">
 		<DatabaseAttr/>
-		<JDBCDatabaseAttr url="jdbc:tibero:thin:@10.125.211.115:8629:BHDMS" driver="com.tmax.tibero.jdbc.TbDriver" user="DMSDB" password="___005700030059004b0026008a000800270022" encryptPassword="true">
+		<JDBCDatabaseAttr url="jdbc:tibero:thin:@192.168.110.75:8629:tibero" driver="com.tmax.tibero.jdbc.TbDriver" user="DMSDB" password="tibero" encryptPassword="true">
 			<DBCPAttr/>
 		</JDBCDatabaseAttr>
 	</Connection>

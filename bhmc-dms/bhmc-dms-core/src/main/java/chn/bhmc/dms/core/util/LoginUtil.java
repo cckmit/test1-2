@@ -35,7 +35,7 @@ public class LoginUtil {
 
     /**
      * 로그인 사용자 ID
-     *
+     *ID
      * @return
      */
     public static String getUserId() {
@@ -44,7 +44,7 @@ public class LoginUtil {
 
     /**
      * 로그인 사용자명
-     *
+     *登录用户名
      * @return
      */
     public static String getUserNm() {
@@ -53,7 +53,7 @@ public class LoginUtil {
 
     /**
      * 로그인 사용자 딜러코드
-     *
+     *登录用户控制器代码
      * @return
      */
     public static String getDlrCd() {
@@ -62,7 +62,7 @@ public class LoginUtil {
 
     /**
      * 로그인 사용자 사업부 코드
-     *
+     *登录用户事业部代码
      * @return
      */
     public static String getSdptCd() {
@@ -71,7 +71,7 @@ public class LoginUtil {
 
     /**
      * 로그인 사용자 지역사무소 코드
-     *
+     *登录用户区域事务所代码
      * @return
      */
     public static String getDistOfficeCd() {
@@ -80,7 +80,7 @@ public class LoginUtil {
 
     /**
      * 로그인 사용자 딜러명
-     *
+     *登录用户销售人名
      * @return
      */
     public static String getDlrNm() {
@@ -89,7 +89,7 @@ public class LoginUtil {
 
     /**
      * 로그인 사용자 언어코드
-     *
+     *登录用户语言代码
      * @return
      */
     public static String getLangCd() {
@@ -98,7 +98,7 @@ public class LoginUtil {
 
     /**
      * 로그인 사용자 플랜트 코드
-     *
+     *登录用户设备代码
      * @return
      */
     public static String getPltCd() {
@@ -106,7 +106,7 @@ public class LoginUtil {
     }
 
     /**
-     * 오픈일자(시스템 오픈일자)
+     * 오픈일자(시스템 오픈일자)公开赛日期
      * @return
      */
     public static String getOpenDt() {
@@ -115,7 +115,7 @@ public class LoginUtil {
 
     /**
      * 로그인 사용자 사원번호
-     *
+     *登录用户身份号
      * @return
      */
     public static String getEmpNo() {
@@ -124,7 +124,7 @@ public class LoginUtil {
 
     /**
      * 로그인 사용자 직무 코드
-     *
+     *登录用户职务代码
      * @return
      */
     public static String getTskCd() {
@@ -134,7 +134,7 @@ public class LoginUtil {
     // CRM-멤버십 옵션
     /**
      * 멤버십 운영기준
-     *
+     *会员运营标准
      * @return
      */
     public static String getMembershipPolicy() {
@@ -143,7 +143,7 @@ public class LoginUtil {
 
     /**
      * 멤버십 포인트 유효기간
-     *
+     *会员制积分有效期
      * @return
      */
     public static int getMembershipPointPeriod() {
@@ -152,7 +152,7 @@ public class LoginUtil {
 
     /**
      * 멤버십 포인트 사용 상한치
-     *
+     *会员积分使用上限
      * @return
      */
     public static int getMembershipPointUseMaxPoint() {
@@ -161,7 +161,7 @@ public class LoginUtil {
 
     /**
      * 회원등급 수동 변경여부
-     *
+     *是否修改会员等级
      * @return
      */
     public static String getMembershipGradeNoneAutoYn() {
@@ -170,7 +170,7 @@ public class LoginUtil {
 
     /**
      * 멤버십 포인트환산 기준포인트
-     *
+     *成员10点换算基准点
      * @return
      */
     public static int getMembershipPointExchgPoint() {
@@ -179,7 +179,7 @@ public class LoginUtil {
 
     /**
      * 멤버십 포인트환산 기준금액
-     *
+     *按会员制积分换算基准金额
      * @return
      */
     public static int getMembershipPointExchgMoney() {
@@ -189,7 +189,7 @@ public class LoginUtil {
     //시스템-옵션
     /**
      * 시스템 딜러여부
-     *
+     *系统是否经销商
      * @return
      */
     public static String getSysOwnerYn() {
@@ -198,7 +198,7 @@ public class LoginUtil {
 
     /**
      * 센터 DMS 사용딜러 여부
-     *
+     *是否使用经销商
      * @return
      */
     public static String getUseCenterDmsYn() {
@@ -208,7 +208,7 @@ public class LoginUtil {
     // CRM-판매기회 옵션
     /**
      * 자동배정기준
-     *
+     *销售机会选项
      * @return
      */
     public static String getAutoAssignCd() {
@@ -217,7 +217,7 @@ public class LoginUtil {
 
     /**
      * OB 배정 자동여부
-     *
+     *是否安排自动
      * @return
      */
     public static String getObAssignAutoYn() {
@@ -226,7 +226,7 @@ public class LoginUtil {
 
     /**
      * 자동전출설정(일)
-     *
+     *自动调设定
      * @return
      */
     public static String getAutoTrsfConf() {
@@ -235,7 +235,7 @@ public class LoginUtil {
 
     /**
      * 판매기회 비밀번호 설정여부
-     *
+     *是否为销售机会设定密码
      * @return
      */
     public static String getSalesOpptPwYn() {
@@ -253,7 +253,7 @@ public class LoginUtil {
     }
 
     /**
-     * 유효통과시간(초)
+     * 유효통과시간(초) 通过有效时间
      *
      * @return
      */
@@ -263,7 +263,7 @@ public class LoginUtil {
 
     //부품-옵션
     /**
-     * BMP거래처코드
+     * BMP거래처코드 客户代码
      *
      * @return
      */
@@ -272,7 +272,7 @@ public class LoginUtil {
     }
 
     /**
-     * PREFIX고객번호
+     * PREFIX고객번호号码
      *
      * @return
      */
@@ -281,7 +281,7 @@ public class LoginUtil {
     }
 
     /**
-     * 클레임 청구가능 여부
+     * 클레임 청구가능 여부 是否可以请求索赔
      * @return
      */
     public static String getClaimYn(){
@@ -295,7 +295,7 @@ public class LoginUtil {
 
     /**
      * 로그인 사용자 정보
-     *
+     * 登录用户信息
      * @return
      */
     public static CustomUserVO getUser() {

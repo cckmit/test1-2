@@ -20,12 +20,12 @@
 <!--                 <input type="hidden" id="defaultTargetUrl" name="defaultTargetUrl" value="/selectHome.do?viewId=VIEW-D-10313" /> -->
                 <div class="input_area">
                     <span class="icon_id"></span>
-                    <input type="text" id="usrId" name="usrId" placeholder="User ID" class="login_input">
+                    <input type="text" id="usrId" name="usrId" placeholder="User ID" class="login_input" value="admin">
                 </div>
 
                 <div class="input_area">
                     <span class="icon_pw"></span>
-                    <input type="password" id="usrPw" name="usrPw" placeholder="Password" class="login_input">
+                    <input type="password" id="usrPw" name="usrPw" placeholder="Password" class="login_input" value="P@ssw0rd">
                 </div>
             </form>
 

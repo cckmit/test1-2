@@ -2,8 +2,8 @@
 <Configuration status="ERROR">
     <Appenders>
         <!--APP ERROR LOG-->
-        <RollingFile name="APP_ERROR_LOG" fileName="D:/logs/bhmc-dms-app/error.log" filePattern="D:/logs/bhmc-dms-app/$${date:yyyy-MM}/app_error-%d{yyyy-MM-dd}-%i.log">
-            <PatternLayout charset="UTF-8" pattern="[DMSWEB_APP_ERROR] %d %-5p [%c:%L] %m%n"/>
+        <RollingFile name="APP_ERROR_LOG" fileName="C:/logs/bhmc-dms-app/error.log" filePattern="D:/logs/bhmc-dms-app/$${date:yyyy-MM}/app_error-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout pattern="[DMSWEB_APP_ERROR] %d %-5p [%c:%L] %m%n"/>
             <Policies>
                 <TimeBasedTriggeringPolicy/>
                 <SizeBasedTriggeringPolicy size="10 MB"/>
@@ -12,8 +12,8 @@
         </RollingFile>
 
         <!--APP ERROR LOG-->
-        <RollingFile name="INF_MONITOR_LOG" fileName="D:/logs/bhmc-dms-app/monitor.log" filePattern="D:/logs/bhmc-dms-app/$${date:yyyy-MM}/inf_monitor-%d{yyyy-MM-dd}-%i.log">
-            <PatternLayout charset="UTF-8" pattern="[DMSWEB_INF_MONITOR] %d %-5p [%c:%L] %m%n"/>
+        <RollingFile name="INF_MONITOR_LOG" fileName="C:/logs/bhmc-dms-app/monitor.log" filePattern="D:/logs/bhmc-dms-app/$${date:yyyy-MM}/inf_monitor-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout pattern="[DMSWEB_INF_MONITOR] %d %-5p [%c:%L] %m%n"/>
             <Policies>
                 <TimeBasedTriggeringPolicy/>
                 <SizeBasedTriggeringPolicy size="10 MB"/>
@@ -22,8 +22,8 @@
         </RollingFile>
         
         <!--SQL CONSOLE LOG   wushibin start-->
-        <RollingFile name="SQL_CONSOLE_LOG" fileName="D:/logs/bhmc-dms-app/console.log" filePattern="D:/logs/bhmc-dms-app/$${date:yyyy-MM}/sql_console-%d{yyyy-MM-dd}-%i.log">
-            <PatternLayout charset="UTF-8" pattern="%d %-5p [%c:%L] %m%n"/>
+        <RollingFile name="SQL_CONSOLE_LOG" fileName="C:/logs/bhmc-dms-app/console.log" filePattern="D:/logs/bhmc-dms-app/$${date:yyyy-MM}/sql_console-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout pattern="%d %-5p [%c:%L] %m%n"/>
             <Policies>
                 <TimeBasedTriggeringPolicy/>
                 <SizeBasedTriggeringPolicy size="10 MB"/>

@@ -54,11 +54,11 @@
             <!-- <input type="hidden" name="loginFailureUrl" value="/mob/cmm/login/selectLoginMain.do" /> -->
                <div class="input_area">
                     <span class="icon_id"></span>
-                    <input type="text" id="usrId" name="usrId" placeholder="User ID" value="" class="login_input">
+                    <input type="text" id="usrId" name="usrId" placeholder="User ID" value="" class="login_input" value="admin">
                 </div>
                 <div class="input_area">
                     <span class="icon_pw"></span>
-                    <input type="password" id="usrPw" name="usrPw" placeholder="Password" value="" class="login_input">
+                    <input type="password" id="usrPw" name="usrPw" placeholder="Password" value="" class="login_input" value="P@ssw0rd">
                 </div>
                 <!-- <div class="input_area">
                     <span class="icon_pw"></span>

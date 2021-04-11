@@ -19,6 +19,7 @@
     </definition>
 
     <!-- 공임관리 메인 -->
+    <!-- 维修工时管理 wangc 2021年4月8日09:51:18 -->
     <definition name="/ser/svi/laborManage/selectLaborCodeManageMain" extends="defaultTemplate">
         <put-attribute name="body" value="/WEB-INF/jsp/ser/svi/laborManage/selectLaborCodeManageMain.jsp" />
     </definition>
@@ -632,5 +633,12 @@
     <!-- 전일자 정비 현황 조회 화면  -->
     <definition name="/ser/svi/serviceHistory/selectServiceEveHistoryMain" extends="defaultTemplate">
         <put-attribute name="body" value="/WEB-INF/jsp/ser/svi/serviceHistory/selectServiceEveHistoryMain.jsp" />
+    </definition>
+    
+    
+    
+ 	<!-- 索赔发票接收 wangc 2021年4月8日09:51:18 -->
+    <definition name="/ser/wac/claimlnvoice/selectClaimInvoiceReceptionMain" extends="defaultTemplate">
+        <put-attribute name="body" value="/WEB-INF/jsp/ser/wac/claimlnvoice/selectClaimInvoiceReceptionMain.jsp" />
     </definition>
 </tiles-definitions>
