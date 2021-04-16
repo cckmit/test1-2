@@ -191,7 +191,7 @@
     		WHERE 1=1
     		AND INVC_NO = #{invcNo}
     </update>
-    
+    <!-- 导入excel的信息 -->
     <select id="selectClaimInvoiceReceptionByExcel" parameterType="chn.bhmc.dms.ser.wac.vo.ClaimInvoiceSearchVO" resultType="chn.bhmc.dms.ser.wac.vo.ClaimInvoiceExcelVO">
     	select invoices.DLR_CD, invoices.DLR_NM,invoices.INVC_NO,
 		      (select CMM_CD_NM from CM_0303T where CMM_CD = invoices.RECEIPT_TP and CMM_GRP_CD='SEF004') as RECEIPT_TP,
