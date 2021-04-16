@@ -679,7 +679,7 @@ $(document).ready(function (e){
         }
     });
 
-    //Excel下载操作
+    //Excel下载操作  wangc 2021年4月16日09:29:31
     $("#btnExcelExport").kendoButton({
         click:function(e){
         	 dms.ajax.excelExport({
