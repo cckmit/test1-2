@@ -257,18 +257,18 @@ $(document).ready(function (e){
      });
     
      /**提报开始日期 **/
-     $("#sFromReqDt").kendoExtMaskedDatePicker({
+      $("#sFromReqDt").kendoExtMaskedDatePicker({
          format:"<dms:configValue code='dateFormat' />"
          ,dateValidMessage:"<spring:message code='ser.lbl.date' var='dateMsg' /><spring:message code='global.err.invalid' arguments='${dateMsg}' />"
-         ,value:"${sFromReqDt}"
-     });
+         ,value:""
+     }); 
 
     /**提报结束日期**/
-     $("#sToReqDt").kendoExtMaskedDatePicker({
+      $("#sToReqDt").kendoExtMaskedDatePicker({
          format:"<dms:configValue code='dateFormat' />"
          ,dateValidMessage:"<spring:message code='ser.lbl.date' var='dateMsg' /><spring:message code='global.err.invalid' arguments='${dateMsg}' />"
-         ,value:"${sToReqDt}"
-     });
+         ,value:""
+     }); 
 
 
      /** 提报状态下拉列表 **/
