@@ -72,7 +72,7 @@ public class SpecialRequestServiceImpl extends HService implements SpecialReques
 	public int selectSpecialRequestForSpecialBySpecialCnt(SpecialRequestSearchVo searchVO) {
          
 		searchVO.setsLangCd(LocaleContextHolder.getLocale().getLanguage());//设置语言
-        
+		
 		return specialRequestDao.selectSpecialRequestForSpecialBySpecialCnt(searchVO);
 	}
 	/**
