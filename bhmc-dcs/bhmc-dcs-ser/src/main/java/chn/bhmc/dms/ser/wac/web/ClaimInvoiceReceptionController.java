@@ -56,13 +56,14 @@ public class ClaimInvoiceReceptionController extends HController{
 	 public String selectLaborManageMain(Model model)throws Exception{
 		 String langCd = LocaleContextHolder.getLocale().getLanguage();
 		 //1、页面时间赋值
-		 model.addAttribute("invcsFromDt", DateUtil.getDate(DateUtil.add(new Date(), Calendar.DATE, -15), "yyyy-MM-dd") );//结算报表年月日开始时间
-	     model.addAttribute("invcsToDt", DateUtil.getDate("yyyy-MM-dd"));//结算报表年月日结束时间
+		 model.addAttribute("sinvcsFromDt", DateUtil.getDate(DateUtil.add(new Date(), Calendar.DATE, -15), "yyyy-MM-dd") );//结算报表年月日开始时间
+	     model.addAttribute("sinvcsToDt", DateUtil.getDate("yyyy-MM-dd"));//结算报表年月日结束时间
 		 //2、页面下拉选赋值
-	     model.addAttribute("receiptTpDs", commonCodeService.selectCommonCodesByCmmGrpCd("SEF1004", null, LocaleContextHolder.getLocale().getLanguage()));//开票状态
-	     model.addAttribute("trsfTpDs", commonCodeService.selectCommonCodesByCmmGrpCd("SEF1005", null, LocaleContextHolder.getLocale().getLanguage()));//快递状态
-
-	     
+	     model.addAttribute("receiptTpDs", commonCodeService.selectCommonCodesByCmmGrpCd("SEF004", null, langCd));//发票状态
+	     model.addAttribute("trsfTpDs", commonCodeService.selectCommonCodesByCmmGrpCd("SEF005", null, langCd));//快递状态
+	     model.addAttribute("paymTpDs", commonCodeService.selectCommonCodesByCmmGrpCd("SEF006", null, langCd));//汇(收)款状态
+	     model.addAttribute("failMsgDs", commonCodeService.selectCommonCodesByCmmGrpCd("SEF007", null, langCd));//退票原因
+	     model.addAttribute("cancelYnDs", commonCodeService.selectCommonCodesByCmmGrpCd("SEF008", null, langCd));//是否取消
 		 return "/ser/wac/claimlnvoice/selectClaimInvoiceReceptionMain";
 	 }
 	 
@@ -121,9 +122,10 @@ public class ClaimInvoiceReceptionController extends HController{
 	      return result;
 
 	   }
+	   
 	   /**
 	    * 
-	    *<p>Title:退票操作</p>
+	    *<p>Title:收票/退票操作</p>
 	    * @author wangc
 	    * @serialData 2021年4月8日
 		* @method 
@@ -131,41 +133,22 @@ public class ClaimInvoiceReceptionController extends HController{
 	    * @param searchVO
 	    * @return String
 	    */
-	   @RequestMapping(value = "/ser/wac/claimlnvoice/refundClaimInvoiceReception.do", method = RequestMethod.POST)
+	   @RequestMapping(value = "/ser/wac/claimlnvoice/updateClaimInvoiceReception.do", method = RequestMethod.POST)
 	   @ResponseBody
-	   public String refundClaimInvoiceReception(@RequestBody ClaimInvoiceSearchVO searchVO){
+	   public String updateClaimInvoiceReception(@RequestBody ClaimInvoiceSearchVO searchVO){
 		   String result = "success";//返回退票结果
+		   String invcNo = searchVO.getSinvcNo();//索赔结算单信息
 		   try{
-			   result = claimInvoiceReceptionService.refundClaimInvoiceReception(searchVO);//1、退票业务操作
+			   //02是收票业务 03是退票业务
+			   if("02".equals(searchVO.getSreceiptTp())){
+				   result = claimInvoiceReceptionService.takerClaimInvoiceReception(invcNo);//1、收票业务操作
+			   }else if("03".equals(searchVO.getSreceiptTp())){
+				   result = claimInvoiceReceptionService.refundClaimInvoiceReception(searchVO);//1、退票业务操作
+			   }
 		   }catch(Exception e){
 			   System.out.println(e.getMessage());
 			   result = e.getMessage();
 		   }		   
-		   return 	result;   
-	   }
-	   
-	   
-	   
-	   /**
-	    * 
-	    *<p>Title:收票操作</p>
-	    * @author wangc
-	    * @serialData 2021年4月8日
-		* @method 
-		* 1、收票业务操作
-	    * @param searchVO
-	    * @return String
-	    */
-	   @RequestMapping(value = "/ser/wac/claimlnvoice/takerClaimInvoiceReception.do", method = RequestMethod.POST)
-	   @ResponseBody
-	   public String takerClaimInvoiceReception(@RequestBody String invcNo){
-		   String result = "success";//返回退票结果
-		   try{
-			   result = claimInvoiceReceptionService.takerClaimInvoiceReception(invcNo);//1、收票业务操作
-		   }catch(Exception e){
-			   System.out.println(e.getMessage());
-			   result = e.getMessage();
-		   }	   
 		   return 	result;   
 	   }
 	 

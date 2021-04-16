@@ -21,12 +21,17 @@ public class ClaimInvoiceVO extends BaseVO {
 	 * 经销商id
 	 */
 	private String dlrCd;
+	
+	/**
+	 * 经销商名字
+	 */
+	private String dlrNm;
 	/**
 	 * 索赔结算单信息
 	 */
 	private String invcNo;
     /**
-     * 开票状态 未开票：01 已开票：02 已退票：03
+     * 开票状态 01：未开票  02：已开票 03：已退票
      */
     private String receiptTp;
 
@@ -36,7 +41,7 @@ public class ClaimInvoiceVO extends BaseVO {
     private String expsCmpNm;
 
     /**
-     * 快递状态 未邮寄：00 已邮寄：01 车厂接收：02 退票接收：03
+     * 快递状态   01：未邮寄 02：已邮寄 03：车厂接收  04：退票接收  05：未接收 
      */
     private String trsfTp;
 
@@ -81,7 +86,7 @@ public class ClaimInvoiceVO extends BaseVO {
     private String recipAddr;
 
     /**
-     * 汇(收)款状态
+     * 汇(收)款状态  01：未汇款 02：已汇款 03：已收款
      */
     private String paymTp;
 
@@ -101,12 +106,12 @@ public class ClaimInvoiceVO extends BaseVO {
     private int failCnt;
 
     /**
-     * 退票备注
+     * 退票原因  01:金额错误 02: 税号错误 03: 税率错误 04: 没盖章 05: 发票破损 06: 三包凭证错误 07:其他
      */
     private String failMsg;
 
     /**
-     * null
+     * 退票备注
      */
     private String failRemark;
 
@@ -129,6 +134,38 @@ public class ClaimInvoiceVO extends BaseVO {
      * 修改人
      */
     private String updtUsrId;
+    
+    /**
+     * 扣减金额
+     */
+    private double ddctTotAmt;
+    
+    /**
+     * 确认金额
+     */
+    private double confirmTotAmt; 
+    
+    /**
+     * 收票日期
+     */
+    private Date recipDt;
+    /**
+     * 退票日期
+     */
+    private Date failDt;
+    /**
+     * 结算报表年月
+     */
+    private Date invcDt;
+    /**
+     * 结算金额
+     */
+    private double invcClaimTotAmt;
+    
+    /**
+     * 是否取消 Y是 N否
+     */
+    private String cancelYn;
 
     /**
      * 开票状态
@@ -480,6 +517,70 @@ public class ClaimInvoiceVO extends BaseVO {
 
 	public void setInvcNo(String invcNo) {
 		this.invcNo = invcNo;
+	}
+
+	public double getDdctTotAmt() {
+		return ddctTotAmt;
+	}
+
+	public void setDdctTotAmt(double ddctTotAmt) {
+		this.ddctTotAmt = ddctTotAmt;
+	}
+
+	public double getConfirmTotAmt() {
+		return confirmTotAmt;
+	}
+
+	public void setConfirmTotAmt(double confirmTotAmt) {
+		this.confirmTotAmt = confirmTotAmt;
+	}
+
+	public Date getRecipDt() {
+		return recipDt;
+	}
+
+	public void setRecipDt(Date recipDt) {
+		this.recipDt = recipDt;
+	}
+
+	public Date getInvcDt() {
+		return invcDt;
+	}
+
+	public void setInvcDt(Date invcDt) {
+		this.invcDt = invcDt;
+	}
+
+	public double getInvcClaimTotAmt() {
+		return invcClaimTotAmt;
+	}
+
+	public void setInvcClaimTotAmt(double invcClaimTotAmt) {
+		this.invcClaimTotAmt = invcClaimTotAmt;
+	}
+
+	public String getDlrNm() {
+		return dlrNm;
+	}
+
+	public void setDlrNm(String dlrNm) {
+		this.dlrNm = dlrNm;
+	}
+
+	public Date getFailDt() {
+		return failDt;
+	}
+
+	public void setFailDt(Date failDt) {
+		this.failDt = failDt;
+	}
+
+	public String getCancelYn() {
+		return cancelYn;
+	}
+
+	public void setCancelYn(String cancelYn) {
+		this.cancelYn = cancelYn;
 	}
     
     

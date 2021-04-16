@@ -13,12 +13,17 @@ import chn.bhmc.dms.core.datatype.BaseVO;
  */
 public class ClaimInvoiceDetailVO extends BaseVO{
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4413024205822128465L;
+
+	 /**
      * 增票主键
      */
     private String receiptId;
 
     /**
-     * 차량ID
+     * 车辆ID
      */
     private String carId;
 
@@ -28,92 +33,92 @@ public class ClaimInvoiceDetailVO extends BaseVO{
     private Short seq;
 
     /**
-     * 차대번호
+     * VIN码
      */
     private String vinNo;
 
     /**
-     * 차대번호1
+     * VIN码1
      */
     private String vinNo1;
 
     /**
-     * 차대번호2
+     * VIN码2
      */
     private String vinNo2;
 
     /**
-     * 딜러코드
+     * 经销商代码
      */
     private String dlrCd;
 
     /**
-     * 납세자식별번호
+     * 纳税人识别号
      */
     private String taxpayerIdCd;
 
     /**
-     * 영수증번호
+     * 发票号码
      */
     private String receiptNo;
 
     /**
-     * 영수증코드
+     * 发票代码
      */
     private String receiptCd;
 
     /**
-     * 구입처
+     * 发票抬头
      */
     private String buyNm;
 
     /**
-     * 영수증발행일자
+     * 发票日期
      */
     private Date receiptIssDt;
 
     /**
-     * 스캔세금포함금액
+     * 税价合计(小写)
      */
     private int scanSumAmt;
 
     /**
-     * 차종코드
+     * 车种代码
      */
     private String carlineCd;
 
     /**
-     * 모델코드
+     * 车型代码
      */
     private String modelCd;
 
     /**
-     * 정판형호번호
+     * 厂牌型号
      */
     private String jeongpanNo;
 
     /**
-     * 외장색상코드
+     * 外观颜色代码코드
      */
     private String extColorCd;
 
     /**
-     * 신차공장지도가격
+     * 新车工厂指导价
      */
     private int wsPrc;
 
     /**
-     * 출고일자
+     * 税价合计
      */
     private Date pltGiDt;
 
     /**
-     * 금액
+     * 发票金额
      */
     private int sumAmt;
 
     /**
-     * 세액
+     * 税额
      */
     private int taxAmt;
 
@@ -133,17 +138,17 @@ public class ClaimInvoiceDetailVO extends BaseVO{
     private Integer fileSizeVal;
 
     /**
-     * 단말기코드
+     * 终端机代码
      */
     private String tmrCd;
 
     /**
-     * 심사결과코드
+     * 审核结果代码
      */
     private String evalRsltCd;
 
     /**
-     * 미업로드원인
+     * 未上传原因
      */
     private String errUpCd;
 
@@ -153,7 +158,7 @@ public class ClaimInvoiceDetailVO extends BaseVO{
     private String sdlrCd;
 
     /**
-     * 비고
+     * 备注
      */
     private String remark;
 
@@ -293,11 +298,6 @@ public class ClaimInvoiceDetailVO extends BaseVO{
     private String drawer;
 
     /**
-     * 是否绑定车辆（1.是、0.否）
-     */
-    private String isBidingVin;
-
-    /**
      * 发票状态（01.正常、02.作废、04.红冲）
      */
     private String receiptStatus;
@@ -344,16 +344,16 @@ public class ClaimInvoiceDetailVO extends BaseVO{
     }
 
     /**
-     * 차량ID
-     * @return CAR_ID 차량ID
+     * 车辆ID
+     * @return CAR_ID 车辆ID
      */
     public String getCarId() {
         return carId;
     }
 
     /**
-     * 차량ID
-     * @param carId 차량ID
+     * 车辆ID
+     * @param carId 车辆ID
      */
     public void setCarId(String carId) {
         this.carId = carId == null ? null : carId.trim();
@@ -376,256 +376,268 @@ public class ClaimInvoiceDetailVO extends BaseVO{
     }
 
     /**
-     * 차대번호
-     * @return VIN_NO 차대번호
+     * VIN码
+     * @return VIN_NO VIN码
      */
     public String getVinNo() {
         return vinNo;
     }
 
     /**
-     * 차대번호
-     * @param vinNo 차대번호
+     * VIN码
+     * @param vinNo VIN码
      */
     public void setVinNo(String vinNo) {
         this.vinNo = vinNo == null ? null : vinNo.trim();
     }
 
     /**
-     * 차대번호1
-     * @return VIN_NO1 차대번호1
+     * VIN码1
+     * @return VIN_NO1 VIN码1
      */
     public String getVinNo1() {
         return vinNo1;
     }
 
     /**
-     * 차대번호1
-     * @param vinNo1 차대번호1
+     * VIN码1
+     * @param vinNo1 VIN码1
      */
     public void setVinNo1(String vinNo1) {
         this.vinNo1 = vinNo1 == null ? null : vinNo1.trim();
     }
 
     /**
-     * 차대번호2
-     * @return VIN_NO2 차대번호2
+     * VIN码2
+     * @return VIN_NO2 VIN码2
      */
     public String getVinNo2() {
         return vinNo2;
     }
 
     /**
-     * 차대번호2
-     * @param vinNo2 차대번호2
+     * VIN码2
+     * @param vinNo2 VIN码2
      */
     public void setVinNo2(String vinNo2) {
         this.vinNo2 = vinNo2 == null ? null : vinNo2.trim();
     }
 
     /**
-     * 딜러코드
-     * @return DLR_CD 딜러코드
+     * 经销商代码
+     * @return DLR_CD 经销商代码
      */
     public String getDlrCd() {
         return dlrCd;
     }
 
     /**
-     * 딜러코드
-     * @param dlrCd 딜러코드
+     * 经销商代码
+     * @param dlrCd 经销商代码
      */
     public void setDlrCd(String dlrCd) {
         this.dlrCd = dlrCd == null ? null : dlrCd.trim();
     }
 
     /**
-     * 납세자식별번호
-     * @return TAXPAYER_ID_CD 납세자식별번호
+     * 纳税人识别号
+纳税人识别号
+纳税人识别号
+
+     * @return TAXPAYER_ID_CD 纳税人识别号
+纳税人识别号
+纳税人识别号
+
      */
     public String getTaxpayerIdCd() {
         return taxpayerIdCd;
     }
 
     /**
-     * 납세자식별번호
-     * @param taxpayerIdCd 납세자식별번호
+     * 纳税人识别号
+纳税人识别号
+纳税人识别号
+
+     * @param taxpayerIdCd 纳税人识别号
+纳税人识别号
+纳税人识别号
+
      */
     public void setTaxpayerIdCd(String taxpayerIdCd) {
         this.taxpayerIdCd = taxpayerIdCd == null ? null : taxpayerIdCd.trim();
     }
 
     /**
-     * 영수증번호
-     * @return RECEIPT_NO 영수증번호
+     * 发票号码
+     * @return RECEIPT_NO 发票号码
      */
     public String getReceiptNo() {
         return receiptNo;
     }
 
     /**
-     * 영수증번호
-     * @param receiptNo 영수증번호
+     * 发票号码
+     * @param receiptNo 发票号码
      */
     public void setReceiptNo(String receiptNo) {
         this.receiptNo = receiptNo == null ? null : receiptNo.trim();
     }
 
     /**
-     * 영수증코드
-     * @return RECEIPT_CD 영수증코드
+     * 发票代码
+     * @return RECEIPT_CD 发票代码
      */
     public String getReceiptCd() {
         return receiptCd;
     }
 
     /**
-     * 영수증코드
-     * @param receiptCd 영수증코드
+     * 发票代码
+     * @param receiptCd 发票代码
      */
     public void setReceiptCd(String receiptCd) {
         this.receiptCd = receiptCd == null ? null : receiptCd.trim();
     }
 
     /**
-     * 구입처
-     * @return BUY_NM 구입처
+     * 购货单位
+     * @return BUY_NM 购货单位
      */
     public String getBuyNm() {
         return buyNm;
     }
 
     /**
-     * 구입처
-     * @param buyNm 구입처
+     * 购货单位
+     * @param buyNm 购货单位
      */
     public void setBuyNm(String buyNm) {
         this.buyNm = buyNm == null ? null : buyNm.trim();
     }
 
     /**
-     * 영수증발행일자
-     * @return RECEIPT_ISS_DT 영수증발행일자
+     * 开票日期
+     * @return RECEIPT_ISS_DT 开票日期
      */
     public Date getReceiptIssDt() {
         return receiptIssDt;
     }
 
     /**
-     * 영수증발행일자
-     * @param receiptIssDt 영수증발행일자
+     * 开票日期
+     * @param receiptIssDt 开票日期
      */
     public void setReceiptIssDt(Date receiptIssDt) {
         this.receiptIssDt = receiptIssDt;
     }
 
     /**
-     * 스캔세금포함금액
-     * @return SCAN_SUM_AMT 스캔세금포함금액
+     * 税价合计(小写)
+     * @return SCAN_SUM_AMT 税价合计(小写)
      */
     public int getScanSumAmt() {
         return scanSumAmt;
     }
 
     /**
-     * 스캔세금포함금액
-     * @param scanSumAmt 스캔세금포함금액
+     * 税价合计(小写)
+     * @param scanSumAmt 税价合计(小写)
      */
     public void setScanSumAmt(int scanSumAmt) {
         this.scanSumAmt = scanSumAmt;
     }
 
     /**
-     * 차종코드
-     * @return CARLINE_CD 차종코드
+     * 车种代码
+     * @return CARLINE_CD 车种代码
      */
     public String getCarlineCd() {
         return carlineCd;
     }
 
     /**
-     * 차종코드
-     * @param carlineCd 차종코드
+     * 车种代码
+     * @param carlineCd 车种代码
      */
     public void setCarlineCd(String carlineCd) {
         this.carlineCd = carlineCd == null ? null : carlineCd.trim();
     }
 
     /**
-     * 모델코드
-     * @return MODEL_CD 모델코드
+     * 车型代码
+     * @return MODEL_CD 车型代码
      */
     public String getModelCd() {
         return modelCd;
     }
 
     /**
-     * 모델코드
-     * @param modelCd 모델코드
+     * 车型代码
+     * @param modelCd 车型代码
      */
     public void setModelCd(String modelCd) {
         this.modelCd = modelCd == null ? null : modelCd.trim();
     }
 
     /**
-     * 정판형호번호
-     * @return JEONGPAN_NO 정판형호번호
+     * 厂牌型号
+     * @return JEONGPAN_NO 厂牌型号
      */
     public String getJeongpanNo() {
         return jeongpanNo;
     }
 
     /**
-     * 정판형호번호
-     * @param jeongpanNo 정판형호번호
+     * 厂牌型号
+     * @param jeongpanNo 厂牌型号
      */
     public void setJeongpanNo(String jeongpanNo) {
         this.jeongpanNo = jeongpanNo == null ? null : jeongpanNo.trim();
     }
 
     /**
-     * 외장색상코드
-     * @return EXT_COLOR_CD 외장색상코드
+     * 外观颜色代码코드
+     * @return EXT_COLOR_CD 外观颜色代码코드
      */
     public String getExtColorCd() {
         return extColorCd;
     }
 
     /**
-     * 외장색상코드
-     * @param extColorCd 외장색상코드
+     * 外观颜色代码코드
+     * @param extColorCd 外观颜色代码코드
      */
     public void setExtColorCd(String extColorCd) {
         this.extColorCd = extColorCd == null ? null : extColorCd.trim();
     }
 
     /**
-     * 신차공장지도가격
-     * @return WS_PRC 신차공장지도가격
+     * 新车工厂指导价
+     * @return WS_PRC 新车工厂指导价
      */
     public int getWsPrc() {
         return wsPrc;
     }
 
     /**
-     * 신차공장지도가격
-     * @param wsPrc 신차공장지도가격
+     * 新车工厂指导价
+     * @param wsPrc 新车工厂指导价
      */
     public void setWsPrc(int wsPrc) {
         this.wsPrc = wsPrc;
     }
 
     /**
-     * 출고일자
-     * @return PLT_GI_DT 출고일자
+     * 税价合计
+     * @return PLT_GI_DT 税价合计
      */
     public Date getPltGiDt() {
         return pltGiDt;
     }
 
     /**
-     * 출고일자
-     * @param pltGiDt 출고일자
+     * 税价合计
+     * @param pltGiDt 税价合计
      */
     public void setPltGiDt(Date pltGiDt) {
         this.pltGiDt = pltGiDt;
@@ -648,16 +660,16 @@ public class ClaimInvoiceDetailVO extends BaseVO{
     }
 
     /**
-     * 세액
-     * @return TAX_AMT 세액
+     * 税额
+     * @return TAX_AMT 税额
      */
     public int getTaxAmt() {
         return taxAmt;
     }
 
     /**
-     * 세액
-     * @param taxAmt 세액
+     * 税额
+     * @param taxAmt 税额
      */
     public void setTaxAmt(int taxAmt) {
         this.taxAmt = taxAmt;
@@ -712,48 +724,48 @@ public class ClaimInvoiceDetailVO extends BaseVO{
     }
 
     /**
-     * 단말기코드
-     * @return TMR_CD 단말기코드
+     * 终端机代码
+     * @return TMR_CD 终端机代码
      */
     public String getTmrCd() {
         return tmrCd;
     }
 
     /**
-     * 단말기코드
-     * @param tmrCd 단말기코드
+     * 终端机代码
+     * @param tmrCd 终端机代码
      */
     public void setTmrCd(String tmrCd) {
         this.tmrCd = tmrCd == null ? null : tmrCd.trim();
     }
 
     /**
-     * 심사결과코드
-     * @return EVAL_RSLT_CD 심사결과코드
+     * 审核结果代码
+     * @return EVAL_RSLT_CD 审核结果代码
      */
     public String getEvalRsltCd() {
         return evalRsltCd;
     }
 
     /**
-     * 심사결과코드
-     * @param evalRsltCd 심사결과코드
+     * 审核结果代码
+     * @param evalRsltCd 审核结果代码
      */
     public void setEvalRsltCd(String evalRsltCd) {
         this.evalRsltCd = evalRsltCd == null ? null : evalRsltCd.trim();
     }
 
     /**
-     * 미업로드원인
-     * @return ERR_UP_CD 미업로드원인
+     * 未上传原因
+     * @return ERR_UP_CD 未上传原因
      */
     public String getErrUpCd() {
         return errUpCd;
     }
 
     /**
-     * 미업로드원인
-     * @param errUpCd 미업로드원인
+     * 未上传原因
+     * @param errUpCd 未上传原因
      */
     public void setErrUpCd(String errUpCd) {
         this.errUpCd = errUpCd == null ? null : errUpCd.trim();
@@ -1221,22 +1233,6 @@ public class ClaimInvoiceDetailVO extends BaseVO{
      */
     public void setDrawer(String drawer) {
         this.drawer = drawer == null ? null : drawer.trim();
-    }
-
-    /**
-     * 是否绑定车辆（1.是、0.否）
-     * @return IS_BIDING_VIN 是否绑定车辆（1.是、0.否）
-     */
-    public String getIsBidingVin() {
-        return isBidingVin;
-    }
-
-    /**
-     * 是否绑定车辆（1.是、0.否）
-     * @param isBidingVin 是否绑定车辆（1.是、0.否）
-     */
-    public void setIsBidingVin(String isBidingVin) {
-        this.isBidingVin = isBidingVin == null ? null : isBidingVin.trim();
     }
 
     /**

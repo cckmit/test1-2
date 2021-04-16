@@ -124,7 +124,7 @@
     
    <!-- 根据维修委托单号查询是否有正在提报的信息 -->
    <select id="getReqCountSpecial" parameterType="String" resultType="int">
-		SELECT count(*) FROM (select * from SE_1162T se where se.CANCEL_YN='N') as specialRequest where specialRequest.RO_DOC_NO = #{roDocNo} and specialRequest.REQ_STAT_CD ='01'
+		SELECT count(*) FROM (select * from SE_1162T se where se.CANCEL_YN='N') as specialRequest where specialRequest.RO_DOC_NO = #{roDocNo} and specialRequest.REQ_STAT_CD in ('01','03')
     </select>
     <!-- 提报 -->
    <update id="mergeReqSpecial"  parameterType="SpecialRequestVo"  >
@@ -227,7 +227,7 @@
    
       <!-- 根据维修委托单号查询工单信息 -->
    <select id="selectWorkOrder" parameterType="String" resultType="SpecialRequestVo">
-		 select repair.*,HP_NO as DRIVER_HP_NO from (select  se0300t.DLR_CD,se0300t.CAR_REG_NO,se0300t.VIN_NO,se0300t.RO_DOC_NO,se0300t.CAR_OWNER_ID,se0300t.CAR_OWNER_NM,se0300t.DRIVER_ID,se0300t.DRIVER_NM
+		 select repair.*,HP_NO as DRIVER_HP_NO from (select  se0300t.DLR_CD,se0300t.CAR_REG_NO,se0300t.VIN_NO,se0300t.RO_DOC_NO,se0300t.CAR_OWNER_ID,se0300t.CAR_OWNER_NM,se0300t.DRIVER_ID,se0300t.DRIVER_NM,se0300t.UPDT_DT
 		 from SE_0300T se0300t 
 		 where se0300t.DL_STAT_CD =  '02' 
 		 AND se0300t.RO_STAT_CD = '03'   
@@ -235,4 +235,68 @@
 		 AND se0300t.CUST_CONFIRM_CD IS NULL) repair left join CR_0101T t on t.DLR_CD  = repair.DLR_CD AND t.CUST_NO = repair.DRIVER_ID	
 		 where repair.RO_DOC_NO = #{roDocNo}
    </select>
+   
+   
+   
+   
+   	   <!-- Excel的导出 wangc 2021年4月14日21:03:26 -->
+       <select id="selectSpecialRequestForSpecialBySpecialExcel" parameterType="SpecialRequestSearchVo" resultType="SpecialRequestVo">
+        SELECT *
+         FROM (
+              SELECT ROWNUM AS RNUM , T1.*
+                FROM (
+                    SELECT repairOrder.CAR_REG_NO,repairOrder.VIN_NO,repairOrder.RO_DOC_NO,repairOrder.CAR_OWNER_ID,repairOrder.CAR_OWNER_NM,specialRequest.DRIVER_NM,
+					 	   repairOrder.HP_NO as DRIVER_HP_NO,specialRequest.REQ_REASON_DESC,specialRequest.APPROVE_DESC, 
+					 	   (select CMM_CD_NM from CM_0303T where CMM_CD = specialRequest.REQ_REASON_TP and CMM_GRP_CD='SER602') as REQ_REASON_TP,
+					       specialRequest.REQ_USR_NM AS REQ_USR_NM, specialRequest.APPROVE_USR_NM, specialRequest.CAR_OWNER_NM, repairOrder.DRIVER_NM, 
+					       repairOrder.RO_DT, specialRequest.REQ_DT,specialRequest.FILE_DOC_NO,
+					       (select CMM_CD_NM from CM_0303T where CMM_CD = specialRequest.REQ_STAT_CD and CMM_GRP_CD='SER601') as REQ_STAT_CD,
+					       specialRequest.CAR_REG_NO,ROWNUM 
+					 FROM (
+					 select repair.*,HP_NO from (select  se0300t.DLR_CD,se0300t.CAR_REG_NO,se0300t.VIN_NO,se0300t.RO_DOC_NO,se0300t.CAR_OWNER_ID,se0300t.CAR_OWNER_NM,
+					 		se0300t.DRIVER_ID,se0300t.DRIVER_NM,se0300t.RO_DT
+					 from SE_0300T se0300t 
+					 where se0300t.DL_STAT_CD =  '02' 
+					 AND se0300t.RO_STAT_CD = '03'   
+					 AND se0300t.CUST_CONFIRM_YN ='Y'                                     
+					 AND se0300t.CUST_CONFIRM_CD IS NULL) repair 
+					 left join CR_0101T t on t.DLR_CD  = repair.DLR_CD AND t.CUST_NO = repair.DRIVER_ID
+					 )repairOrder 
+					left join (select * from SE_1162T se where se.CANCEL_YN='N') as specialRequest on specialRequest.RO_DOC_NO = repairOrder.RO_DOC_NO
+					where 1 = 1
+				   <if test='sRoDocNo != null and sRoDocNo != "" '>
+                   AND repairOrder.RO_DOC_NO = #{sRoDocNo}
+                   </if>
+                   <if test='sCarRegNo != null and sCarRegNo != "" '>
+                   AND specialRequest.CAR_REG_NO = #{sCarRegNo}
+                   </if>
+                   <if test='sReqStatCd != null and sReqStatCd != "" '>
+                   AND specialRequest.REQ_STAT_CD = #{sReqStatCd}
+                   </if>
+                   <if test='sFromReqDt !=null'>
+                   AND specialRequest.REQ_DT <![CDATA[>=]]> #{sFromReqDt}
+                   </if>
+                   <if test='sToReqDt !=null'>
+                   AND specialRequest.REQ_DT <![CDATA[<=]]> #{sToReqDt}+1
+                   </if>
+                   <if test='sFromRoDt !=null'>
+                   AND specialRequest.RO_DT <![CDATA[>=]]> #{sFromRoDt}
+                   </if>
+                   <if test='sToRoDt !=null'>
+                   AND specialRequest.RO_DT <![CDATA[<=]]> #{sToRoDt}+1
+                   </if>
+                   ORDER BY repairOrder.RO_DT desc
+                ) T1
+                 <where>
+                     <if test='firstIndex != -1 and lastIndex != -1'>
+                       AND ROWNUM <![CDATA[<=]]> #{lastIndex}
+                     </if>
+                 </where>
+         )
+        <where>
+            <if test='firstIndex != -1 and lastIndex != -1'>
+                RNUM > #{firstIndex}
+            </if>
+        </where>
+    </select>
 </mapper>

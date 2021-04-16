@@ -110,6 +110,19 @@ public interface SpecialRequestDao {
 	 * @date 2021-04-06 06:11:05 
 	 */
 	SpecialRequestVo selectWorkOrder(String roDocNo);
+	
+	/**
+	 * 
+	 * @MethodName: selectSpecialRequestForSpecialBySpecialExcel
+	 * <p>Title: 导出Excel信息</p >
+	 * @Description: TODO
+	 * @author wangc
+	 * @param searchVO
+	 * @return List<SpecialRequestVo>
+	 * @date 2021-04-14 08:44:42 
+	 * @param searchVO
+	 */
+	List<SpecialRequestVo> selectSpecialRequestForSpecialBySpecialExcel(SpecialRequestSearchVo searchVO);
 
 	
 

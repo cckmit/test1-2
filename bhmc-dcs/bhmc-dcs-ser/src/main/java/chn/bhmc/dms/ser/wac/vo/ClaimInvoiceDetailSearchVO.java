@@ -59,12 +59,12 @@ public class ClaimInvoiceDetailSearchVO extends SearchVO{
     private String taxpayerIdCd;
 
     /**
-     * 영수증번호
+     * 发票代码
      */
     private String receiptNo;
 
     /**
-     * 영수증코드
+     * 发票号
      */
     private String receiptCd;
 

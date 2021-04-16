@@ -129,7 +129,8 @@
                         	<tr>
                         		 <input type="text" id="roDocNo" name="roDocNo" class="form_comboBox" style="display:none" data-json-obj="true" /><!-- 维修委托单号 作为整个主键-->
                         		<th scope="row"><span class="bu_required"><spring:message code="wac.title.message" /></span></th><!-- 提报原因分类 -->
-                                <td  class="required_area">
+                                <!-- <td  class="required_area"> -->
+                                <td id="reqReasonTptd" class="readonly_area">
                                     <input type="text" id="reqReasonTp" name="reqReasonTp" class="form_comboBox" data-json-obj="true" />
                                 </td>
                                 <th scope="row"><spring:message code="ser.lbl.requestUsr" /></th><!-- 提报人 -->
@@ -146,12 +147,12 @@
                                 </td>
                                 <th scope="row"><spring:message code="ser.lbl.hqApproveNm" /></th>
                                 <td class="readonly_area">
-                                    <input type="text" id="approveUsrNm" name="approveUsrNm" readOnly class="form_input" data-json-obj="true"/><!-- 판정인 -->
+                                    <input type="text" id="approveUsrNm" name="approveUsrNm" readOnly class="form_input" data-json-obj="true"/><!-- 判定人 -->
                                 </td>
                         	</tr>
                         	<tr>
                         		<th scope="row"><span class="bu_required"><spring:message code="global.lbl.regReason" /></span></th><!-- 提报原因 -->
-                                <td colspan="10">
+                                <td colspan="10" id="reqReasonDesctd" class="readonly_area">
                                 	<textarea required min=2 maxlength="120" id="reqReasonDesc" name="reqReasonDesc" rows="2" cols="" class="form_textarea form_required" data-name="<spring:message code="ser.lbl.errPhenCont" />" data-json-obj="true"></textarea>
                                 </td>
                         	</tr>
@@ -202,7 +203,7 @@ var qcValR =1;//1时隐藏，2为展示 当选中的状态为不承认时，提�
 var isDbClice=1;//是否双击 1 不是，2是 贾明 2018-11-15
 var pwaDocNoValue = 1;//pwa编号 贾明2018-11-15
 var rowRoDocNo;//保存/申请之后显示被选中的那一项
-var gridRow = 0;//默认不选
+var gridRow = -1;//默认不选
 var gridRowTr;//保存/申请之后显示被选中的那一项
 //审核状态列表赋值 wangc 2021年3月31日10:24:34
 var reqStatCdList = [];
@@ -294,15 +295,18 @@ $(document).ready(function (e){
      $("#btnSearch").kendoButton({
          click:function(e){
              selectedYn = false;
+             gridRow = -1;
              $("#gridMaster").data("kendoExtGrid").dataSource.data([]);
              $("#gridMaster").data("kendoExtGrid").dataSource.page(1);//列表重新加载
              //特殊提报信息清空操作,保存按钮，提报按钮置灰
              $("#roDocNo").val("");//维修委托单号
-             $("#reqReasonTp").val("");//提报原因类别
+             $("#reqReasonTp").data("kendoExtDropDownList").value("");//提报原因类别
              $("#reqReasonDesc").val("");//提报原因描述
              $("#fileKeyNm").val("");//保存file的id
              $("#btnSave").data("kendoButton").enable(false);//保存按钮置灰
         	 $("#btnReq").data("kendoButton").enable(false);//提报按钮置灰
+        	 $("#reqReasonTptd").addClass("readonly_area");//提报原因分类 置灰
+        	 $("#reqReasonDesctd").addClass("readonly_area");//提报原因 置灰
              //文件列表清空
              $("#btnFileAdd").hide();//上传文件隐藏
              $("#btnFileDel").data("kendoButton").enable(false);//删除按钮置灰
@@ -387,6 +391,8 @@ $(document).ready(function (e){
 		if(reqStatCd=="01"){
 			 $("#btnSave").data("kendoButton").enable(false);//保存按钮置灰
         	 $("#btnReq").data("kendoButton").enable(false);//提报按钮置灰
+        	 $("#reqReasonTptd").addClass("readonly_area");//提报原因分类 置灰
+        	 $("#reqReasonDesctd").addClass("readonly_area");//提报原因 置灰
         	 $("#btnFileAdd").hide();//上传文件隐藏
              $("#btnFileDel").data("kendoButton").enable(false);//删除按钮置灰
 		}
@@ -430,12 +436,16 @@ $(document).ready(function (e){
     		 //保存按钮和提报按钮显示出来
     		 $("#btnSave").data("kendoButton").enable(true);
         	 $("#btnReq").data("kendoButton").enable(true);
+        	 $("#reqReasonTptd").removeClass("readonly_area");//提报原因分类
+        	 $("#reqReasonDesctd").removeClass("readonly_area");//提报原因 
         	 $("#btnFileAdd").show();//上传文件显示
              $("#btnFileDel").data("kendoButton").enable(true);//删除按钮显示
     	}else{
     		 //保存按钮和提报按钮置灰
 	   		 $("#btnSave").data("kendoButton").enable(false);
 	       	 $("#btnReq").data("kendoButton").enable(false);
+	       	 $("#reqReasonTptd").addClass("readonly_area");//提报原因分类 置灰
+       	 	 $("#reqReasonDesctd").addClass("readonly_area");//提报原因 置灰
 	       	 $("#btnFileAdd").hide();//上传文件隐藏
              $("#btnFileDel").data("kendoButton").enable(false);//删除按钮置灰
     	}

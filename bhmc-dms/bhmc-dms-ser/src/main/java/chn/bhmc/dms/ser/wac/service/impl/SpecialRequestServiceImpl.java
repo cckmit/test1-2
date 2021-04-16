@@ -114,9 +114,9 @@ public class SpecialRequestServiceImpl extends HService implements SpecialReques
 		Date nowDate = new Date();//当前时间
 		
 		//1、基础信息查询及赋值 
-		addVO.setRoUpdtDt(addVO.getRoDt());//工单修改时间
 		addVO.setDlrCd(LoginUtil.getDlrCd());//店代码
 		SpecialRequestVo workOrderVo = specialRequestDao.selectWorkOrder(addVO.getRoDocNo());//根据维修委托单号查询工单信息
+		addVO.setRoUpdtDt(workOrderVo.getRoUpdtDt());//工单修改时间
 		addVO.setCarRegNo(workOrderVo.getCarRegNo());//车牌号
 		addVO.setVinNo(workOrderVo.getVinNo());//车辆识别码
 		addVO.setRoDt(workOrderVo.getRoDt());//开单时间  
@@ -205,7 +205,7 @@ public class SpecialRequestServiceImpl extends HService implements SpecialReques
         }
 
         ObjectUtil.convertMapToObject(params, searchVO, "beanName", "templateFile", "fileName");
-        List<SpecialRequestVo> list = selectSpecialRequestForSpecialBySpecial(searchVO);
+        List<SpecialRequestVo> list = specialRequestDao.selectSpecialRequestForSpecialBySpecialExcel(searchVO);//导出Excel信息
 
         context.putVar("items", list);
 
