@@ -64,10 +64,10 @@
                    AND specialRequest.REQ_DT <![CDATA[<=]]> #{sToReqDt}+1
                    </if>
                    <if test='sFromRoDt !=null'>
-                   AND specialRequest.RO_DT <![CDATA[>=]]> #{sFromRoDt}
+                   AND repairOrder.RO_DT <![CDATA[>=]]> #{sFromRoDt}
                    </if>
                    <if test='sToRoDt !=null'>
-                   AND specialRequest.RO_DT <![CDATA[<=]]> #{sToRoDt}+1
+                   AND repairOrder.RO_DT <![CDATA[<=]]> #{sToRoDt}+1
                    </if>
                    ORDER BY repairOrder.RO_DT desc
                 ) T1
@@ -115,10 +115,10 @@
        AND specialRequest.REQ_DT <![CDATA[<=]]> #{sToReqDt}+1
        </if>
        <if test='sFromRoDt !=null'>
-       AND specialRequest.RO_DT <![CDATA[>=]]> #{sFromRoDt}
+       AND repairOrder.RO_DT <![CDATA[>=]]> #{sFromRoDt}
        </if>
        <if test='sToRoDt !=null'>
-       AND specialRequest.RO_DT <![CDATA[<=]]> #{sToRoDt}+1
+       AND repairOrder.RO_DT <![CDATA[<=]]> #{sToRoDt}+1
        </if>
     </select>
     
@@ -160,7 +160,8 @@
 		UPDATE
 		SET in1162t.FILE_DOC_NO = se1162t.FILE_DOC_NO,
 		    in1162t.REQ_REASON_TP =se1162t.REQ_REASON_TP,
-		    in1162t.REQ_STAT_CD = se1162t.REQ_STAT_CD
+		    in1162t.REQ_STAT_CD = se1162t.REQ_STAT_CD,
+		    in1162t.REQ_REASON_DESC = se1162t.REQ_REASON_DESC
 		WHEN NOT MATCHED THEN
 		INSERT (
 		in1162t.REQ_NO,in1162t.DLR_CD,in1162t.CAR_REG_NO,in1162t.VIN_NO,in1162t.RO_DOC_NO,in1162t.RO_DT,in1162t.RO_TP,in1162t.CAR_OWNER_ID,in1162t.CAR_OWNER_NM,
@@ -205,7 +206,8 @@
 		SET in1162t.FILE_DOC_NO = se1162t.FILE_DOC_NO,
 		    in1162t.REQ_REASON_TP =se1162t.REQ_REASON_TP,
 		    in1162t.REG_DT = se1162t.REG_DT,
-		    in1162t.REQ_STAT_CD = se1162t.REQ_STAT_CD
+		    in1162t.REQ_STAT_CD = se1162t.REQ_STAT_CD,
+		    in1162t.REQ_REASON_DESC = se1162t.REQ_REASON_DESC
 		WHEN NOT MATCHED THEN
 		INSERT (
 		in1162t.REQ_NO,in1162t.DLR_CD,in1162t.CAR_REG_NO,in1162t.VIN_NO,in1162t.RO_DOC_NO,in1162t.RO_DT,in1162t.RO_TP,in1162t.CAR_OWNER_ID,in1162t.CAR_OWNER_NM,
