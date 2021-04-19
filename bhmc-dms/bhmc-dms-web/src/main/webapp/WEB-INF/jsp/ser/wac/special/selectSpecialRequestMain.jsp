@@ -128,7 +128,7 @@
                         <tbody>
                         	<tr>
                         		 <input type="text" id="roDocNo" name="roDocNo" class="form_comboBox" style="display:none" data-json-obj="true" /><!-- 维修委托单号 作为整个主键-->
-                        		<th scope="row"><span class="bu_required"><spring:message code="wac.title.message" /></span></th><!-- 提报原因分类 -->
+                        		<th scope="row"><span class="bu_required"><spring:message code="ser.lbl.applyReasonTp" /></span></th><!-- 提报原因分类 -->
                                 <!-- <td  class="required_area"> -->
                                 <td id="reqReasonTptd" class="readonly_area">
                                     <input type="text" id="reqReasonTp" name="reqReasonTp" class="form_comboBox" data-json-obj="true" />
@@ -374,6 +374,20 @@ $(document).ready(function (e){
             dms.notification.warning("<spring:message code='global.lbl.regReason' var='regReason' /><spring:message code='global.info.isNotNull' arguments='${regReason}' />");
             return;
         }
+    	//判断提报原因描述必须包含汉子 申请原因输入文字限定5~20个字，不可以填入纯数字或纯字母或纯数字+纯字母！
+    	var reqDesc = $("#reqReasonDesc").val();   
+    	if (!/[\u4E00-\u9FA5]/.test(reqDesc)) {
+    		dms.notification.warning("<spring:message code='global.err.inputReason' />");
+    		return;
+    	}else{
+    		//申请原因输入文字限定5~20个字 申请原因输入文字限定5~20个字，不可以填入纯数字或纯字母或纯数字+纯字母！
+    		if(reqDesc.length>20||reqDesc.length<5){
+    			dms.notification.warning("<spring:message code='global.err.inputReason' />");
+        		return;
+    		}
+    	} 
+    	   
+    	
 		//保存提报赋值传参
     	var params =  $.extend(
             {"reqStatCd":reqStatCd}//单据状态
@@ -432,7 +446,7 @@ $(document).ready(function (e){
      /** 给特殊提报信息赋值  wangc 2021年3月31日17:22:50**/
      setResultDataSetting =  function (result){
     	
-    	if(result.reqStatCd!="01"&&result.reqStatCd!="03"){
+    	if(result.reqStatCd!="01"&&result.reqStatCd!="03"&&result.reqStatCd!="02"){
     		 //保存按钮和提报按钮显示出来
     		 $("#btnSave").data("kendoButton").enable(true);
         	 $("#btnReq").data("kendoButton").enable(true);

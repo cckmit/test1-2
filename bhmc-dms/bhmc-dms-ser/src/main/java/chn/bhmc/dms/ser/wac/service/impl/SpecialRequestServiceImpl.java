@@ -120,6 +120,7 @@ public class SpecialRequestServiceImpl extends HService implements SpecialReques
 		addVO.setCarRegNo(workOrderVo.getCarRegNo());//车牌号
 		addVO.setVinNo(workOrderVo.getVinNo());//车辆识别码
 		addVO.setRoDt(workOrderVo.getRoDt());//开单时间  
+		addVO.setRoTp(workOrderVo.getRoTp());//维修委托类型
 		addVO.setCarOwnerId(workOrderVo.getCarOwnerId());//车辆所有者ID
 		addVO.setCarOwnerNm(workOrderVo.getCarOwnerNm());//车辆所有者名字
 		addVO.setDriverId(workOrderVo.getDriverId());// 送修人id
