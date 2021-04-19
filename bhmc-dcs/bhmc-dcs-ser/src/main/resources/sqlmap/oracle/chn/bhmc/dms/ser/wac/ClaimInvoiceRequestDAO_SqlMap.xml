@@ -3,7 +3,7 @@
 
 <!--
     SQL File Name : ClaimInvoiceRequestServiceDao.xml
-    Description : 삼보 요청 에 관한 데이터처리
+    Description : 结算单相关信息查询
     author wangc
     since 2021年4月8日
     version 1.0
@@ -38,7 +38,7 @@
             AND pack.invc_Dt <![CDATA[>=]]> #{sinvcsFromDt}
             </if>
             <if test='sinvcsToDt !=null'>
-            AND pack.invc_Dt <![CDATA[<=]]> #{sinvcsToDt}+1
+            AND pack.invc_Dt <![CDATA[<]]> #{sinvcsToDt}+1
             </if>
             <if test='sreceiptTp != null and sreceiptTp != "" '>
             AND invoice.RECEIPT_TP = #{sreceiptTp}
@@ -87,7 +87,7 @@
             AND pack.invc_Dt <![CDATA[>=]]> #{sinvcsFromDt}
             </if>
             <if test='sinvcsToDt !=null'>
-            AND pack.invc_Dt <![CDATA[<=]]> #{sinvcsToDt}+1
+            AND pack.invc_Dt <![CDATA[<]]> #{sinvcsToDt}+1
             </if>
             <if test='sreceiptTp != null and sreceiptTp != "" '>
             AND invoice.RECEIPT_TP = #{sreceiptTp}
@@ -224,7 +224,7 @@
 		AND pack.invc_Dt <![CDATA[>=]]> #{sinvcsFromDt}
 		</if>
 		<if test='sinvcsToDt !=null'>
-		AND pack.invc_Dt <![CDATA[<=]]> #{sinvcsToDt}+1
+		AND pack.invc_Dt <![CDATA[<]]> #{sinvcsToDt}+1
 		</if>
 		<if test='sreceiptTp != null and sreceiptTp != "" '>
         AND invoice.RECEIPT_TP = #{sreceiptTp}
