@@ -88,5 +88,15 @@ public interface ClaimInvoiceReceptionDao {
 	 * @return
 	 */
 	List<ClaimInvoiceExcelVO> selectClaimInvoiceReceptionByExcel(ClaimInvoiceSearchVO searchVO);
+	
+	/**
+	 * 
+	 *<p>Title:下发给DMS</p>
+	 * @author wangc
+	 * @param claimInvoiceVO
+	 * @return
+	 * @param claimInvoiceVO
+	 */
+	void updateInvoiceService(ClaimInvoiceVO claimInvoiceVO);
 
 }

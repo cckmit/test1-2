@@ -56,8 +56,8 @@ public class ClaimInvoiceReceptionController extends HController{
 	 public String selectLaborManageMain(Model model)throws Exception{
 		 String langCd = LocaleContextHolder.getLocale().getLanguage();
 		 //1、页面时间赋值
-		 model.addAttribute("sinvcsFromDt", DateUtil.getDate(DateUtil.add(new Date(), Calendar.DATE, -15), "yyyy-MM-dd") );//结算报表年月日开始时间
-	     model.addAttribute("sinvcsToDt", DateUtil.getDate("yyyy-MM-dd"));//结算报表年月日结束时间
+		 model.addAttribute("sinvcsFromDt", DateUtil.getDate(DateUtil.add(new Date(), Calendar.DATE, -31), "yyyy-MM") );//结算报表年月日开始时间
+	     model.addAttribute("sinvcsToDt", DateUtil.getDate("yyyy-MM"));//结算报表年月日结束时间
 		 //2、页面下拉选赋值
 	     model.addAttribute("receiptTpDs", commonCodeService.selectCommonCodesByCmmGrpCd("SEF004", null, langCd));//发票状态
 	     model.addAttribute("trsfTpDs", commonCodeService.selectCommonCodesByCmmGrpCd("SEF005", null, langCd));//快递状态

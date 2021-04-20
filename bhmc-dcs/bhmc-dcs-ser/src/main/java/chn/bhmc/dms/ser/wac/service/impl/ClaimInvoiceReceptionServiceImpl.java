@@ -103,9 +103,12 @@ public class ClaimInvoiceReceptionServiceImpl extends HService implements ClaimI
     * @author wangc
     * @serialData 2021年4月8日
 	* @method 
-	* 1、开票状态变为已退票
-    * 2、快递状态为已邮寄
-    * 3、除已退票状态外，均可进行退票操作。点击退票前，需要填写退票信息。下发DMS
+	* 1、根据结算报表编号查询结算单信息
+    * 2、判断结算单号是否存在多条
+    * 3、判断是否已经取消了，取消了不可以再退票
+    * 4、判断当前的开票状态是否是已退票状态，如果是，则不可以再退票，如果不是，才可以退票
+    * 5、修改开票状态变为已退票/快递状态为已邮寄等退票信息
+    * 6、下发DMS
     * @param invcNo 索赔结算单信息
     * @return String
     */
@@ -121,18 +124,17 @@ public class ClaimInvoiceReceptionServiceImpl extends HService implements ClaimI
 			 result = "根据结算单号查询出多条结算单信息！";
 		}else{
 			ClaimInvoiceVO claimInvoiceVO = claimInvoiceVOList.get(0);//正常就应该是一条索赔结算单信息
-			//3、判断当前的开票状态是否是已退票状态，如果是，则不可以再退票，如果不是，才可以退票
-			if("03".equals(claimInvoiceVO.getReceiptTp())){
-				result = "当前结算单状态已退票，不可以重复退票！";
+			//3、判断是否已经取消了，取消了不可以再退票
+			if("Y".equals(claimInvoiceVO.getCancelYn())){
+				result = "当前结算单状态已取消，不可以在退票！";
 			}else{
-				//判断是否已经取消了，取消了不可以再收票
-				if("Y".equals(claimInvoiceVO.getCancelYn())){
-					result = "当前结算单状态已取消，不可以在退票！";
+				//4、判断当前的开票状态是否是已退票状态，如果是，则不可以再退票，如果不是，才可以退票
+				if("03".equals(claimInvoiceVO.getReceiptTp())){
+					result = "当前结算单状态已退票，不可以再退票！";
 				}else{
-					//4、修改开票状态变为已退票/快递状态为已邮寄等退票信息
+					//5、修改开票状态变为已退票/快递状态为已邮寄等退票信息
 					claimInvoiceVO.setReceiptTp("03");//已退票
 					claimInvoiceVO.setTrsfTp("02");//已邮寄
-					//退票原因
 					claimInvoiceVO.setFailMsg(searchVO.getSfailMsg());//退票原因
 					claimInvoiceVO.setFailRemark(searchVO.getSfailRemark());//退票备注
 					claimInvoiceVO.setTrsfNo(searchVO.getStrsfNo());//快递单号
@@ -140,8 +142,12 @@ public class ClaimInvoiceReceptionServiceImpl extends HService implements ClaimI
 					claimInvoiceVO.setSenderNm(searchVO.getSsenderNm());//寄件人
 					claimInvoiceVO.setSenderTelno(searchVO.getSsenderTelno());//寄件人联系电话
 				    claimInvoiceReceptionDAO.updateClaimInvoiceRefund(claimInvoiceVO);//退票存储
+				    //6、下发DMS
+				    claimInvoiceReceptionDAO.updateInvoiceService(claimInvoiceVO);//下发DMS
 				}
+				
 			}
+			
 		}
 		return result;
 	}
@@ -152,9 +158,13 @@ public class ClaimInvoiceReceptionServiceImpl extends HService implements ClaimI
     * @author wangc
     * @serialData 2021年4月8日
 	* @method 
-	* 1、开票状态为“已开票”
-    * 2、快递状态为“车厂接收”
-    * 3、下发DMS
+	* 1、根据结算报表编号查询结算单信息
+    * 2、判断结算单号是否存在多条
+    * 3、判断是否已经取消了，取消了不可以再收票
+    * 4、判断当前的开票状态是否是已退票状态，如果是，则不可以再退票，如果不是，才可以退票
+    * 4、判断当前的开票状态是否是已收票状态，如果是，则不可以再收票，如果不是，才可以收票
+    * 5、开票状态为“已开票”/快递状态为“车厂接收”
+    * 6、下发DMS
     * @param invcNo 索赔结算单信息
     * @return String
     */
@@ -169,19 +179,25 @@ public class ClaimInvoiceReceptionServiceImpl extends HService implements ClaimI
 			 result = "根据结算单号查询出多条结算单信息！";
 		}else{
 			ClaimInvoiceVO claimInvoiceVO = claimInvoiceVOList.get(0);//正常就应该是一条索赔结算单信息
-			//3、判断当前的开票状态是否是已退票状态，如果是，则不可以再退票，如果不是，才可以退票
-			if("03".equals(claimInvoiceVO.getReceiptTp())){
-				result = "当前结算单状态已退票，不可以在收票！";
+			//3、判断是否已经取消了，取消了不可以再收票
+			if("Y".equals(claimInvoiceVO.getCancelYn())){
+				result = "当前结算单状态已取消，不可以在收票！";
 			}else{
-				//判断是否已经取消了，取消了不可以再收票
-				if("Y".equals(claimInvoiceVO.getCancelYn())){
-					result = "当前结算单状态已取消，不可以在收票！";
+				//4、判断当前的开票状态是否是已退票状态，如果是，则不可以再退票，如果不是，才可以退票
+				if("03".equals(claimInvoiceVO.getReceiptTp())){
+					result = "当前结算单状态已退票，不可以在收票！";
+				//4、判断当前的开票状态是否是已收票状态，如果是，则不可以再收票，如果不是，才可以收票
+				}else if("02".equals(claimInvoiceVO.getReceiptTp())){
+					result = "当前结算单状态已收票，不可以在收票！";
 				}else{
-					//4、开票状态为“已开票”/快递状态为“车厂接收”
+					//5、开票状态为“已开票”/快递状态为“车厂接收”
 				    claimInvoiceReceptionDAO.updateClaimInvoiceTaker(invcNo);//收票存储
+				    //6、下发DMS
+				    claimInvoiceReceptionDAO.updateInvoiceService(claimInvoiceVO);//下发DMS
 				}
 				
 			}
+			
 		}
 		
 		return result;

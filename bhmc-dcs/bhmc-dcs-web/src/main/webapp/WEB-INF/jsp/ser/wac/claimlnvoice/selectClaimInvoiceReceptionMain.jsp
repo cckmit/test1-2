@@ -82,10 +82,10 @@
                 <h2 class="title_basic"><spring:message code="ser.title.wfinalStatementList" /></h2>
                 <div class="btn_right">
                		 <dms:access viewId="VIEW-I-13295" hasPermission="${dms:getPermissionMask('READ')}"> 
-                     <button type="button" class="btn_m" id="btnQuit" ><spring:message code="global.lbl.receipt" /></button><!-- 退票 -->
+                     <button type="button" class="btn_m" id="btnQuit" ><spring:message code="ser.mnu.refund" /></button><!-- 退票 -->
                      </dms:access> 
                      <dms:access viewId="VIEW-I-13294" hasPermission="${dms:getPermissionMask('READ')}"> 
-                     <button type="button" class="btn_m" id="btReceive" ><spring:message code="ser.mnu.refund" /></button><!-- 收票 -->
+                     <button type="button" class="btn_m" id="btReceive" ><spring:message code="global.lbl.receipt" /></button><!-- 收票 -->
                       </dms:access>
                 </div>
             </div>

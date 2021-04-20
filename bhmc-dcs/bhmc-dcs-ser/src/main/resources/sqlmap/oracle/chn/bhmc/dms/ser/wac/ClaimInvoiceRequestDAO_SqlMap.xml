@@ -237,4 +237,23 @@
     
     
     </select>
+    <!-- 下发给DMS wangc 2021年4月20日10:23:07 -->
+    <update id="updateInvoiceService" parameterType="chn.bhmc.dms.ser.wac.vo.ClaimInvoiceVO">
+    	MERGE INTO se_0960is in0960is
+    	USING (select #{dlrCd} as DLR_CD,#{invcNo} as INVC_NO
+    		   from dual) se0960is
+    	ON (in0960is.INVC_NO = se0960is.INVC_NO)
+    	WHEN MATCHED THEN
+    	UPDATE
+		SET in0960is.DLR_CD = se0960is.DLR_CD,
+			in0960is.IFRESULT = 'N',
+			in0960is.CREATEDATE = to_char(SYSDATE,'yyyyMMddHH24miss'),
+			in0960is.IF_REG_DT = SYSDATE
+    	WHEN NOT MATCHED THEN
+    	INSERT (
+    	in0960is.DLR_CD,in0960is.INVC_NO,in0960is.IFRESULT,in0960is.CREATEDATE,in0960is.IF_REG_DT
+    	) VALUES (
+    	se0960is.DLR_CD,se0960is.INVC_NO,'N',to_char(SYSDATE,'yyyyMMddHH24miss'),SYSDATE
+    	)
+    </update>
 </mapper>
