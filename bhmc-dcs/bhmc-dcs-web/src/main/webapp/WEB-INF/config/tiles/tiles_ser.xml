@@ -635,10 +635,40 @@
         <put-attribute name="body" value="/WEB-INF/jsp/ser/svi/serviceHistory/selectServiceEveHistoryMain.jsp" />
     </definition>
     
-    
-    
- 	<!-- 索赔发票接收 wangc 2021年4月8日09:51:18 -->
-    <definition name="/ser/wac/claimlnvoice/selectClaimInvoiceReceptionMain" extends="defaultTemplate">
-        <put-attribute name="body" value="/WEB-INF/jsp/ser/wac/claimlnvoice/selectClaimInvoiceReceptionMain.jsp" />
+    <!-- DCS 工单确认条件设置主页面 -->
+    <definition name="/ser/svi/orderConfirm/selectOrderConfirmMain" extends="defaultTemplate">
+        <put-attribute name="body" value="/WEB-INF/jsp/ser/svi/orderConfirm/selectOrderConfirmMain.jsp" />
     </definition>
+    
+    <!-- DCS 工单确认条件设置  根据经销商代码设置车种 -->
+    <definition name="/ser/svi/orderConfirm/selectOrderConfirmToCarline" extends="defaultTemplate">
+        <put-attribute name="body" value="/WEB-INF/jsp/ser/svi/orderConfirm/selectOrderConfirmToCarline.jsp" />
+    </definition>
+    
+    <!-- DCS 工单确认条件设置  根据经销商代码设置车辆用途 -->
+    <definition name="/ser/svi/orderConfirm/selectOrderConfirmToPcDstin" extends="defaultTemplate">
+        <put-attribute name="body" value="/WEB-INF/jsp/ser/svi/orderConfirm/selectOrderConfirmToPcDstin.jsp" />
+    </definition>
+
+    <!-- 保修工单审核 -->
+    <definition name="/ser/svi/reviewWarrantyOrder/selectReviewWarrantyOrderMain" extends="defaultTemplate">
+        <put-attribute name="body" value="/WEB-INF/jsp/ser/svi/reviewWarrantyOrder/selectReviewWarrantyOrderMain.jsp" />
+    </definition>
+    
+    <!-- DCS 索赔发票汇款主页面 -->
+    <definition name="/ser/wac/claimInvoice/selectClaimInvoiceRemittanceMain" extends="defaultTemplate">
+        <put-attribute name="body" value="/WEB-INF/jsp/ser/wac/claimInvoice/selectClaimInvoiceRemittanceMain.jsp" />
+    </definition>
+    
+    <!-- DCS 索赔发票汇款批量上传页面 -->
+    <definition name="/ser/wac/claimInvoice/selectClaimInvoiceRemittanceBatchUpload" extends="defaultTemplate">
+        <put-attribute name="body" value="/WEB-INF/jsp/ser/wac/claimInvoice/selectClaimInvoiceRemittanceBatchUpload.jsp" />
+    </definition>
+    
+    
+    <!-- 索赔发票接收 wangc 2021年4月8日09:51:18 -->
+    <definition name="/ser/wac/claimInvoice/selectClaimInvoiceReceptionMain" extends="defaultTemplate">
+        <put-attribute name="body" value="/WEB-INF/jsp/ser/wac/claimInvoice/selectClaimInvoiceReceptionMain.jsp" />
+    </definition>
+    
 </tiles-definitions>

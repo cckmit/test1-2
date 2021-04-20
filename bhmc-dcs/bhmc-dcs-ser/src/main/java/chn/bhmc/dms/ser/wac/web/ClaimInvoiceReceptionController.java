@@ -52,7 +52,7 @@ public class ClaimInvoiceReceptionController extends HController{
 	  * @return String
 	  * @throws Exception
 	  */
-	 @RequestMapping(value="/ser/wac/claimlnvoice/selectClaimInvoiceReceptionMain.do")
+	 @RequestMapping(value="/ser/wac/claimInvoice/selectClaimInvoiceReceptionMain.do")
 	 public String selectLaborManageMain(Model model)throws Exception{
 		 String langCd = LocaleContextHolder.getLocale().getLanguage();
 		 //1、页面时间赋值
@@ -64,7 +64,7 @@ public class ClaimInvoiceReceptionController extends HController{
 	     model.addAttribute("paymTpDs", commonCodeService.selectCommonCodesByCmmGrpCd("SEF006", null, langCd));//汇(收)款状态
 	     model.addAttribute("failMsgDs", commonCodeService.selectCommonCodesByCmmGrpCd("SEF007", null, langCd));//退票原因
 	     model.addAttribute("cancelYnDs", commonCodeService.selectCommonCodesByCmmGrpCd("SEF008", null, langCd));//是否取消
-		 return "/ser/wac/claimlnvoice/selectClaimInvoiceReceptionMain";
+		 return "/ser/wac/claimInvoice/selectClaimInvoiceReceptionMain";
 	 }
 	 
 	   /**
@@ -79,7 +79,7 @@ public class ClaimInvoiceReceptionController extends HController{
 	    * @return SearchResult
 	    * @throws Exception
 	    */
-	   @RequestMapping(value = "/ser/wac/claimlnvoice/selectClaimInvoiceReception.do", method = RequestMethod.POST)
+	   @RequestMapping(value = "/ser/wac/claimInvoice/selectClaimInvoiceReception.do", method = RequestMethod.POST)
 	   @ResponseBody
 	   public SearchResult selectClaimInvoiceReception(@RequestBody ClaimInvoiceSearchVO searchVO)throws Exception{
 
@@ -108,7 +108,7 @@ public class ClaimInvoiceReceptionController extends HController{
 	    * @return SearchResult
 	    * @throws Exception
 	    */
-	   @RequestMapping(value = "/ser/wac/claimlnvoice/selectClaimInvoiceDetail.do", method = RequestMethod.POST)
+	   @RequestMapping(value = "/ser/wac/claimInvoice/selectClaimInvoiceDetail.do", method = RequestMethod.POST)
 	   @ResponseBody
 	   public SearchResult selectClaimInvoiceDetail(@RequestBody ClaimInvoiceDetailSearchVO searchVO)throws Exception{
 
@@ -133,7 +133,7 @@ public class ClaimInvoiceReceptionController extends HController{
 	    * @param searchVO
 	    * @return String
 	    */
-	   @RequestMapping(value = "/ser/wac/claimlnvoice/updateClaimInvoiceReception.do", method = RequestMethod.POST)
+	   @RequestMapping(value = "/ser/wac/claimInvoice/updateClaimInvoiceReception.do", method = RequestMethod.POST)
 	   @ResponseBody
 	   public String updateClaimInvoiceReception(@RequestBody ClaimInvoiceSearchVO searchVO){
 		   String result = "success";//返回退票结果

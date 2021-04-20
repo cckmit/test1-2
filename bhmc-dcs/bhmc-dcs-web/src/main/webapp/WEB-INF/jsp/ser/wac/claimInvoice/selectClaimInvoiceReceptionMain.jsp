@@ -289,7 +289,7 @@ $(document).ready(function (e){
         ,dataSource:{
             transport:{
                    read :{
-                       url:"<c:url value='/ser/wac/claimlnvoice/selectClaimInvoiceReception.do' />"
+                       url:"<c:url value='/ser/wac/claimInvoice/selectClaimInvoiceReception.do' />"
                    }
                  ,parameterMap:function(options , operation){
                      if(operation == "read"){
@@ -459,7 +459,7 @@ $(document).ready(function (e){
         ,dataSource:{
             transport:{
                    read :{
-                       url:"<c:url value='/ser/wac/claimlnvoice/selectClaimInvoiceDetail.do' />"
+                       url:"<c:url value='/ser/wac/claimInvoice/selectClaimInvoiceDetail.do' />"
                    }
                  ,parameterMap:function(options , operation){
                      if(operation == "read"){
@@ -621,7 +621,7 @@ $(document).ready(function (e){
     //修改结算单收票/退票状态
     postUpdateReceiptTp = function(params){
     	$.ajax({
-            url:"<c:url value='/ser/wac/claimlnvoice/updateClaimInvoiceReception.do' />"
+            url:"<c:url value='/ser/wac/claimInvoice/updateClaimInvoiceReception.do' />"
             ,data:JSON.stringify(params)
             ,type:'POST'
             ,dataType:'json'
