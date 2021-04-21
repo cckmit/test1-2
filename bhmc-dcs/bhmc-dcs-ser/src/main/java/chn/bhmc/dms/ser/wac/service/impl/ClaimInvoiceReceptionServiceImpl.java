@@ -137,10 +137,10 @@ public class ClaimInvoiceReceptionServiceImpl extends HService implements ClaimI
 					claimInvoiceVO.setTrsfTp("02");//已邮寄
 					claimInvoiceVO.setFailMsg(searchVO.getSfailMsg());//退票原因
 					claimInvoiceVO.setFailRemark(searchVO.getSfailRemark());//退票备注
-					claimInvoiceVO.setTrsfNo(searchVO.getStrsfNo());//快递单号
-					claimInvoiceVO.setExpsCmpNm(searchVO.getSexpsCmpNm());//快递公司
-					claimInvoiceVO.setSenderNm(searchVO.getSsenderNm());//寄件人
-					claimInvoiceVO.setSenderTelno(searchVO.getSsenderTelno());//寄件人联系电话
+					//claimInvoiceVO.setTrsfNo(searchVO.getStrsfNo());//快递单号
+					//claimInvoiceVO.setExpsCmpNm(searchVO.getSexpsCmpNm());//快递公司
+					//claimInvoiceVO.setSenderNm(searchVO.getSsenderNm());//寄件人
+					//claimInvoiceVO.setSenderTelno(searchVO.getSsenderTelno());//寄件人联系电话
 				    claimInvoiceReceptionDAO.updateClaimInvoiceRefund(claimInvoiceVO);//退票存储
 				    //6、下发DMS
 				    claimInvoiceReceptionDAO.updateInvoiceService(claimInvoiceVO);//下发DMS

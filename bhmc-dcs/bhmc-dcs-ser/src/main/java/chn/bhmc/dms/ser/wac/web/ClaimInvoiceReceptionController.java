@@ -64,7 +64,8 @@ public class ClaimInvoiceReceptionController extends HController{
 	     model.addAttribute("paymTpDs", commonCodeService.selectCommonCodesByCmmGrpCd("SEF006", null, langCd));//汇(收)款状态
 	     model.addAttribute("failMsgDs", commonCodeService.selectCommonCodesByCmmGrpCd("SEF007", null, langCd));//退票原因
 	     model.addAttribute("cancelYnDs", commonCodeService.selectCommonCodesByCmmGrpCd("SEF008", null, langCd));//是否取消
-		 return "/ser/wac/claimInvoice/selectClaimInvoiceReceptionMain";
+	     model.addAttribute("expsCmpNmDs", commonCodeService.selectCommonCodesByCmmGrpCd("SEF009", null, langCd));//快递公司
+	     return "/ser/wac/claimInvoice/selectClaimInvoiceReceptionMain";
 	 }
 	 
 	   /**
