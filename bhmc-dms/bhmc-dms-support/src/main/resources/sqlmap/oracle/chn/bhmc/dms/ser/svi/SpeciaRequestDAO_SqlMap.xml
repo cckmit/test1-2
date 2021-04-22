@@ -32,25 +32,49 @@
          FROM (
               SELECT ROWNUM AS RNUM , T1.*
                 FROM (
-                	select * from 
-                    	(SELECT repairOrder.CAR_REG_NO,repairOrder.VIN_NO,repairOrder.RO_DOC_NO,repairOrder.CAR_OWNER_ID,repairOrder.CAR_OWNER_NM,specialRequest.DRIVER_NM,
-					 	   repairOrder.HP_NO as DRIVER_HP_NO,specialRequest.REQ_REASON_TP,specialRequest.REQ_REASON_DESC,specialRequest.APPROVE_DESC, 
-					       specialRequest.REQ_USR_NM AS REQ_USR_NM, specialRequest.APPROVE_USR_NM, specialRequest.CAR_OWNER_NM, repairOrder.DRIVER_NM, 
-					       repairOrder.RO_DT, specialRequest.REQ_DT,specialRequest.FILE_DOC_NO,
-					      (CASE when specialRequest.REQ_STAT_CD  is null  THEN '05' ELSE specialRequest.REQ_STAT_CD END) REQ_STAT_CD,
-					       repairOrder.DL_CHK_DT,ROWNUM 
-					 	FROM (
-					 	select repair.*,HP_NO from (select  se0300t.DLR_CD,se0300t.CAR_REG_NO,se0300t.VIN_NO,se0300t.RO_DOC_NO,se0300t.CAR_OWNER_ID,se0300t.CAR_OWNER_NM,
-					 		se0300t.DRIVER_ID,se0300t.DRIVER_NM,se0300t.RO_DT,se0300t.DL_CHK_DT
-					 	from SE_0300T se0300t 
-						 where se0300t.DL_STAT_CD =  '02' 
-						 AND se0300t.RO_STAT_CD = '03'   
-					 	AND se0300t.CUST_CONFIRM_YN ='Y'
-					 	and (se0300t.cust_confirm_cd = '01' or se0300t.cust_confirm_cd is null)                                     
-					 	) repair 
-					 	left join CR_0101T t on t.DLR_CD  = repair.DLR_CD AND t.CUST_NO = repair.DRIVER_ID
-					 	)repairOrder 
-					 	left join (select * from SE_1162T se where se.CANCEL_YN='N') as specialRequest on specialRequest.RO_DOC_NO = repairOrder.RO_DOC_NO) as statcd
+                	 select  statcd.*,ROWNUM  from (
+						select statcd01.* from (	
+							SELECT repairOrder.CAR_REG_NO,repairOrder.VIN_NO,repairOrder.RO_DOC_NO,repairOrder.CAR_OWNER_ID,repairOrder.CAR_OWNER_NM,specialRequest.DRIVER_NM,
+						 	   repairOrder.HP_NO as DRIVER_HP_NO,specialRequest.REQ_REASON_TP,specialRequest.REQ_REASON_DESC,specialRequest.APPROVE_DESC, 
+						       specialRequest.REQ_USR_NM AS REQ_USR_NM, specialRequest.APPROVE_USR_NM, specialRequest.CAR_OWNER_NM, repairOrder.DRIVER_NM, 
+						       repairOrder.RO_DT, specialRequest.REQ_DT,specialRequest.FILE_DOC_NO,
+						      (CASE when specialRequest.REQ_STAT_CD  is null  THEN '05' ELSE specialRequest.REQ_STAT_CD END) REQ_STAT_CD,
+						       repairOrder.DL_CHK_DT
+						 	FROM (
+								select repair.*,HP_NO from (select  se0300t.DLR_CD,se0300t.CAR_REG_NO,se0300t.VIN_NO,se0300t.RO_DOC_NO,se0300t.CAR_OWNER_ID,se0300t.CAR_OWNER_NM,
+									se0300t.DRIVER_ID,se0300t.DRIVER_NM,se0300t.RO_DT,se0300t.DL_CHK_DT
+								from SE_0300T se0300t 
+								where se0300t.DL_STAT_CD =  '02' 
+								AND se0300t.RO_STAT_CD = '03'   
+								AND se0300t.CUST_CONFIRM_YN ='Y'
+								and (se0300t.cust_confirm_cd = '02' or se0300t.cust_confirm_cd is null)                                     
+								) repair 
+								left join CR_0101T t on t.DLR_CD  = repair.DLR_CD AND t.CUST_NO = repair.DRIVER_ID
+						 	)repairOrder 
+						 	left join (select * from SE_1162T se where se.CANCEL_YN='N') as specialRequest on specialRequest.RO_DOC_NO = repairOrder.RO_DOC_NO
+						) as statcd01
+						UNION ALL
+						select statcd02.* from (	
+							SELECT repairOrder.CAR_REG_NO,repairOrder.VIN_NO,repairOrder.RO_DOC_NO,repairOrder.CAR_OWNER_ID,repairOrder.CAR_OWNER_NM,specialRequest.DRIVER_NM,
+						 	   repairOrder.HP_NO as DRIVER_HP_NO,specialRequest.REQ_REASON_TP,specialRequest.REQ_REASON_DESC,specialRequest.APPROVE_DESC, 
+						       specialRequest.REQ_USR_NM AS REQ_USR_NM, specialRequest.APPROVE_USR_NM, specialRequest.CAR_OWNER_NM, repairOrder.DRIVER_NM, 
+						       repairOrder.RO_DT, specialRequest.REQ_DT,specialRequest.FILE_DOC_NO,
+						      (CASE when specialRequest.REQ_STAT_CD  is null  THEN '05' ELSE specialRequest.REQ_STAT_CD END) REQ_STAT_CD,
+						       repairOrder.DL_CHK_DT
+						 	FROM (
+								select repair.*,HP_NO from (select  se0300t.DLR_CD,se0300t.CAR_REG_NO,se0300t.VIN_NO,se0300t.RO_DOC_NO,se0300t.CAR_OWNER_ID,se0300t.CAR_OWNER_NM,
+									se0300t.DRIVER_ID,se0300t.DRIVER_NM,se0300t.RO_DT,se0300t.DL_CHK_DT
+								from SE_0300T se0300t 
+								where se0300t.DL_STAT_CD =  '02' 
+								AND se0300t.RO_STAT_CD = '03'   
+								AND se0300t.CUST_CONFIRM_YN ='Y'
+								and (se0300t.cust_confirm_cd = '01')                                     
+								) repair 
+								left join CR_0101T t on t.DLR_CD  = repair.DLR_CD AND t.CUST_NO = repair.DRIVER_ID
+						 	)repairOrder 
+						 	left join (select * from SE_1162T se where se.CANCEL_YN='N') as specialRequest on specialRequest.RO_DOC_NO = repairOrder.RO_DOC_NO 
+						) as statcd02 where 1=1 and statcd02.REQ_STAT_CD not in ('05','00')
+						) as statcd
 					 where 1 = 1
 					 <if test='sRoDocNo != null and sRoDocNo != "" '>
 	                 AND statcd.RO_DOC_NO = #{sRoDocNo}
@@ -91,53 +115,75 @@
     
     <!-- 申请工单列表详细信息（数量）-->
     <select id="selectSpecialRequestForSpecialBySpecialCnt" parameterType="SpecialRequestSearchVo" resultType="int">
-		 SELECT count(*)
-         FROM (
-           SELECT ROWNUM AS RNUM , T1.*
+           SELECT count(*)
            FROM (
-               SELECT repairOrder.CAR_REG_NO,repairOrder.VIN_NO,repairOrder.RO_DOC_NO,repairOrder.CAR_OWNER_ID,repairOrder.CAR_OWNER_NM,specialRequest.DRIVER_NM,
-					 	   repairOrder.HP_NO as DRIVER_HP_NO,specialRequest.REQ_REASON_TP,specialRequest.REQ_REASON_DESC,specialRequest.APPROVE_DESC, 
-					       specialRequest.REQ_USR_NM AS REQ_USR_NM, specialRequest.APPROVE_USR_NM, specialRequest.CAR_OWNER_NM, repairOrder.DRIVER_NM, 
-					       repairOrder.RO_DT, specialRequest.REQ_DT,specialRequest.FILE_DOC_NO,
-					      (CASE when specialRequest.REQ_STAT_CD  is null  THEN '05' ELSE specialRequest.REQ_STAT_CD END) REQ_STAT_CD,
-					       repairOrder.DL_CHK_DT,ROWNUM 
-					 FROM (
-					 select repair.*,HP_NO from (select  se0300t.DLR_CD,se0300t.CAR_REG_NO,se0300t.VIN_NO,se0300t.RO_DOC_NO,se0300t.CAR_OWNER_ID,se0300t.CAR_OWNER_NM,
-					 		se0300t.DRIVER_ID,se0300t.DRIVER_NM,se0300t.RO_DT,se0300t.DL_CHK_DT
-					 from SE_0300T se0300t 
-					 where se0300t.DL_STAT_CD =  '02' 
-					 AND se0300t.RO_STAT_CD = '03'   
-					 AND se0300t.CUST_CONFIRM_YN ='Y'
-					 and (se0300t.cust_confirm_cd = '01' or se0300t.cust_confirm_cd is null)                                     
-					 ) repair 
-					 left join CR_0101T t on t.DLR_CD  = repair.DLR_CD AND t.CUST_NO = repair.DRIVER_ID
-					 )repairOrder 
-					 left join (select * from SE_1162T se where se.CANCEL_YN='N') as specialRequest on specialRequest.RO_DOC_NO = repairOrder.RO_DOC_NO
-           ORDER BY repairOrder.RO_DT desc
+              select  statcd.*,ROWNUM  from (
+						select statcd01.* from (	
+							SELECT repairOrder.CAR_REG_NO,repairOrder.VIN_NO,repairOrder.RO_DOC_NO,repairOrder.CAR_OWNER_ID,repairOrder.CAR_OWNER_NM,specialRequest.DRIVER_NM,
+						 	   repairOrder.HP_NO as DRIVER_HP_NO,specialRequest.REQ_REASON_TP,specialRequest.REQ_REASON_DESC,specialRequest.APPROVE_DESC, 
+						       specialRequest.REQ_USR_NM AS REQ_USR_NM, specialRequest.APPROVE_USR_NM, specialRequest.CAR_OWNER_NM, repairOrder.DRIVER_NM, 
+						       repairOrder.RO_DT, specialRequest.REQ_DT,specialRequest.FILE_DOC_NO,
+						      (CASE when specialRequest.REQ_STAT_CD  is null  THEN '05' ELSE specialRequest.REQ_STAT_CD END) REQ_STAT_CD,
+						       repairOrder.DL_CHK_DT
+						 	FROM (
+								select repair.*,HP_NO from (select  se0300t.DLR_CD,se0300t.CAR_REG_NO,se0300t.VIN_NO,se0300t.RO_DOC_NO,se0300t.CAR_OWNER_ID,se0300t.CAR_OWNER_NM,
+									se0300t.DRIVER_ID,se0300t.DRIVER_NM,se0300t.RO_DT,se0300t.DL_CHK_DT
+								from SE_0300T se0300t 
+								where se0300t.DL_STAT_CD =  '02' 
+								AND se0300t.RO_STAT_CD = '03'   
+								AND se0300t.CUST_CONFIRM_YN ='Y'
+								and (se0300t.cust_confirm_cd = '02' or se0300t.cust_confirm_cd is null)                                     
+								) repair 
+								left join CR_0101T t on t.DLR_CD  = repair.DLR_CD AND t.CUST_NO = repair.DRIVER_ID
+						 	)repairOrder 
+						 	left join (select * from SE_1162T se where se.CANCEL_YN='N') as specialRequest on specialRequest.RO_DOC_NO = repairOrder.RO_DOC_NO
+						) as statcd01
+						UNION ALL
+						select statcd02.* from (	
+							SELECT repairOrder.CAR_REG_NO,repairOrder.VIN_NO,repairOrder.RO_DOC_NO,repairOrder.CAR_OWNER_ID,repairOrder.CAR_OWNER_NM,specialRequest.DRIVER_NM,
+						 	   repairOrder.HP_NO as DRIVER_HP_NO,specialRequest.REQ_REASON_TP,specialRequest.REQ_REASON_DESC,specialRequest.APPROVE_DESC, 
+						       specialRequest.REQ_USR_NM AS REQ_USR_NM, specialRequest.APPROVE_USR_NM, specialRequest.CAR_OWNER_NM, repairOrder.DRIVER_NM, 
+						       repairOrder.RO_DT, specialRequest.REQ_DT,specialRequest.FILE_DOC_NO,
+						      (CASE when specialRequest.REQ_STAT_CD  is null  THEN '05' ELSE specialRequest.REQ_STAT_CD END) REQ_STAT_CD,
+						       repairOrder.DL_CHK_DT
+						 	FROM (
+								select repair.*,HP_NO from (select  se0300t.DLR_CD,se0300t.CAR_REG_NO,se0300t.VIN_NO,se0300t.RO_DOC_NO,se0300t.CAR_OWNER_ID,se0300t.CAR_OWNER_NM,
+									se0300t.DRIVER_ID,se0300t.DRIVER_NM,se0300t.RO_DT,se0300t.DL_CHK_DT
+								from SE_0300T se0300t 
+								where se0300t.DL_STAT_CD =  '02' 
+								AND se0300t.RO_STAT_CD = '03'   
+								AND se0300t.CUST_CONFIRM_YN ='Y'
+								and (se0300t.cust_confirm_cd = '01')                                     
+								) repair 
+								left join CR_0101T t on t.DLR_CD  = repair.DLR_CD AND t.CUST_NO = repair.DRIVER_ID
+						 	)repairOrder 
+						 	left join (select * from SE_1162T se where se.CANCEL_YN='N') as specialRequest on specialRequest.RO_DOC_NO = repairOrder.RO_DOC_NO 
+						) as statcd02 where 1=1 and statcd02.REQ_STAT_CD not in ('05','00')
+						) as statcd
+					 where 1 = 1
+					 <if test='sRoDocNo != null and sRoDocNo != "" '>
+	                 AND statcd.RO_DOC_NO = #{sRoDocNo}
+	                 </if>
+	                 <if test='sCarRegNo != null and sCarRegNo != "" '>
+	                 AND statcd.CAR_REG_NO = #{sCarRegNo}
+	                 </if>
+	                 <if test='sReqStatCd != null and sReqStatCd != "" '>
+	                 AND statcd.REQ_STAT_CD = #{sReqStatCd}
+	                 </if>
+	                 <if test='sFromReqDt !=null'>
+	                 AND statcd.REQ_DT <![CDATA[>=]]> #{sFromReqDt}
+	                 </if>
+	                 <if test='sToReqDt !=null'>
+	                 AND statcd.REQ_DT <![CDATA[<=]]> #{sToReqDt}+1
+	                 </if>
+                     <if test='sFromRoDt !=null'>
+                     AND statcd.RO_DT <![CDATA[>=]]> #{sFromRoDt}
+	                 </if>
+	                 <if test='sToRoDt !=null'>
+	                 AND statcd.RO_DT <![CDATA[<=]]> #{sToRoDt}+1
+	                 </if>
+	                 ORDER BY statcd.RO_DT desc
            ) T1
-					where 1 = 1
-				   <if test='sRoDocNo != null and sRoDocNo != "" '>
-					 AND T1.RO_DOC_NO = #{sRoDocNo}
-					 </if>
-					 <if test='sCarRegNo != null and sCarRegNo != "" '>
-					 AND T1.CAR_REG_NO = #{sCarRegNo}
-					 </if>
-					 <if test='sReqStatCd != null and sReqStatCd != "" '>
-					 AND T1.REQ_STAT_CD = #{sReqStatCd}
-					 </if>
-					 <if test='sFromReqDt !=null'>
-					 AND T1.REQ_DT <![CDATA[>=]]> #{sFromReqDt}
-					 </if>
-					 <if test='sToReqDt !=null'>
-					 AND T1.REQ_DT <![CDATA[<=]]> #{sToReqDt}+1
-					 </if>
-					 <if test='sFromRoDt !=null'>
-					 AND T1.RO_DT <![CDATA[>=]]> #{sFromRoDt}
-					 </if>
-					 <if test='sToRoDt !=null'>
-					 AND T1.RO_DT <![CDATA[<=]]> #{sToRoDt}+1
-					 </if>
-         )
     </select>
     
    <!-- 根据维修委托单号查询是否有正在提报的信息 -->
@@ -260,12 +306,11 @@
       <!-- 根据维修委托单号查询工单信息 -->
    <select id="selectWorkOrder" parameterType="String" resultType="SpecialRequestVo">
 		 select repair.*,HP_NO as DRIVER_HP_NO from (select  se0300t.DLR_CD,se0300t.CAR_REG_NO,se0300t.VIN_NO,se0300t.RO_DOC_NO,se0300t.CAR_OWNER_ID,
-		 se0300t.CAR_OWNER_NM,se0300t.DRIVER_ID,se0300t.DRIVER_NM,se0300t.UPDT_DT,se0300t.ro_tp,se0300t.ro_dt,se0300t.DL_CHK_DT
+		 se0300t.CAR_OWNER_NM,se0300t.DRIVER_ID,se0300t.DRIVER_NM,se0300t.UPDT_DT,se0300t.ro_tp,se0300t.ro_dt,se0300t.DL_CHK_DT,se0300t.cust_confirm_cd
 		 from SE_0300T se0300t 
 		 where se0300t.DL_STAT_CD =  '02' 
 		 AND se0300t.RO_STAT_CD = '03'   
 		 AND se0300t.CUST_CONFIRM_YN ='Y'  
-		 and (se0300t.cust_confirm_cd = '01' or se0300t.cust_confirm_cd is null)                                   
 		 ) repair left join CR_0101T t on t.DLR_CD  = repair.DLR_CD AND t.CUST_NO = repair.DRIVER_ID	
 		 where repair.RO_DOC_NO = #{roDocNo}
    </select>
@@ -274,65 +319,79 @@
    <select id="selectSpecialRequestForSpecialBySpecialExcel" parameterType="SpecialRequestSearchVo" resultType="SpecialRequestVo">
         SELECT *
          FROM (
-              SELECT ROWNUM AS RNUM , T1.*
+              SELECT ROWNUM AS RNUM , T1.*,
+               (select CMM_CD_NM from CM_0303T where CMM_CD = T1.REQ_REASON_TPE and CMM_GRP_CD='SER602') as REQ_REASON_TP,
+ 			   (select CMM_CD_NM from CM_0303T where CMM_CD = T1.REQ_STAT_CDE and CMM_GRP_CD='SER601') as REQ_STAT_CD
                 FROM (
-                    select * from (
-	                    SELECT repairOrder.CAR_REG_NO,repairOrder.VIN_NO,repairOrder.RO_DOC_NO,repairOrder.CAR_OWNER_ID,repairOrder.CAR_OWNER_NM,specialRequest.DRIVER_NM,
-						 	   repairOrder.HP_NO as DRIVER_HP_NO,specialRequest.REQ_REASON_DESC,specialRequest.APPROVE_DESC, 
-						 	   (select CMM_CD_NM from CM_0303T where CMM_CD = specialRequest.REQ_REASON_TP and CMM_GRP_CD='SER602') as REQ_REASON_TP,
+                    select  statcd.*,ROWNUM  from (
+						select statcd01.* from (	
+							SELECT repairOrder.CAR_REG_NO,repairOrder.VIN_NO,repairOrder.RO_DOC_NO,repairOrder.CAR_OWNER_ID,repairOrder.CAR_OWNER_NM,specialRequest.DRIVER_NM,
+						 	   repairOrder.HP_NO as DRIVER_HP_NO,specialRequest.REQ_REASON_TP as REQ_REASON_TPE,specialRequest.REQ_REASON_DESC,specialRequest.APPROVE_DESC, 
 						       specialRequest.REQ_USR_NM AS REQ_USR_NM, specialRequest.APPROVE_USR_NM, specialRequest.CAR_OWNER_NM, repairOrder.DRIVER_NM, 
 						       repairOrder.RO_DT, specialRequest.REQ_DT,specialRequest.FILE_DOC_NO,
-						       (select CMM_CD_NM from CM_0303T where CMM_CD = (CASE when specialRequest.REQ_STAT_CD  is null  THEN '05' ELSE specialRequest.REQ_STAT_CD END) and CMM_GRP_CD='SER601') as REQ_STAT_CD,
-						       (CASE when specialRequest.REQ_STAT_CD  is null  THEN '05' ELSE specialRequest.REQ_STAT_CD END) as REQ_STAT_CDExcel,
-						       specialRequest.CAR_REG_NO,repairOrder.DL_CHK_DT,ROWNUM 
-						 FROM (
-						 select repair.*,HP_NO from (select  se0300t.DLR_CD,se0300t.CAR_REG_NO,se0300t.VIN_NO,se0300t.RO_DOC_NO,se0300t.CAR_OWNER_ID,se0300t.CAR_OWNER_NM,
-						 		se0300t.DRIVER_ID,se0300t.DRIVER_NM,se0300t.RO_DT,se0300t.DL_CHK_DT
-						 from SE_0300T se0300t 
-						 where se0300t.DL_STAT_CD =  '02' 
-						 AND se0300t.RO_STAT_CD = '03'   
-						 AND se0300t.CUST_CONFIRM_YN ='Y'
-						 and (se0300t.cust_confirm_cd = '01' or se0300t.cust_confirm_cd is null)                                     
-						 ) repair 
-						 left join CR_0101T t on t.DLR_CD  = repair.DLR_CD AND t.CUST_NO = repair.DRIVER_ID
-						 )repairOrder 
-						left join (select * from SE_1162T se where se.CANCEL_YN='N') as specialRequest on specialRequest.RO_DOC_NO = repairOrder.RO_DOC_NO
-					) stat
-					where 1 = 1
-				   <if test='sRoDocNo != null and sRoDocNo != "" '>
-                   AND stat.RO_DOC_NO = #{sRoDocNo}
-                   </if>
-                   <if test='sCarRegNo != null and sCarRegNo != "" '>
-                   AND stat.CAR_REG_NO = #{sCarRegNo}
-                   </if>
-                   <if test='sReqStatCd != null and sReqStatCd != "" '>
-                   AND stat.REQ_STAT_CDExcel = #{sReqStatCd}
-                   </if>
-                   <if test='sFromReqDt !=null'>
-                   AND stat.REQ_DT <![CDATA[>=]]> #{sFromReqDt}
-                   </if>
-                   <if test='sToReqDt !=null'>
-                   AND stat.REQ_DT <![CDATA[<=]]> #{sToReqDt}+1
-                   </if>
-                   <if test='sFromRoDt !=null'>
-                   AND stat.RO_DT <![CDATA[>=]]> #{sFromRoDt}
-                   </if>
-                   <if test='sToRoDt !=null'>
-                   AND stat.RO_DT <![CDATA[<=]]> #{sToRoDt}+1
-                   </if>
-                   ORDER BY stat.RO_DT desc
+						      (CASE when specialRequest.REQ_STAT_CD  is null  THEN '05' ELSE specialRequest.REQ_STAT_CD END) REQ_STAT_CDE,
+						       repairOrder.DL_CHK_DT
+						 	FROM (
+								select repair.*,HP_NO from (select  se0300t.DLR_CD,se0300t.CAR_REG_NO,se0300t.VIN_NO,se0300t.RO_DOC_NO,se0300t.CAR_OWNER_ID,se0300t.CAR_OWNER_NM,
+									se0300t.DRIVER_ID,se0300t.DRIVER_NM,se0300t.RO_DT,se0300t.DL_CHK_DT
+								from SE_0300T se0300t 
+								where se0300t.DL_STAT_CD =  '02' 
+								AND se0300t.RO_STAT_CD = '03'   
+								AND se0300t.CUST_CONFIRM_YN ='Y'
+								and (se0300t.cust_confirm_cd = '02' or se0300t.cust_confirm_cd is null)                                     
+								) repair 
+								left join CR_0101T t on t.DLR_CD  = repair.DLR_CD AND t.CUST_NO = repair.DRIVER_ID
+						 	)repairOrder 
+						 	left join (select * from SE_1162T se where se.CANCEL_YN='N') as specialRequest on specialRequest.RO_DOC_NO = repairOrder.RO_DOC_NO
+						) as statcd01
+						UNION ALL
+						select statcd02.* from (	
+							SELECT repairOrder.CAR_REG_NO,repairOrder.VIN_NO,repairOrder.RO_DOC_NO,repairOrder.CAR_OWNER_ID,repairOrder.CAR_OWNER_NM,specialRequest.DRIVER_NM,
+						 	   repairOrder.HP_NO as DRIVER_HP_NO,specialRequest.REQ_REASON_TP AS REQ_REASON_TPE,specialRequest.REQ_REASON_DESC,specialRequest.APPROVE_DESC, 
+						       specialRequest.REQ_USR_NM AS REQ_USR_NM, specialRequest.APPROVE_USR_NM, specialRequest.CAR_OWNER_NM, repairOrder.DRIVER_NM, 
+						       repairOrder.RO_DT, specialRequest.REQ_DT,specialRequest.FILE_DOC_NO,
+						      (CASE when specialRequest.REQ_STAT_CD  is null  THEN '05' ELSE specialRequest.REQ_STAT_CD END) REQ_STAT_CDE,
+						       repairOrder.DL_CHK_DT
+						 	FROM (
+								select repair.*,HP_NO from (select  se0300t.DLR_CD,se0300t.CAR_REG_NO,se0300t.VIN_NO,se0300t.RO_DOC_NO,se0300t.CAR_OWNER_ID,se0300t.CAR_OWNER_NM,
+									se0300t.DRIVER_ID,se0300t.DRIVER_NM,se0300t.RO_DT,se0300t.DL_CHK_DT
+								from SE_0300T se0300t 
+								where se0300t.DL_STAT_CD =  '02' 
+								AND se0300t.RO_STAT_CD = '03'   
+								AND se0300t.CUST_CONFIRM_YN ='Y'
+								and (se0300t.cust_confirm_cd = '01')                                     
+								) repair 
+								left join CR_0101T t on t.DLR_CD  = repair.DLR_CD AND t.CUST_NO = repair.DRIVER_ID
+						 	)repairOrder 
+						 	left join (select * from SE_1162T se where se.CANCEL_YN='N') as specialRequest on specialRequest.RO_DOC_NO = repairOrder.RO_DOC_NO 
+						) as statcd02 where 1=1 and statcd02.REQ_STAT_CDE not in ('05','00')
+						) as statcd
+					 where 1 = 1
+					 <if test='sRoDocNo != null and sRoDocNo != "" '>
+	                 AND statcd.RO_DOC_NO = #{sRoDocNo}
+	                 </if>
+	                 <if test='sCarRegNo != null and sCarRegNo != "" '>
+	                 AND statcd.CAR_REG_NO = #{sCarRegNo}
+	                 </if>
+	                 <if test='sReqStatCd != null and sReqStatCd != "" '>
+	                 AND statcd.REQ_STAT_CDE = #{sReqStatCd}
+	                 </if>
+	                 <if test='sFromReqDt !=null'>
+	                 AND statcd.REQ_DT <![CDATA[>=]]> #{sFromReqDt}
+	                 </if>
+	                 <if test='sToReqDt !=null'>
+	                 AND statcd.REQ_DT <![CDATA[<=]]> #{sToReqDt}+1
+	                 </if>
+                     <if test='sFromRoDt !=null'>
+                     AND statcd.RO_DT <![CDATA[>=]]> #{sFromRoDt}
+	                 </if>
+	                 <if test='sToRoDt !=null'>
+	                 AND statcd.RO_DT <![CDATA[<=]]> #{sToRoDt}+1
+	                 </if>
+	                 ORDER BY statcd.RO_DT desc
                 ) T1
-                 <where>
-                     <if test='firstIndex != -1 and lastIndex != -1'>
-                       AND ROWNUM <![CDATA[<=]]> #{lastIndex}
-                     </if>
-                 </where>
          )
-        <where>
-            <if test='firstIndex != -1 and lastIndex != -1'>
-                RNUM > #{firstIndex}
-            </if>
-        </where>
+       
     </select>
    <!-- 根据岗位编码查询岗位信息 wangc  2021年4月21日20:56:16 -->
    <select id="selectReqTskNm" parameterType="String" resultType="String">

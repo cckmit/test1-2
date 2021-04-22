@@ -156,6 +156,10 @@ public class SpecialRequestVo extends BaseVO{
      * 交车确认日期
      */
     private Date dlChkDt;
+    /**
+     * 工单数据完成状态 01：APP确认02：系统确认 空未确认
+     */
+    private String custConfirmCd;
     
 	public String getReqNo() {
 		return reqNo;
@@ -345,7 +349,13 @@ public class SpecialRequestVo extends BaseVO{
 	public void setDlChkDt(Date dlChkDt) {
 		this.dlChkDt = dlChkDt;
 	}
-
+	public String getCustConfirmCd() {
+		return custConfirmCd;
+	}
+	public void setCustConfirmCd(String custConfirmCd) {
+		this.custConfirmCd = custConfirmCd;
+	}
+	
     
     
 }

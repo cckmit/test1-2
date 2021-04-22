@@ -123,6 +123,10 @@ public class SpecialRequestServiceImpl extends HService implements SpecialReques
 		//1、基础信息查询及赋值 
 		addVO.setDlrCd(LoginUtil.getDlrCd());//店代码
 		SpecialRequestVo workOrderVo = specialRequestDao.selectWorkOrder(addVO.getRoDocNo());//根据维修委托单号查询工单信息
+		//如果已经APP确认了，就不可以再申请和保存了
+		if("01".equals(workOrderVo.getCustConfirmCd())){
+			return "该工单已经在APP确认了，不可以再做保存/申请操作！";
+		}
 		addVO.setRoUpdtDt(workOrderVo.getRoUpdtDt());//工单修改时间
 		addVO.setCarRegNo(workOrderVo.getCarRegNo());//车牌号
 		addVO.setVinNo(workOrderVo.getVinNo());//车辆识别码
