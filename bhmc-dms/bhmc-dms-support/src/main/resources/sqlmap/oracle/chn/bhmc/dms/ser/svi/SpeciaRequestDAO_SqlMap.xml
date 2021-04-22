@@ -38,7 +38,7 @@
 					       specialRequest.REQ_USR_NM AS REQ_USR_NM, specialRequest.APPROVE_USR_NM, specialRequest.CAR_OWNER_NM, repairOrder.DRIVER_NM, 
 					       repairOrder.RO_DT, specialRequest.REQ_DT,specialRequest.FILE_DOC_NO,
 					      (CASE when specialRequest.REQ_STAT_CD  is null  THEN '05' ELSE specialRequest.REQ_STAT_CD END) REQ_STAT_CD,
-					       specialRequest.CAR_REG_NO,repairOrder.DL_CHK_DT,ROWNUM 
+					       repairOrder.DL_CHK_DT,ROWNUM 
 					 	FROM (
 					 	select repair.*,HP_NO from (select  se0300t.DLR_CD,se0300t.CAR_REG_NO,se0300t.VIN_NO,se0300t.RO_DOC_NO,se0300t.CAR_OWNER_ID,se0300t.CAR_OWNER_NM,
 					 		se0300t.DRIVER_ID,se0300t.DRIVER_NM,se0300t.RO_DT,se0300t.DL_CHK_DT
@@ -100,7 +100,7 @@
 					       specialRequest.REQ_USR_NM AS REQ_USR_NM, specialRequest.APPROVE_USR_NM, specialRequest.CAR_OWNER_NM, repairOrder.DRIVER_NM, 
 					       repairOrder.RO_DT, specialRequest.REQ_DT,specialRequest.FILE_DOC_NO,
 					      (CASE when specialRequest.REQ_STAT_CD  is null  THEN '05' ELSE specialRequest.REQ_STAT_CD END) REQ_STAT_CD,
-					       specialRequest.CAR_REG_NO,repairOrder.DL_CHK_DT,ROWNUM 
+					       repairOrder.DL_CHK_DT,ROWNUM 
 					 FROM (
 					 select repair.*,HP_NO from (select  se0300t.DLR_CD,se0300t.CAR_REG_NO,se0300t.VIN_NO,se0300t.RO_DOC_NO,se0300t.CAR_OWNER_ID,se0300t.CAR_OWNER_NM,
 					 		se0300t.DRIVER_ID,se0300t.DRIVER_NM,se0300t.RO_DT,se0300t.DL_CHK_DT
