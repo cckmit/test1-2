@@ -58,5 +58,19 @@ public interface SpecialRequestService {
 	 * @date 2021-03-31 08:08:40 
 	 */
 	public String addSpecialRequest(SpecialRequestVo addVO);
+	
+	
+	/**
+	 * 
+	 * @MethodName: selectReqTskNm
+	 * <p>Title: 根据岗位代码查询岗位信息</p >
+	 * @Description: TODO
+	 * @author wangc
+	 * @param tskCd
+	 * @return String
+	 * @date 2021-04-21 08:45:29 
+	 * @param tskCd
+	 */
+	public String selectReqTskNm(String tskCd);
 
 }

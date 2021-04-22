@@ -123,6 +123,18 @@ public interface SpecialRequestDao {
 	 * @param searchVO
 	 */
 	List<SpecialRequestVo> selectSpecialRequestForSpecialBySpecialExcel(SpecialRequestSearchVo searchVO);
+	
+	/**
+	 * 
+	 * @MethodName: selectReqTskNm
+	 * <p>Title: 根据岗位编码查询岗位名称</p >
+	 * @Description: TODO
+	 * @author wangc
+	 * @param tskCd
+	 * @param params
+	 * @date 2021年4月21日20:54:20 
+	 */
+	String selectReqTskNm(String tskCd);
 
 	
 

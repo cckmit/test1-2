@@ -70,13 +70,15 @@ public class SpecialRequestController extends HController{
 	           ,HttpServletRequest request)throws Exception{
 		 	String langCd = LocaleContextHolder.getLocale().getLanguage();
 		 	String dateFormat = systemConfigInfoService.selectStrValueByKey("dateFormat");
+		 	String reqTskNm = "";//申请人岗位
 		 	
 		 	//1、共同编码放入集合做返显
 		 	model.addAttribute("reqStatDs", commonCodeService.selectCommonCodesByCmmGrpCd("SER601", null, langCd));//单据状态
 		 	model.addAttribute("reqReasonTp", commonCodeService.selectCommonCodesByCmmGrpCd("SER602", null, langCd));//申请原因类别
 		 	model.addAttribute("sreqUsrId", LoginUtil.getUserId());//申请人ID
 		 	model.addAttribute("sreqUsrNm", LoginUtil.getUserNm());//申请人姓名
-		 	model.addAttribute("reqTskNm", LoginUtil.getTskCd());//申请人岗位
+		 	reqTskNm = specialRequestService.selectReqTskNm(LoginUtil.getTskCd());//根据申请人岗位id查询岗位名字
+		 	model.addAttribute("reqTskNm", reqTskNm);//查询申请人岗位
 		 	model.addAttribute("reqHpNo", LoginUtil.getPrefixCustNo());//申请人手机号
 		 	//2、申请时间段赋值以及工单时间段赋值
 		 	model.addAttribute("sToRoDt", DateUtil.getDate(dateFormat));//开单开始日期

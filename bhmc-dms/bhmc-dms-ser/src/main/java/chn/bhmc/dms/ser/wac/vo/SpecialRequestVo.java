@@ -44,7 +44,7 @@ public class SpecialRequestVo extends BaseVO{
      */
     private String roDocNo;
     /**
-     * 工单开单日期
+     * 工单开单日期 维修委托时间
      */
     @JsonDeserialize(using=JsonDateDeserializer.class)
     private Date roDt;
@@ -77,7 +77,7 @@ public class SpecialRequestVo extends BaseVO{
      */
     private String fileDocNo;
     /**
-     *单据状态 “00”保存 “01”提报 “02”通过“03”拒绝 “04”驳回
+     *单据状态 “00”保存 “01”已申请 “02”审核通过“03”审核拒绝  “04”审核驳回"05"未申请 wangc 2021年3月31日19:28:25
      */
     private String reqStatCd;
     /**
@@ -151,6 +151,11 @@ public class SpecialRequestVo extends BaseVO{
      * 是否取消标识Y是N否
      */
     private String cancelYn;
+    
+    /**
+     * 交车确认日期
+     */
+    private Date dlChkDt;
     
 	public String getReqNo() {
 		return reqNo;
@@ -333,6 +338,12 @@ public class SpecialRequestVo extends BaseVO{
 	}
 	public void setCancelYn(String cancelYn) {
 		this.cancelYn = cancelYn;
+	}
+	public Date getDlChkDt() {
+		return dlChkDt;
+	}
+	public void setDlChkDt(Date dlChkDt) {
+		this.dlChkDt = dlChkDt;
 	}
 
     

@@ -127,7 +127,7 @@
                         </colgroup>
                         <tbody>
                         	<tr>
-                        		 <input type="text" id="roDocNo" name="roDocNo" class="form_comboBox" style="display:none" data-json-obj="true" /><!-- 维修委托单号 作为整个主键-->
+                        		<input type="text" id="roDocNo" name="roDocNo" class="form_comboBox" style="display:none" data-json-obj="true" /><!-- 维修委托单号 作为整个主键-->
                         		<th scope="row"><span class="bu_required"><spring:message code="ser.lbl.applyReasonTp" /></span></th><!-- 提报原因分类 -->
                                 <!-- <td  class="required_area"> -->
                                 <td id="reqReasonTptd" class="readonly_area">
@@ -341,7 +341,7 @@ $(document).ready(function (e){
      /** 保存 wangc 2021年3月31日17:44:52**/
      $("#btnSave").kendoButton({
          click:function(e){
-             sendRequestSave('00');//“00”保存 “01”提报 “02”通过“03”拒绝 “04”驳回 wangc 2021年3月31日19:28:25
+             sendRequestSave('00');//“00”保存 “01”已申请 “02”审核通过“03”审核拒绝  “04”审核驳回"05"未申请 wangc 2021年3月31日19:28:25
             
          }
      });
@@ -351,7 +351,7 @@ $(document).ready(function (e){
      /** 提报  wangc 2021年3月31日17:44:52 **/
      $("#btnReq").kendoButton({
          click:function (e){
-        	sendRequestSave('01');// “00”保存 “01”提报 “02”通过“03”拒绝 “04”驳回  wangc 2021年3月31日19:28:25
+        	sendRequestSave('01');//“00”保存 “01”已申请 “02”审核通过“03”审核拒绝  “04”审核驳回"05"未申请 wangc 2021年3月31日19:28:25
          }
      });
 
@@ -609,8 +609,6 @@ $(document).ready(function (e){
                        $('<span class="k-invalid-msg" data-for="reqStatCd"></span>').appendTo(container);
                       }
                  }//提报原因分类
-               
-             
               ,{field:"reqReasonDesc", title:"<spring:message code='global.lbl.regReason' />" , width:100 , attributes :{"class":"al"}}//提报原因
               ,{field:"approveDesc", title:"<spring:message code='ser.lbl.rejectReason' />" , width:100 , attributes :{"class":"al"}}//审核原因
               ,{field:"reqUsrNm", title:"<spring:message code='ser.lbl.requestUsr' />" , width:90 , attributes :{"class":"ar"}}//提报人
@@ -618,11 +616,15 @@ $(document).ready(function (e){
               ,{field:"roDt" , title:"<spring:message code='wac.lbl.roDt' />", width:125
                   , attributes :{"class":"ac"}
                   , format:"{0:<dms:configValue code='dateFormat' /> HH:mm}"
-               }//开单日期
+               }//开单日期 -- 维修委托时间
               ,{field:"reqDt" , title:"<spring:message code='wac.lbl.reqDt' />", width:125
                   , attributes :{"class":"ac"}
                   , format:"{0:<dms:configValue code='dateFormat' /> HH:mm}"
-               }//提报日期
+               }//提报日期 -- 申请日期
+              ,{field:"dlChkDt" , title:"<spring:message code='wac.lbl.dlChkDt' />", width:125
+                  , attributes :{"class":"ac"}
+                  , format:"{0:<dms:configValue code='dateFormat' /> HH:mm}"
+               }//交车确认日期
                ,{field:"fileDocNo", title:"文件id" , width:80 , attributes :{"class":"ar"} , hidden:true}//文件id
              ]
     });

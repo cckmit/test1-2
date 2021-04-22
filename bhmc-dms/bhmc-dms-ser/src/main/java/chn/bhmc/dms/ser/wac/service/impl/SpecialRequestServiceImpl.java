@@ -2,12 +2,15 @@ package chn.bhmc.dms.ser.wac.service.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
 import org.jxls.common.Context;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +27,7 @@ import chn.bhmc.dms.ser.wac.vo.PwaSearchVO;
 import chn.bhmc.dms.ser.wac.vo.PwaVO;
 import chn.bhmc.dms.ser.wac.vo.SpecialRequestSearchVo;
 import chn.bhmc.dms.ser.wac.vo.SpecialRequestVo;
+import chn.bhmc.dms.ser.cmm.service.ServiceCommonService;
 /**  
  * @ClassName: SpecialRequestController
  * <p>Title:DMS特殊申请（保修工单确认申请） </p >
@@ -37,6 +41,9 @@ public class SpecialRequestServiceImpl extends HService implements SpecialReques
 	@Resource(name="specialRequestDao")
 	SpecialRequestDao specialRequestDao;//DMS特殊申请
 	
+	//特殊车辆申请 SER140 DMS->DCS jiaMing 2021-4-7 
+		@Autowired
+	    ServiceCommonService serviceCommonService;
 	/**
 	 * 
 	 * @MethodName: selectRates
@@ -72,7 +79,7 @@ public class SpecialRequestServiceImpl extends HService implements SpecialReques
 	public int selectSpecialRequestForSpecialBySpecialCnt(SpecialRequestSearchVo searchVO) {
          
 		searchVO.setsLangCd(LocaleContextHolder.getLocale().getLanguage());//设置语言
-		
+        
 		return specialRequestDao.selectSpecialRequestForSpecialBySpecialCnt(searchVO);
 	}
 	/**
@@ -119,7 +126,8 @@ public class SpecialRequestServiceImpl extends HService implements SpecialReques
 		addVO.setRoUpdtDt(workOrderVo.getRoUpdtDt());//工单修改时间
 		addVO.setCarRegNo(workOrderVo.getCarRegNo());//车牌号
 		addVO.setVinNo(workOrderVo.getVinNo());//车辆识别码
-		addVO.setRoDt(workOrderVo.getRoDt());//开单时间  
+		addVO.setRoDt(workOrderVo.getRoDt());//开单时间  维修委托时间
+		addVO.setDlChkDt(workOrderVo.getDlChkDt());//交车确认日期
 		addVO.setRoTp(workOrderVo.getRoTp());//维修委托类型
 		addVO.setCarOwnerId(workOrderVo.getCarOwnerId());//车辆所有者ID
 		addVO.setCarOwnerNm(workOrderVo.getCarOwnerNm());//车辆所有者名字
@@ -147,7 +155,7 @@ public class SpecialRequestServiceImpl extends HService implements SpecialReques
 			addVO.setReqDt(nowDate);//申请日期 
 			addVO.setReqUsrId(LoginUtil.getUserId());//申请人id
 			addVO.setReqUsrNm(LoginUtil.getUserNm());//申请人姓名
-			addVO.setReqTskNm(LoginUtil.getTskCd());// 申请人岗位
+			addVO.setReqTskNm(selectReqTskNm(LoginUtil.getTskCd()));// 申请人岗位
 			addVO.setReqHpNo(LoginUtil.getPrefixCustNo());//申请人手机
 			//3、判断该工单是否存在申请单（提报）
 			getNum = specialRequestDao.getReqCountSpecial(addVO.getRoDocNo());
@@ -211,5 +219,20 @@ public class SpecialRequestServiceImpl extends HService implements SpecialReques
         context.putVar("items", list);
 
     }
+	/**
+	 * 
+	 * @MethodName: selectReqTskNm
+	 * <p>Title: 根据岗位编码查询岗位名称</p >
+	 * @Description: TODO
+	 * @author wangc
+	 * @param tskCd
+	 * @param params
+	 * @date 2021年4月21日20:54:20 
+	 */
+	@Override
+	public String selectReqTskNm(String tskCd) {
+
+		return specialRequestDao.selectReqTskNm(tskCd);
+	}
 
 }
