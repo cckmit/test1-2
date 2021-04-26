@@ -155,6 +155,7 @@ public class SpecialRequestVo extends BaseVO{
     /**
      * 交车确认日期
      */
+    @JsonDeserialize(using=JsonDateDeserializer.class)
     private Date dlChkDt;
     /**
      * 工单数据完成状态 01：APP确认02：系统确认 空未确认
