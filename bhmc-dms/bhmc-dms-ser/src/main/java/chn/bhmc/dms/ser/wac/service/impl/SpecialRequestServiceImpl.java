@@ -158,9 +158,9 @@ public class SpecialRequestServiceImpl extends HService implements SpecialReques
 			addVO.setRegUsrId(LoginUtil.getUserId());//录入人id
 			addVO.setReqDt(nowDate);//申请日期 
 			addVO.setReqUsrId(LoginUtil.getUserId());//申请人id
-			addVO.setReqUsrNm(LoginUtil.getUserNm());//申请人姓名
+			addVO.setReqUsrNm(addVO.getReqUsrNm());//申请人姓名
 			addVO.setReqTskNm(selectReqTskNm(LoginUtil.getTskCd()));// 申请人岗位
-			addVO.setReqHpNo(LoginUtil.getPrefixCustNo());//申请人手机
+			addVO.setReqHpNo(addVO.getReqHpNo());//申请人手机
 			//3、判断该工单是否存在申请单（提报）
 			getNum = specialRequestDao.getReqCountSpecial(addVO.getRoDocNo());
 			if(getNum>0){
@@ -237,6 +237,21 @@ public class SpecialRequestServiceImpl extends HService implements SpecialReques
 	public String selectReqTskNm(String tskCd) {
 
 		return specialRequestDao.selectReqTskNm(tskCd);
+	}
+	
+	/**
+	 * @MethodName: selectReqTskNm
+	 * <p>Title: 根据岗位编码查询岗位名称</p >
+	 * @Description: TODO
+	 * @author wangc
+	 * @param tskCd
+	 * @param params
+	 * @date 2021年4月21日20:54:20 
+	 */
+	@Override
+	public String selectReqHpNo(String userId) {
+		
+		return specialRequestDao.selectReqHpNo(userId);
 	}
 
 }

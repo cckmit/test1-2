@@ -403,4 +403,10 @@
    <select id="selectReqTskNm" parameterType="String" resultType="String">
    	select TSK_NM from cm_2801t t where t.CMP_TP='10' and t.TSK_CD=#{tskCd};
    </select>
+   
+   
+      <!-- 根据用户的id查询手机号码  wangc  2021年4月26日15:51:27 -->
+   <select id="selectReqHpNo" parameterType="String" resultType="String">
+   	select HP_NO from cm_0801t t where t.USR_ID=#{userId}
+   </select>
 </mapper>

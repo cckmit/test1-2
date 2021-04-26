@@ -135,6 +135,19 @@ public interface SpecialRequestDao {
 	 * @date 2021年4月21日20:54:20 
 	 */
 	String selectReqTskNm(String tskCd);
+	
+	
+	
+	/*
+	 * @MethodName: selectReqTskNm
+	 * <p>Title: 根据用户的id账号查询手机号码</p >
+	 * @Description: TODO
+	 * @author wangc
+	 * @param tskCd
+	 * @param params
+	 * @date 2021年4月21日20:54:20  
+	 */
+	String selectReqHpNo(String userId);
 
 	
 
