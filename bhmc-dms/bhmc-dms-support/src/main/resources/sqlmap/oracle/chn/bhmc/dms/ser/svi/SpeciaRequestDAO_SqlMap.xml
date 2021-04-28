@@ -34,7 +34,7 @@
                 FROM (
                 	 select  statcd.*,ROWNUM  from (
 						select statcd01.* from (	
-							SELECT repairOrder.CAR_REG_NO,repairOrder.VIN_NO,repairOrder.RO_DOC_NO,repairOrder.CAR_OWNER_ID,repairOrder.CAR_OWNER_NM,specialRequest.DRIVER_NM,
+							SELECT repairOrder.CAR_REG_NO,repairOrder.VIN_NO,repairOrder.RO_DOC_NO,repairOrder.CAR_OWNER_ID,repairOrder.CAR_OWNER_NM,
 						 	   repairOrder.HP_NO as DRIVER_HP_NO,specialRequest.REQ_REASON_TP,specialRequest.REQ_REASON_DESC,specialRequest.APPROVE_DESC, 
 						       specialRequest.REQ_USR_NM AS REQ_USR_NM, specialRequest.APPROVE_USR_NM, specialRequest.CAR_OWNER_NM, repairOrder.DRIVER_NM, 
 						       repairOrder.RO_DT, specialRequest.REQ_DT,specialRequest.FILE_DOC_NO,
@@ -55,7 +55,7 @@
 						) as statcd01
 						UNION ALL
 						select statcd02.* from (	
-							SELECT repairOrder.CAR_REG_NO,repairOrder.VIN_NO,repairOrder.RO_DOC_NO,repairOrder.CAR_OWNER_ID,repairOrder.CAR_OWNER_NM,specialRequest.DRIVER_NM,
+							SELECT repairOrder.CAR_REG_NO,repairOrder.VIN_NO,repairOrder.RO_DOC_NO,repairOrder.CAR_OWNER_ID,repairOrder.CAR_OWNER_NM,
 						 	   repairOrder.HP_NO as DRIVER_HP_NO,specialRequest.REQ_REASON_TP,specialRequest.REQ_REASON_DESC,specialRequest.APPROVE_DESC, 
 						       specialRequest.REQ_USR_NM AS REQ_USR_NM, specialRequest.APPROVE_USR_NM, specialRequest.CAR_OWNER_NM, repairOrder.DRIVER_NM, 
 						       repairOrder.RO_DT, specialRequest.REQ_DT,specialRequest.FILE_DOC_NO,
@@ -119,7 +119,7 @@
            FROM (
               select  statcd.*,ROWNUM  from (
 						select statcd01.* from (	
-							SELECT repairOrder.CAR_REG_NO,repairOrder.VIN_NO,repairOrder.RO_DOC_NO,repairOrder.CAR_OWNER_ID,repairOrder.CAR_OWNER_NM,specialRequest.DRIVER_NM,
+							SELECT repairOrder.CAR_REG_NO,repairOrder.VIN_NO,repairOrder.RO_DOC_NO,repairOrder.CAR_OWNER_ID,repairOrder.CAR_OWNER_NM,
 						 	   repairOrder.HP_NO as DRIVER_HP_NO,specialRequest.REQ_REASON_TP,specialRequest.REQ_REASON_DESC,specialRequest.APPROVE_DESC, 
 						       specialRequest.REQ_USR_NM AS REQ_USR_NM, specialRequest.APPROVE_USR_NM, specialRequest.CAR_OWNER_NM, repairOrder.DRIVER_NM, 
 						       repairOrder.RO_DT, specialRequest.REQ_DT,specialRequest.FILE_DOC_NO,
@@ -140,7 +140,7 @@
 						) as statcd01
 						UNION ALL
 						select statcd02.* from (	
-							SELECT repairOrder.CAR_REG_NO,repairOrder.VIN_NO,repairOrder.RO_DOC_NO,repairOrder.CAR_OWNER_ID,repairOrder.CAR_OWNER_NM,specialRequest.DRIVER_NM,
+							SELECT repairOrder.CAR_REG_NO,repairOrder.VIN_NO,repairOrder.RO_DOC_NO,repairOrder.CAR_OWNER_ID,repairOrder.CAR_OWNER_NM,
 						 	   repairOrder.HP_NO as DRIVER_HP_NO,specialRequest.REQ_REASON_TP,specialRequest.REQ_REASON_DESC,specialRequest.APPROVE_DESC, 
 						       specialRequest.REQ_USR_NM AS REQ_USR_NM, specialRequest.APPROVE_USR_NM, specialRequest.CAR_OWNER_NM, repairOrder.DRIVER_NM, 
 						       repairOrder.RO_DT, specialRequest.REQ_DT,specialRequest.FILE_DOC_NO,
@@ -331,7 +331,7 @@
                 FROM (
                     select  statcd.*,ROWNUM  from (
 						select statcd01.* from (	
-							SELECT repairOrder.CAR_REG_NO,repairOrder.VIN_NO,repairOrder.RO_DOC_NO,repairOrder.CAR_OWNER_ID,repairOrder.CAR_OWNER_NM,specialRequest.DRIVER_NM,
+							SELECT repairOrder.CAR_REG_NO,repairOrder.VIN_NO,repairOrder.RO_DOC_NO,repairOrder.CAR_OWNER_ID,repairOrder.CAR_OWNER_NM,
 						 	   repairOrder.HP_NO as DRIVER_HP_NO,specialRequest.REQ_REASON_TP as REQ_REASON_TPE,specialRequest.REQ_REASON_DESC,specialRequest.APPROVE_DESC, 
 						       specialRequest.REQ_USR_NM AS REQ_USR_NM, specialRequest.APPROVE_USR_NM, specialRequest.CAR_OWNER_NM, repairOrder.DRIVER_NM, 
 						       repairOrder.RO_DT, specialRequest.REQ_DT,specialRequest.FILE_DOC_NO,
@@ -352,7 +352,7 @@
 						) as statcd01
 						UNION ALL
 						select statcd02.* from (	
-							SELECT repairOrder.CAR_REG_NO,repairOrder.VIN_NO,repairOrder.RO_DOC_NO,repairOrder.CAR_OWNER_ID,repairOrder.CAR_OWNER_NM,specialRequest.DRIVER_NM,
+							SELECT repairOrder.CAR_REG_NO,repairOrder.VIN_NO,repairOrder.RO_DOC_NO,repairOrder.CAR_OWNER_ID,repairOrder.CAR_OWNER_NM,
 						 	   repairOrder.HP_NO as DRIVER_HP_NO,specialRequest.REQ_REASON_TP AS REQ_REASON_TPE,specialRequest.REQ_REASON_DESC,specialRequest.APPROVE_DESC, 
 						       specialRequest.REQ_USR_NM AS REQ_USR_NM, specialRequest.APPROVE_USR_NM, specialRequest.CAR_OWNER_NM, repairOrder.DRIVER_NM, 
 						       repairOrder.RO_DT, specialRequest.REQ_DT,specialRequest.FILE_DOC_NO,
