@@ -17,10 +17,10 @@
             <div class="header_area">
                 <h1 class="title_basic"><spring:message code="wac.title.SpecialRequestList" /></h1> <!-- 保修工单确认申请 -->
                 <div class="btn_right">
-                    <dms:access viewId="VIEW-D-80904" hasPermission="${dms:getPermissionMask('READ')}">
+                    <dms:access viewId="VIEW-D-13328" hasPermission="${dms:getPermissionMask('READ')}">
                         <button type="button" class="btn_m btn_search" id="btnSearch"><spring:message code="global.btn.search" /></button>
                     </dms:access>
-                    <dms:access viewId="VIEW-D-80903" hasPermission="${dms:getPermissionMask('READ')}">
+                    <dms:access viewId="VIEW-D-13329" hasPermission="${dms:getPermissionMask('READ')}">
                         <button type="button" class="btn_m " id="btnExcelExport"><spring:message code="ser.btn.excelDownload" /></button>
                     </dms:access>
                 </div>
@@ -100,11 +100,11 @@
                 <div class="header_area">
                     <h2 class="title_basic"><spring:message code="wac.title.message" /></h2><!-- 特殊提报信息 -->
                     <div class="btn_right">
-                        <dms:access viewId="VIEW-D-80902" hasPermission="${dms:getPermissionMask('READ')}">
+                        <dms:access viewId="VIEW-D-13330" hasPermission="${dms:getPermissionMask('READ')}">
                             <button type="button" class="btn_s btn_s_min5" id="btnSave" disabled><spring:message code="global.btn.save" /></button>
                         </dms:access>
                        
-                        <dms:access viewId="VIEW-D-80901" hasPermission="${dms:getPermissionMask('READ')}">
+                        <dms:access viewId="VIEW-D-13331" hasPermission="${dms:getPermissionMask('READ')}">
                             <button type="button" class="btn_s btn_s_min5" id="btnReq" disabled><spring:message code="global.btn.req" /></button>
                         </dms:access>
                        
