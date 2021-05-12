@@ -2205,75 +2205,91 @@ public class InvcServiceImpl extends HService implements InvcService, JxlsSuppor
     public void initJxlsContext(Context context, HMap params) throws Exception {
 
         String langCd = LocaleContextHolder.getLocale().getLanguage();
+        
+        /**
+         * 增加一个校验逻辑，如果sServiceName是invc，说明是电子发票打印和代入库清单打印，如果是空，则是原始打印
+         * wangc 2021年5月12日19:36:24
+         */
+        //如果是空，则是原始的业务逻辑，没有变动。sServiceName是新增字段，判断是否是电子发票信息还是待入库清单信息 属性为invc
+        if(params.get("sServiceName")==null){
+        	InvcSearchVO searchVO = new InvcSearchVO();
 
-        InvcSearchVO searchVO = new InvcSearchVO();
+            List<String> sBpCdLst = new ArrayList<String>();
+            String sBpCd;
+            String[] arrayBpCdStr;
 
-        List<String> sBpCdLst = new ArrayList<String>();
-        String sBpCd;
-        String[] arrayBpCdStr;
+            String sListType = params.get("sListType").toString();
 
-        String sListType = params.get("sListType").toString();
+            searchVO.setsLangCd(langCd);
+            searchVO.setsDlrCd(LoginUtil.getDlrCd());
 
-        searchVO.setsLangCd(langCd);
-        searchVO.setsDlrCd(LoginUtil.getDlrCd());
-
-        if (StringUtils.isNotEmpty((String)params.get("sBpCdList"))) {
-            sBpCd = (String)params.get("sBpCdList");
-            arrayBpCdStr = sBpCd.split(",");
-            sBpCdLst = Arrays.asList(arrayBpCdStr);
-            searchVO.setsBpCdList(sBpCdLst);
-        }
-
-        if(!StringUtils.isBlank(params.get("sInvcGrDtFr").toString())){
-            String sInvcGrDtFr = params.get("sInvcGrDtFr").toString();
-            Date dInvcGrDtFr = Date.valueOf(sInvcGrDtFr);
-            searchVO.setsInvcGrDtFr(dInvcGrDtFr);
-        }
-
-        if(!StringUtils.isBlank(params.get("sInvcGrDtTo").toString())){
-            String sInvcGrDtTo = params.get("sInvcGrDtTo").toString();
-            Date dInvcGrDtTo = Date.valueOf(sInvcGrDtTo);
-            searchVO.setsInvcGrDtTo(dInvcGrDtTo);
-        }
-        //处理乱码
-        Object sBpNmObj = params.get("sBpNm");
-        String sBpNm = "";
-        if(sBpNmObj!=null){
-        	params.put("sBpNm",sBpNmObj);
-        }
-        Object sItemNmObj = params.get("sItemNm");
-        String sItemNm = "";
-        if(sItemNmObj!=null){
-        	params.put("sItemNm",sItemNmObj);
-        }
-        ObjectUtil.convertMapToObject(params, searchVO, "beanName", "templateFile", "fileName");
-
-        if(StringUtil.nullConvert(sListType).equals("H")){
-            List<InvcVO> list = selectReceivesByCondition(searchVO);
-
-            List<CommonCodeVO> bpTpList = commonCodeService.selectCommonCodesByCmmGrpCd("PAR121", null, langCd);
-            List<CommonCodeVO> invcTpList = commonCodeService.selectCommonCodesByCmmGrpCd("PAR211", null, langCd);
-
-            //공통코드 또는 코드 명칭  변환 처리.
-            for(InvcVO invcVO : list){
-                for(CommonCodeVO cmmCodeVO : bpTpList){
-                    if(cmmCodeVO.getCmmCd().equals(invcVO.getBpTp())){
-                        invcVO.setBpTp("["+invcVO.getBpTp()+"]"+cmmCodeVO.getCmmCdNm());
-                        break;
-                    }
-                }
-
-                for(CommonCodeVO cmmCodeVO : invcTpList){
-                    if(cmmCodeVO.getCmmCd().equals(invcVO.getInvcTp())){
-                        invcVO.setInvcTp("["+invcVO.getInvcTp()+"]"+cmmCodeVO.getCmmCdNm());
-                        break;
-                    }
-                }
+            if (StringUtils.isNotEmpty((String)params.get("sBpCdList"))) {
+                sBpCd = (String)params.get("sBpCdList");
+                arrayBpCdStr = sBpCd.split(",");
+                sBpCdLst = Arrays.asList(arrayBpCdStr);
+                searchVO.setsBpCdList(sBpCdLst);
             }
-            context.putVar("items", list);
-        } else {
-            List<InvcItemVO> list = selectReceiveCnfmListByCondition(searchVO);
-            context.putVar("items", list);
+
+            if(!StringUtils.isBlank(params.get("sInvcGrDtFr").toString())){
+                String sInvcGrDtFr = params.get("sInvcGrDtFr").toString();
+                Date dInvcGrDtFr = Date.valueOf(sInvcGrDtFr);
+                searchVO.setsInvcGrDtFr(dInvcGrDtFr);
+            }
+
+            if(!StringUtils.isBlank(params.get("sInvcGrDtTo").toString())){
+                String sInvcGrDtTo = params.get("sInvcGrDtTo").toString();
+                Date dInvcGrDtTo = Date.valueOf(sInvcGrDtTo);
+                searchVO.setsInvcGrDtTo(dInvcGrDtTo);
+            }
+            //处理乱码
+            Object sBpNmObj = params.get("sBpNm");
+            String sBpNm = "";
+            if(sBpNmObj!=null){
+            	params.put("sBpNm",sBpNmObj);
+            }
+            Object sItemNmObj = params.get("sItemNm");
+            String sItemNm = "";
+            if(sItemNmObj!=null){
+            	params.put("sItemNm",sItemNmObj);
+            }
+            ObjectUtil.convertMapToObject(params, searchVO, "beanName", "templateFile", "fileName");
+
+            if(StringUtil.nullConvert(sListType).equals("H")){
+                List<InvcVO> list = selectReceivesByCondition(searchVO);
+
+                List<CommonCodeVO> bpTpList = commonCodeService.selectCommonCodesByCmmGrpCd("PAR121", null, langCd);
+                List<CommonCodeVO> invcTpList = commonCodeService.selectCommonCodesByCmmGrpCd("PAR211", null, langCd);
+
+                //공통코드 또는 코드 명칭  변환 처리.
+                for(InvcVO invcVO : list){
+                    for(CommonCodeVO cmmCodeVO : bpTpList){
+                        if(cmmCodeVO.getCmmCd().equals(invcVO.getBpTp())){
+                            invcVO.setBpTp("["+invcVO.getBpTp()+"]"+cmmCodeVO.getCmmCdNm());
+                            break;
+                        }
+                    }
+
+                    for(CommonCodeVO cmmCodeVO : invcTpList){
+                        if(cmmCodeVO.getCmmCd().equals(invcVO.getInvcTp())){
+                            invcVO.setInvcTp("["+invcVO.getInvcTp()+"]"+cmmCodeVO.getCmmCdNm());
+                            break;
+                        }
+                    }
+                }
+                context.putVar("items", list);
+            } else {
+                List<InvcItemVO> list = selectReceiveCnfmListByCondition(searchVO);
+                context.putVar("items", list);
+            }
+        }else{
+        	//sServiceName是新增字段，判断是否是电子发票信息或待入库清单信息 属性为invc
+        	if("invc".equals(params.get("sServiceName").toString())){
+        		InvcSearchVO searchVO = new InvcSearchVO();//查询的是电子发票信息或待入库清单信息
+        		
+        		
+        	}
         }
+        
+        
     }
 }

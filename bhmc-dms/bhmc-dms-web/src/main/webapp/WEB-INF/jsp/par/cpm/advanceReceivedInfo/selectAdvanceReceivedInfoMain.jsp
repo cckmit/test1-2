@@ -16,6 +16,7 @@
         <dms:access viewId="VIEW-D-11576" hasPermission="${dms:getPermissionMask('READ')}">
             <button id="btnSuggest" class="btn_m btn_m_min"><spring:message code="par.btn.suggestCost" /></button>
         </dms:access>
+        <button type="button" id="btnDownloadList" name="btnDownloadList" class="btn_m btn_m_min" ><spring:message code="par.btn.excelDownload" /></button><!--wangc 2021年5月12日17:38:48 增加导出按钮 -->
         <dms:access viewId="VIEW-D-11575" hasPermission="${dms:getPermissionMask('READ')}">
             <button id="btnSearch" class="btn_m btn_search btn_m_min"><spring:message code="par.btn.search" /><!-- btnSearch --></button>
         </dms:access>        </div>
@@ -368,6 +369,18 @@ $(document).ready(function() {
             ,{field:"invcNo", title:"<spring:message code='par.lbl.advanceReceivedNum'/>", width:120 }
             ,{field:"remark", title:"<spring:message code='par.lbl.remark'/>", width:120 }
         ]
+    });
+    
+    
+    
+    //excel的下载
+    $("#btnDownloadList").kendoButton({
+        click:function(e){
+			var url="<c:url value='/par/cpm/advanceReceivedInfo/advanceReceivedInfoExcel.do' />";
+			url = url+"?sDlrCd="+$("#sDlrCd").val()+"&sPreAmtTp="+$("#sPreAmtTp").val();//sDlrCd:$("#sDlrCd").val(), sPreAmtTp:$("#sPreAmtTp").val();
+			alert(url);
+			//window.open(url);
+        }
     });
 });
 </script>
