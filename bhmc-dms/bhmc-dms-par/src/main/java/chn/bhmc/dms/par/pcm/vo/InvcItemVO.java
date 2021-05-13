@@ -177,11 +177,6 @@ public class InvcItemVO extends AbstractExcelDataBinder{
     private String excelStrgeCd;
 
     /**
-     * 엑셀창고이름
-     **/
-    private String excelStrgeNm;
-
-    /**
      * 송장원본수량(구매수량)
      **/
     private Double invcQtyOrg;
@@ -1541,20 +1536,6 @@ public class InvcItemVO extends AbstractExcelDataBinder{
     }
 
     /**
-     * @return the excelStrgeNm
-     */
-    public String getExcelStrgeNm() {
-        return excelStrgeNm;
-    }
-
-    /**
-     * @param excelStrgeNm the excelStrgeNm to set
-     */
-    public void setExcelStrgeNm(String excelStrgeNm) {
-        this.excelStrgeNm = excelStrgeNm;
-    }
-
-    /**
      * @return the mvtDocYyMm
      */
     public String getMvtDocYyMm() {
@@ -1606,7 +1587,7 @@ public class InvcItemVO extends AbstractExcelDataBinder{
                 case 1:this.setExcelQty(ExcelDataBinderUtil.toString(value).trim()); break;     //입고수량
                 case 2:this.setExcelPrc(ExcelDataBinderUtil.toString(value).trim()); break;     //입고단가
                 case 3:this.setExcelTaxDdctPrc(ExcelDataBinderUtil.toString(value).trim()); break;     //입고세전단가
-                case 4:this.setExcelStrgeNm(ExcelDataBinderUtil.toString(value).trim()); break;     //입고창고
+                case 4:this.setExcelStrgeCd(ExcelDataBinderUtil.toString(value).trim()); break;     //입고창고
             }
         }catch(Exception e){
 

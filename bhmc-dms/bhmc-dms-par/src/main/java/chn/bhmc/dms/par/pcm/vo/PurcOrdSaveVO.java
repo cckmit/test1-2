@@ -71,7 +71,6 @@ public class PurcOrdSaveVO extends BaseSaveVO<PurcOrdItemVO>{
      */
     private PurcOrdVO purcOrdVO;
 
-
     /**
      * @return the purcOrdVO
      */
@@ -85,6 +84,4 @@ public class PurcOrdSaveVO extends BaseSaveVO<PurcOrdItemVO>{
     public void setPurcOrdVO(PurcOrdVO purcOrdVO) {
         this.purcOrdVO = purcOrdVO;
     }
-
-
 }

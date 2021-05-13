@@ -1285,8 +1285,6 @@ public class InvcServiceImpl extends HService implements InvcService, JxlsSuppor
                 mvtDocItemVO.setPurcPrc(list.get(i).getInvcPrc());
                 //mvtDocItemVO.setPurcAmt(list.get(i).getInvcAmt());
                 mvtDocItemVO.setPurcAmt(list.get(i).getInvcTotAmt());
-                mvtDocItemVO.setPurcTaxDdctPrc(list.get(i).getTaxDdctPrc());
-                mvtDocItemVO.setPurcTaxDdctAmt(list.get(i).getTaxDdctPrc()*list.get(i).getInvcQty());
                 mvtDocItemVO.setRefDocNo(list.get(i).getInvcDocNo());
                 mvtDocItemVO.setRefDocLineNo(list.get(i).getInvcDocLineNo());
                 mvtDocItemVO.setDdlnYn("N");
@@ -1475,6 +1473,96 @@ public class InvcServiceImpl extends HService implements InvcService, JxlsSuppor
                  //송장부품의 입고 확정이 처리되지 않았습니다.
                 throw processException("par.err.failedReceiveCnfmMsg");
             }
+
+            /*
+            cancMvtDocVO.setMvtDocYyMm(mvtSaveItemList.get(0).getMvtDocYyMm());
+            cancMvtDocVO.setMvtDocNo(mvtSaveItemList.get(0).getMvtDocNo());
+
+            if(cancMvtItemList.size() > 0){
+
+                for(int j = 0,cancSize = cancMvtItemList.size(); j < cancSize; j = j + 1){
+                    stockAmt = 0 ;
+
+                     // 해당 부품이 이동평균가격 정보가 존재하는지 조회한다.
+                     // 조회 시 데이터가 없는 경우 처음으로 입고되는 정보라고 판단하여
+                     // 이동평균가격 테이블에 입고 정고를 기준으로 데이터를 생성하고
+                     // 데이터가 존재하는 경우 이동평균가(총평균가)를 수정한다.
+                    searchItemMovingAvgPrcVO = new ItemMovingAvgPrcVO();  //이동평균가격 계산SearchVO
+                    itemMovingAvgPrcVO       = new ItemMovingAvgPrcVO();  //이동평균가격 계산VO
+
+                    searchItemMovingAvgPrcVO.setItemCd(cancMvtItemList.get(j).getItemCd()); //부품코드
+                    searchItemMovingAvgPrcVO.setStrgeCd(cancMvtItemList.get(j).getStrgeCd()); //창고코드
+                    searchItemMovingAvgPrcVO.setDlrCd(invcVO.getDlrCd()); //딜러코드
+
+                    itemMovingAvgPrcVO = itemMovingAvgPrcService.selectItemMovingAvgPrcByKey(searchItemMovingAvgPrcVO);
+
+                    //이동평균가격 정보가 존재하는 경우
+                    if(itemMovingAvgPrcVO != null){
+                        //stockAmt = (itemMovingAvgPrcVO.getTotQty() * itemMovingAvgPrcVO.getMovingAvgPrc()) - Math.abs(cancMvtItemList.get(j).getPurcAmt());
+
+                        //if(stockAmt > 0){
+                        //    if((itemMovingAvgPrcVO.getTotQty() - cancMvtItemList.get(j).getItemQty()) > 0 ){
+                        //        movingAvgPrc = stockAmt / (itemMovingAvgPrcVO.getTotQty() - Math.abs(cancMvtItemList.get(j).getItemQty()));
+                        //    }else{
+                        //        movingAvgPrc = itemMovingAvgPrcVO.getMovingAvgPrc();
+                        //    }
+                        //}else{
+                        //    movingAvgPrc = itemMovingAvgPrcVO.getMovingAvgPrc();
+                        //}
+
+                        itemMovingAvgPrcVO.setRegUsrId(LoginUtil.getUserId());
+                        itemMovingAvgPrcVO.setBefGenDt(itemMovingAvgPrcVO.getGenDt()); //이전발생일자
+                        itemMovingAvgPrcVO.setBefTotQty(itemMovingAvgPrcVO.getTotQty()); //이전 총수량
+                        itemMovingAvgPrcVO.setBefMovingAvgPrc(itemMovingAvgPrcVO.getMovingAvgPrc()); //이전이동평균가격
+
+                        itemMovingAvgPrcVO.setTotQty(itemMovingAvgPrcVO.getTotQty() - Math.abs(cancMvtItemList.get(j).getItemQty()));
+                        itemMovingAvgPrcVO.setMovingAvgPrc(itemMovingAvgPrcVO.getMovingAvgPrc());
+
+                        resultCnt =  itemMovingAvgPrcService.updateItemMovingAvgPrc(itemMovingAvgPrcVO);
+
+                        if(resultCnt != 1){
+                           //송장부품의 입고 확정이 처리되지 않았습니다.
+                            throw processException("par.err.failedReceiveCnfmMsg");
+                        }
+
+                      //이동평균가격 정보가 없는 경우
+                    }else{
+
+                        throw processException("par.err.failedReceiveCnfmMsg");
+                    }
+
+                    itemMovingAvgPrcSeq = itemMovingAvgPrcService.selectItemMovingAvgPrcHistoryMaxLineNo(itemMovingAvgPrcVO);
+
+                    itemMovingAvgPrcVO.setSeq(itemMovingAvgPrcSeq);
+
+                    resultCnt =  itemMovingAvgPrcService.insertItemMovingAvgPrcHistory(itemMovingAvgPrcVO);
+
+                    if(resultCnt != 1){
+                        //송장부품의 입고 확정이 처리되지 않았습니다.
+                         throw processException("par.err.failedReceiveCnfmMsg");
+                     }
+
+                     // 해당 부품이 이동평균가격 정보가 존재하는지 조회한다.
+                     // 조회 시 데이터가 없는 경우 처음으로 입고되는 정보라고 판단하여
+                     // 이동평균가격 테이블에 입고 정고를 기준으로 데이터를 생성하고
+                     // 데이터가 존재하는 경우 이동평균가(총평균가)를 수정한다.
+                     // 끝
+                    for(int k = 0,mvtSize = mvtSaveItemList.size(); k < mvtSize; k = k + 1){
+                        if((cancMvtItemList.get(j).getItemCd().equals(mvtSaveItemList.get(k).getItemCd()))&&(cancMvtItemList.get(j).getStrgeCd().equals(mvtSaveItemList.get(k).getStrgeCd()))){
+                            cancMvtItemList.get(j).setRefDocNo(mvtSaveItemList.get(k).getMvtDocNo());
+                            cancMvtItemList.get(j).setRefDocLineNo(mvtSaveItemList.get(k).getMvtDocLineNo());
+                        }
+                    }
+                }
+
+                cancMvtSaveItemList = mvtDocService.multiCnclMvtDocs(cancMvtDocVO, cancMvtItemList);
+
+                if(cancMvtSaveItemList.size() < 1){
+                     //송장부품의 입고 확정이 처리되지 않았습니다.
+                    throw processException("par.err.failedReceiveCnfmMsg");
+                }
+            }
+            */
         }
 
         if(receiveEtcItemList.size() > 0){
