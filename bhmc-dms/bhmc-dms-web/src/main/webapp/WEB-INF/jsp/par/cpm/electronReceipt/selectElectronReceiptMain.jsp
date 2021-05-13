@@ -728,6 +728,7 @@
                      ,template:'#= changePurcOrdTp(purcOrdTp)#'
                 }//오더유형
                 ,{field:"purcReqDt" ,title:"<spring:message code='par.lbl.ordReqDt' />" ,format:"{0:<dms:configValue code='dateFormat' />}" ,attributes:{ "class":"ac"} ,width:90}//처리일자
+                ,{field:"invcIfOrdNo" ,title:"BMP订单编号" ,width:100}//BMP订单编号    wangc 2021年5月13日19:27:04
                 ,{field:"purcOrdNo" ,title:"<spring:message code='par.lbl.purcOrdNo' />" ,width:100}//구매오더번호
                 ,{field:"bpNm" ,title:"<spring:message code='par.lbl.supplyNo' />" ,width:140}//공급업체
                 ,{field:"itemCd" ,title:"<spring:message code='par.lbl.itemCd' />" ,width:100}//부품번호
@@ -776,11 +777,13 @@
             	dms.ajax.excelExport({
                     "beanName"         :"invcService"
                     ,"templateFile"    :"ElectronReceiptList_Tpl.xlsx"
-                    ,"fileName"        :"电子发票信息列表"
+                    ,"fileName"        :"电子发票信息列表.xlsx"
                     ,"sBpCd"             : $("#sBpCd").val()//供应商代码
                 	,"sMobisInvcNo"      : $("#sMobisInvcNo").val()//装箱单编号
-                	,"sInvcDtFr"         : $("#sInvcDtFr").data("kendoExtMaskedDatePicker").value()//确认日期
-                	,"sInvcDtTo"         : $("#sInvcDtTo").data("kendoExtMaskedDatePicker").value()//确认日期
+                	//,"sInvcDtFr"         : $("#sInvcDtFr").data("kendoExtMaskedDatePicker").value()//确认日期
+                	//,"sInvcDtTo"         : $("#sInvcDtTo").data("kendoExtMaskedDatePicker").value()//确认日期
+                	,"sInvcDtFr"         : $("#sInvcDtFr").val()//确认日期
+                	,"sInvcDtTo"         : $("#sInvcDtTo").val()//确认日期
                		,"sInvcStatCd"       : $("#sInvcStatCd").data("kendoExtDropDownList").value()//装箱单状态
                		,"sServiceName"      :"invc"//电子发票信息和待入库清单
                 });

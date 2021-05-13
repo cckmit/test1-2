@@ -74,8 +74,14 @@ public class InvcExcelVO extends BaseVO{
 
     /**
      * 송장상태코드
+     * 装箱单状态编码
      **/
     private String invcStatCd;
+    
+    /**
+     * 装箱单状态名称
+     **/
+    private String invcStatCdNm;
 
     /**
      * 운송유형
@@ -316,408 +322,408 @@ public class InvcExcelVO extends BaseVO{
      * 딜러코드
      **/
     @NotEmpty
-    private String dlrCd;
+    private String sdlrCd;
 
     /**
      * 송장문서번호
      **/
     @NotEmpty
-    private String invcDocNo;
+    private String sinvcDocNo;
 
     /**
      * 송장문서라인번호
      **/
     @NotEmpty
-    private int invcDocLineNo;
+    private int sinvcDocLineNo;
 
     /**
      * 모비스송장번호
      **/
-    private String mobisInvcNo;
+    private String smobisInvcNo;
 
     /**
      * 모비스송장라인번호
      **/
-    private int mobisInvcLineNo;
+    private int smobisInvcLineNo;
 
     /**
      * 구매오더유형
      **/
-    private String purcOrdTp;
+    private String spurcOrdTp;
 
     /**
      * 구매오더번호
      **/
-    private String purcOrdNo;
+    private String spurcOrdNo;
 
     /**
      * 구매오더라인번호
      **/
-    private String purcOrdLineNo;
+    private String spurcOrdLineNo;
 
     /**
      * I/F 구매오더번호
      **/
-    private String invcIfOrdNo;
+    private String sinvcIfOrdNo;
 
     /**
      * I/F 구매오더라인번호
      **/
-    private String invcIfOrdLn;
+    private String sinvcIfOrdLn;
 
     /**
      * 구매오더라인구분자
      **/
-    private String purcOrdLineDetlNo;
+    private String spurcOrdLineDetlNo;
 
     /**
      * 품목코드
      **/
-    private String itemCd;
+    private String sitemCd;
 
     /**
      * 품목명
      **/
-    private String itemNm;
+    private String sitemNm;
 
     /**
      * 가격유형
      **/
-    private String prcTp;
+    private String sprcTp;
 
     /**
      * 송장대상수량
      **/
-    private Double invcTargetQty;
+    private Double sinvcTargetQty;
 
     /**
      * 송장수량
      **/
-    private Double invcQty;
+    private Double sinvcQty;
 
     /**
      * 구매수량
      **/
-    private Double purcQty;
+    private Double spurcQty;
 
     /**
      * 엑셀업로드수량
      **/
-    private String excelQty;
+    private String sexcelQty;
 
     /**
      * 엑셀업로드단가
      **/
-    private String excelPrc;
+    private String sexcelPrc;
 
     /**
      * 엑셀업로드세전단가
      **/
-    private String excelTaxDdctPrc;
+    private String sexcelTaxDdctPrc;
 
     /**
      * 엑셀창고코드
      **/
-    private String excelStrgeCd;
+    private String sexcelStrgeCd;
 
     /**
      * 엑셀창고이름
      **/
-    private String excelStrgeNm;
+    private String sexcelStrgeNm;
 
     /**
      * 송장원본수량(구매수량)
      **/
-    private Double invcQtyOrg;
+    private Double sinvcQtyOrg;
 
     /**
      * 송장단위코드
      **/
-    private String invcUnitCd;
+    private String sinvcUnitCd;
 
     /**
      * 공급상
      **/
-    private String spyrCd;
+    private String sspyrCd;
 
     /**
      * 송장단가
      **/
-    private Double invcPrc;
+    private Double sinvcPrc;
 
     /**
      * 세금공제단가
      **/
-    private Double taxDdctPrc;
+    private Double staxDdctPrc;
 
     /**
      * 할인율
      **/
-    private Double dcRate;
+    private Double sdcRate;
 
     /**
      * 송장단가(세액포함)
      **/
-    private Double invcIncTaxPrc;
+    private Double sinvcIncTaxPrc;
 
     /**
      * 송장금액
      **/
-    private Double invcAmt;
+    private Double sinvcAmt;
 
     /**
      * 부가세금액
      **/
-    private Double vatAmt;
+    private Double svatAmt;
 
     /**
      * 송장총금액
      **/
-    private Double invcTotAmt;
+    private Double sinvcTotAmt;
 
     /**
      * 입고총금액
      **/
-    private Double grTotAmt;
+    private Double sgrTotAmt;
 
     /**
      * 입고총금액(세금제외)
      **/
-    private Double grTaxDdctAmt;
+    private Double sgrTaxDdctAmt;
 
     /**
      * 세금
      **/
-    private Double taxAmt;
+    private Double staxAmt;
 
     /**
      * 차변대변구분코드
      **/
-    private String debitCreditDstinCd;
+    private String sdebitCreditDstinCd;
 
     /**
      * 참조송장문서번호
      **/
-    private String refInvcDocNo;
+    private String srefInvcDocNo;
 
     /**
      * 참조송장문서라인번호
      **/
-    private int refInvcDocLineNo;
+    private int srefInvcDocLineNo;
 
     /**
      * 도착예정일자
      **/
     @JsonDeserialize(using=JsonDateDeserializer.class)
-    private Date arrvDt;
+    private Date sarrvDt;
 
     /**
      * 송장입고일자
      **/
     @JsonDeserialize(using=JsonDateDeserializer.class)
-    private Date invcGrDt;
+    private Date sinvcGrDt;
 
     /**
      * INVOICE일자
      **/
     @JsonDeserialize(using=JsonDateDeserializer.class)
-    private Date invcDt;
+    private Date sinvcDt;
 
     /**
      * 구매신청일자
      **/
     @JsonDeserialize(using=JsonDateDeserializer.class)
-    private Date purcRegDt;
+    private Date spurcRegDt;
 
     /**
      * 배송PDC코드
      **/
-    private String dlPdcCd;
+    private String sdlPdcCd;
 
     /**
      * 입고창고코드
      **/
-    private String grStrgeCd;
+    private String sgrStrgeCd;
 
     /**
      * 입고창고명
      **/
-    private String grStrgeNm;
+    private String sgrStrgeNm;
 
     /**
      * 입고Location
      **/
-    private String grLocCd;
+    private String sgrLocCd;
 
     /**
      * 입고Location명
      **/
-    private String grLocNm;
+    private String sgrLocNm;
 
     /**
      * 입고수량
      **/
-    private Double grQty;
+    private Double sgrQty;
 
     /**
      * 거래처코드
      **/
-    private String bpCd;
+    private String sbpCd;
 
     /**
      * 거래처명
      **/
-    private String bpNm;
+    private String sbpNm;
 
     /**
      * 구매신청자
      **/
-    private String ordRegUsrId;
+    private String sordRegUsrId;
 
     /**
      * 구매신청자명
      **/
-    private String ordRegUsrNm;
+    private String sordRegUsrNm;
 
     /**
      * 결품신청자
      **/
-    private String reqUsrId;
+    private String sreqUsrId;
 
     /**
      * 결품신청자명
      **/
-    private String reqUsrNm;
+    private String sreqUsrNm;
 
     /**
      * 클레임대상코드
      **/
-    private String claimTargCd;
+    private String sclaimTargCd;
 
     /**
      * 배송거래처코드
      **/
-    private String dlBpCd;
+    private String sdlBpCd;
 
     /**
      * 배송거래처명
      **/
-    private String dlBpNm;
+    private String sdlBpNm;
 
     /**
      * 클레임유형
      **/
-    private String claimTp;
+    private String sclaimTp;
 
     /**
      * 송장유형
      **/
-    private String invcTp;
+    private String sinvcTp;
 
     /**
      * 송장상태
      **/
-    private String invcStatCd;
+    private String sinvcStatCd;
 
     /**
      * 기 클레임수량
      **/
-    private Double prevClaimQty;
+    private Double sprevClaimQty;
 
     /**
      * 클레임수량
      **/
-    private Double claimQty;
+    private Double sclaimQty;
 
     /**
      * 차이수량
      **/
-    private Double compareQty;
+    private Double scompareQty;
 
     /**
      * 요청내용
      **/
-    private String reqCont;
+    private String sreqCont;
 
     /**
      * 문서파일번호
      **/
-    private String docFileNo;
+    private String sdocFileNo;
 
     /**
      * 입고완료여부
      */
-    private String grEndYn;
+    private String sgrEndYn;
 
     /**
      * BOX번호
      */
-    private String boxNo;
+    private String sboxNo;
 
     /**
      * BMP구매번호
      */
-    private String bmpOrdNo;
+    private String sbmpOrdNo;
 
     /**
      * BMP구매라인번호
      */
-    private String bmpOrdLineNo;
+    private String sbmpOrdLineNo;
 
     /**
      * 구매단가
      **/
-    private Double purcPrc;
+    private Double spurcPrc;
 
     /**
      * 구매금액
      **/
-    private Double purcAmt;
+    private Double spurcAmt;
 
     /**
      * 실구매요청수량
      **/
-    private Double purcReqQty;
+    private Double spurcReqQty;
 
     /**
      * 가용재고
      **/
-    private Double avlbStockQty;
+    private Double savlbStockQty;
 
     /**
      * 예약수량
      **/
-    private Double resvStockQty;
+    private Double sresvStockQty;
 
     /**
      * 재고수량
      **/
-    private Double stockQty;
+    private Double sstockQty;
 
     /**
      * 차입수량
      **/
-    private Double borrowQty;
+    private Double sborrowQty;
 
     /**
      * 대여수량
      **/
-    private Double rentQty;
+    private Double srentQty;
 
     /**
      * 수불문서년월
      **/
-    private String mvtDocYyMm;
+    private String smvtDocYyMm;
 
     /**
      * 수불문서번호
      **/
-    private String mvtDocNo;
+    private String smvtDocNo;
 
     /**
      * 수불문서라인번호
      **/
-    private int mvtDocLineNo;
+    private int smvtDocLineNo;
     
     
     
@@ -1472,5 +1478,662 @@ public class InvcExcelVO extends BaseVO{
     public void setUpdtDtStr(String updtDtStr) {
         this.updtDtStr = updtDtStr;
     }
+  //子表的get/set方法
 
+	public String getSdlrCd() {
+		return sdlrCd;
+	}
+
+	public void setSdlrCd(String sdlrCd) {
+		this.sdlrCd = sdlrCd;
+	}
+
+	public String getSinvcDocNo() {
+		return sinvcDocNo;
+	}
+
+	public void setSinvcDocNo(String sinvcDocNo) {
+		this.sinvcDocNo = sinvcDocNo;
+	}
+
+	public int getSinvcDocLineNo() {
+		return sinvcDocLineNo;
+	}
+
+	public void setSinvcDocLineNo(int sinvcDocLineNo) {
+		this.sinvcDocLineNo = sinvcDocLineNo;
+	}
+
+	public String getSmobisInvcNo() {
+		return smobisInvcNo;
+	}
+
+	public void setSmobisInvcNo(String smobisInvcNo) {
+		this.smobisInvcNo = smobisInvcNo;
+	}
+
+	public int getSmobisInvcLineNo() {
+		return smobisInvcLineNo;
+	}
+
+	public void setSmobisInvcLineNo(int smobisInvcLineNo) {
+		this.smobisInvcLineNo = smobisInvcLineNo;
+	}
+
+	public String getSpurcOrdTp() {
+		return spurcOrdTp;
+	}
+
+	public void setSpurcOrdTp(String spurcOrdTp) {
+		this.spurcOrdTp = spurcOrdTp;
+	}
+
+	public String getSpurcOrdNo() {
+		return spurcOrdNo;
+	}
+
+	public void setSpurcOrdNo(String spurcOrdNo) {
+		this.spurcOrdNo = spurcOrdNo;
+	}
+
+	public String getSpurcOrdLineNo() {
+		return spurcOrdLineNo;
+	}
+
+	public void setSpurcOrdLineNo(String spurcOrdLineNo) {
+		this.spurcOrdLineNo = spurcOrdLineNo;
+	}
+
+	public String getSinvcIfOrdNo() {
+		return sinvcIfOrdNo;
+	}
+
+	public void setSinvcIfOrdNo(String sinvcIfOrdNo) {
+		this.sinvcIfOrdNo = sinvcIfOrdNo;
+	}
+
+	public String getSinvcIfOrdLn() {
+		return sinvcIfOrdLn;
+	}
+
+	public void setSinvcIfOrdLn(String sinvcIfOrdLn) {
+		this.sinvcIfOrdLn = sinvcIfOrdLn;
+	}
+
+	public String getSpurcOrdLineDetlNo() {
+		return spurcOrdLineDetlNo;
+	}
+
+	public void setSpurcOrdLineDetlNo(String spurcOrdLineDetlNo) {
+		this.spurcOrdLineDetlNo = spurcOrdLineDetlNo;
+	}
+
+	public String getSitemCd() {
+		return sitemCd;
+	}
+
+	public void setSitemCd(String sitemCd) {
+		this.sitemCd = sitemCd;
+	}
+
+	public String getSitemNm() {
+		return sitemNm;
+	}
+
+	public void setSitemNm(String sitemNm) {
+		this.sitemNm = sitemNm;
+	}
+
+	public String getSprcTp() {
+		return sprcTp;
+	}
+
+	public void setSprcTp(String sprcTp) {
+		this.sprcTp = sprcTp;
+	}
+
+	public Double getSinvcTargetQty() {
+		return sinvcTargetQty;
+	}
+
+	public void setSinvcTargetQty(Double sinvcTargetQty) {
+		this.sinvcTargetQty = sinvcTargetQty;
+	}
+
+	public Double getSinvcQty() {
+		return sinvcQty;
+	}
+
+	public void setSinvcQty(Double sinvcQty) {
+		this.sinvcQty = sinvcQty;
+	}
+
+	public Double getSpurcQty() {
+		return spurcQty;
+	}
+
+	public void setSpurcQty(Double spurcQty) {
+		this.spurcQty = spurcQty;
+	}
+
+	public String getSexcelQty() {
+		return sexcelQty;
+	}
+
+	public void setSexcelQty(String sexcelQty) {
+		this.sexcelQty = sexcelQty;
+	}
+
+	public String getSexcelPrc() {
+		return sexcelPrc;
+	}
+
+	public void setSexcelPrc(String sexcelPrc) {
+		this.sexcelPrc = sexcelPrc;
+	}
+
+	public String getSexcelTaxDdctPrc() {
+		return sexcelTaxDdctPrc;
+	}
+
+	public void setSexcelTaxDdctPrc(String sexcelTaxDdctPrc) {
+		this.sexcelTaxDdctPrc = sexcelTaxDdctPrc;
+	}
+
+	public String getSexcelStrgeCd() {
+		return sexcelStrgeCd;
+	}
+
+	public void setSexcelStrgeCd(String sexcelStrgeCd) {
+		this.sexcelStrgeCd = sexcelStrgeCd;
+	}
+
+	public String getSexcelStrgeNm() {
+		return sexcelStrgeNm;
+	}
+
+	public void setSexcelStrgeNm(String sexcelStrgeNm) {
+		this.sexcelStrgeNm = sexcelStrgeNm;
+	}
+
+	public Double getSinvcQtyOrg() {
+		return sinvcQtyOrg;
+	}
+
+	public void setSinvcQtyOrg(Double sinvcQtyOrg) {
+		this.sinvcQtyOrg = sinvcQtyOrg;
+	}
+
+	public String getSinvcUnitCd() {
+		return sinvcUnitCd;
+	}
+
+	public void setSinvcUnitCd(String sinvcUnitCd) {
+		this.sinvcUnitCd = sinvcUnitCd;
+	}
+
+	public String getSspyrCd() {
+		return sspyrCd;
+	}
+
+	public void setSspyrCd(String sspyrCd) {
+		this.sspyrCd = sspyrCd;
+	}
+
+	public Double getSinvcPrc() {
+		return sinvcPrc;
+	}
+
+	public void setSinvcPrc(Double sinvcPrc) {
+		this.sinvcPrc = sinvcPrc;
+	}
+
+	public Double getStaxDdctPrc() {
+		return staxDdctPrc;
+	}
+
+	public void setStaxDdctPrc(Double staxDdctPrc) {
+		this.staxDdctPrc = staxDdctPrc;
+	}
+
+	public Double getSdcRate() {
+		return sdcRate;
+	}
+
+	public void setSdcRate(Double sdcRate) {
+		this.sdcRate = sdcRate;
+	}
+
+	public Double getSinvcIncTaxPrc() {
+		return sinvcIncTaxPrc;
+	}
+
+	public void setSinvcIncTaxPrc(Double sinvcIncTaxPrc) {
+		this.sinvcIncTaxPrc = sinvcIncTaxPrc;
+	}
+
+	public Double getSinvcAmt() {
+		return sinvcAmt;
+	}
+
+	public void setSinvcAmt(Double sinvcAmt) {
+		this.sinvcAmt = sinvcAmt;
+	}
+
+	public Double getSvatAmt() {
+		return svatAmt;
+	}
+
+	public void setSvatAmt(Double svatAmt) {
+		this.svatAmt = svatAmt;
+	}
+
+	public Double getSinvcTotAmt() {
+		return sinvcTotAmt;
+	}
+
+	public void setSinvcTotAmt(Double sinvcTotAmt) {
+		this.sinvcTotAmt = sinvcTotAmt;
+	}
+
+	public Double getSgrTotAmt() {
+		return sgrTotAmt;
+	}
+
+	public void setSgrTotAmt(Double sgrTotAmt) {
+		this.sgrTotAmt = sgrTotAmt;
+	}
+
+	public Double getSgrTaxDdctAmt() {
+		return sgrTaxDdctAmt;
+	}
+
+	public void setSgrTaxDdctAmt(Double sgrTaxDdctAmt) {
+		this.sgrTaxDdctAmt = sgrTaxDdctAmt;
+	}
+
+	public Double getStaxAmt() {
+		return staxAmt;
+	}
+
+	public void setStaxAmt(Double staxAmt) {
+		this.staxAmt = staxAmt;
+	}
+
+	public String getSdebitCreditDstinCd() {
+		return sdebitCreditDstinCd;
+	}
+
+	public void setSdebitCreditDstinCd(String sdebitCreditDstinCd) {
+		this.sdebitCreditDstinCd = sdebitCreditDstinCd;
+	}
+
+	public String getSrefInvcDocNo() {
+		return srefInvcDocNo;
+	}
+
+	public void setSrefInvcDocNo(String srefInvcDocNo) {
+		this.srefInvcDocNo = srefInvcDocNo;
+	}
+
+	public int getSrefInvcDocLineNo() {
+		return srefInvcDocLineNo;
+	}
+
+	public void setSrefInvcDocLineNo(int srefInvcDocLineNo) {
+		this.srefInvcDocLineNo = srefInvcDocLineNo;
+	}
+
+	public Date getSarrvDt() {
+		return sarrvDt;
+	}
+
+	public void setSarrvDt(Date sarrvDt) {
+		this.sarrvDt = sarrvDt;
+	}
+
+	public Date getSinvcGrDt() {
+		return sinvcGrDt;
+	}
+
+	public void setSinvcGrDt(Date sinvcGrDt) {
+		this.sinvcGrDt = sinvcGrDt;
+	}
+
+	public Date getSinvcDt() {
+		return sinvcDt;
+	}
+
+	public void setSinvcDt(Date sinvcDt) {
+		this.sinvcDt = sinvcDt;
+	}
+
+	public Date getSpurcRegDt() {
+		return spurcRegDt;
+	}
+
+	public void setSpurcRegDt(Date spurcRegDt) {
+		this.spurcRegDt = spurcRegDt;
+	}
+
+	public String getSdlPdcCd() {
+		return sdlPdcCd;
+	}
+
+	public void setSdlPdcCd(String sdlPdcCd) {
+		this.sdlPdcCd = sdlPdcCd;
+	}
+
+	public String getSgrStrgeCd() {
+		return sgrStrgeCd;
+	}
+
+	public void setSgrStrgeCd(String sgrStrgeCd) {
+		this.sgrStrgeCd = sgrStrgeCd;
+	}
+
+	public String getSgrStrgeNm() {
+		return sgrStrgeNm;
+	}
+
+	public void setSgrStrgeNm(String sgrStrgeNm) {
+		this.sgrStrgeNm = sgrStrgeNm;
+	}
+
+	public String getSgrLocCd() {
+		return sgrLocCd;
+	}
+
+	public void setSgrLocCd(String sgrLocCd) {
+		this.sgrLocCd = sgrLocCd;
+	}
+
+	public String getSgrLocNm() {
+		return sgrLocNm;
+	}
+
+	public void setSgrLocNm(String sgrLocNm) {
+		this.sgrLocNm = sgrLocNm;
+	}
+
+	public Double getSgrQty() {
+		return sgrQty;
+	}
+
+	public void setSgrQty(Double sgrQty) {
+		this.sgrQty = sgrQty;
+	}
+
+	public String getSbpCd() {
+		return sbpCd;
+	}
+
+	public void setSbpCd(String sbpCd) {
+		this.sbpCd = sbpCd;
+	}
+
+	public String getSbpNm() {
+		return sbpNm;
+	}
+
+	public void setSbpNm(String sbpNm) {
+		this.sbpNm = sbpNm;
+	}
+
+	public String getSordRegUsrId() {
+		return sordRegUsrId;
+	}
+
+	public void setSordRegUsrId(String sordRegUsrId) {
+		this.sordRegUsrId = sordRegUsrId;
+	}
+
+	public String getSordRegUsrNm() {
+		return sordRegUsrNm;
+	}
+
+	public void setSordRegUsrNm(String sordRegUsrNm) {
+		this.sordRegUsrNm = sordRegUsrNm;
+	}
+
+	public String getSreqUsrId() {
+		return sreqUsrId;
+	}
+
+	public void setSreqUsrId(String sreqUsrId) {
+		this.sreqUsrId = sreqUsrId;
+	}
+
+	public String getSreqUsrNm() {
+		return sreqUsrNm;
+	}
+
+	public void setSreqUsrNm(String sreqUsrNm) {
+		this.sreqUsrNm = sreqUsrNm;
+	}
+
+	public String getSclaimTargCd() {
+		return sclaimTargCd;
+	}
+
+	public void setSclaimTargCd(String sclaimTargCd) {
+		this.sclaimTargCd = sclaimTargCd;
+	}
+
+	public String getSdlBpCd() {
+		return sdlBpCd;
+	}
+
+	public void setSdlBpCd(String sdlBpCd) {
+		this.sdlBpCd = sdlBpCd;
+	}
+
+	public String getSdlBpNm() {
+		return sdlBpNm;
+	}
+
+	public void setSdlBpNm(String sdlBpNm) {
+		this.sdlBpNm = sdlBpNm;
+	}
+
+	public String getSclaimTp() {
+		return sclaimTp;
+	}
+
+	public void setSclaimTp(String sclaimTp) {
+		this.sclaimTp = sclaimTp;
+	}
+
+	public String getSinvcTp() {
+		return sinvcTp;
+	}
+
+	public void setSinvcTp(String sinvcTp) {
+		this.sinvcTp = sinvcTp;
+	}
+
+	public String getSinvcStatCd() {
+		return sinvcStatCd;
+	}
+
+	public void setSinvcStatCd(String sinvcStatCd) {
+		this.sinvcStatCd = sinvcStatCd;
+	}
+
+	public Double getSprevClaimQty() {
+		return sprevClaimQty;
+	}
+
+	public void setSprevClaimQty(Double sprevClaimQty) {
+		this.sprevClaimQty = sprevClaimQty;
+	}
+
+	public Double getSclaimQty() {
+		return sclaimQty;
+	}
+
+	public void setSclaimQty(Double sclaimQty) {
+		this.sclaimQty = sclaimQty;
+	}
+
+	public Double getScompareQty() {
+		return scompareQty;
+	}
+
+	public void setScompareQty(Double scompareQty) {
+		this.scompareQty = scompareQty;
+	}
+
+	public String getSreqCont() {
+		return sreqCont;
+	}
+
+	public void setSreqCont(String sreqCont) {
+		this.sreqCont = sreqCont;
+	}
+
+	public String getSdocFileNo() {
+		return sdocFileNo;
+	}
+
+	public void setSdocFileNo(String sdocFileNo) {
+		this.sdocFileNo = sdocFileNo;
+	}
+
+	public String getSgrEndYn() {
+		return sgrEndYn;
+	}
+
+	public void setSgrEndYn(String sgrEndYn) {
+		this.sgrEndYn = sgrEndYn;
+	}
+
+	public String getSboxNo() {
+		return sboxNo;
+	}
+
+	public void setSboxNo(String sboxNo) {
+		this.sboxNo = sboxNo;
+	}
+
+	public String getSbmpOrdNo() {
+		return sbmpOrdNo;
+	}
+
+	public void setSbmpOrdNo(String sbmpOrdNo) {
+		this.sbmpOrdNo = sbmpOrdNo;
+	}
+
+	public String getSbmpOrdLineNo() {
+		return sbmpOrdLineNo;
+	}
+
+	public void setSbmpOrdLineNo(String sbmpOrdLineNo) {
+		this.sbmpOrdLineNo = sbmpOrdLineNo;
+	}
+
+	public Double getSpurcPrc() {
+		return spurcPrc;
+	}
+
+	public void setSpurcPrc(Double spurcPrc) {
+		this.spurcPrc = spurcPrc;
+	}
+
+	public Double getSpurcAmt() {
+		return spurcAmt;
+	}
+
+	public void setSpurcAmt(Double spurcAmt) {
+		this.spurcAmt = spurcAmt;
+	}
+
+	public Double getSpurcReqQty() {
+		return spurcReqQty;
+	}
+
+	public void setSpurcReqQty(Double spurcReqQty) {
+		this.spurcReqQty = spurcReqQty;
+	}
+
+	public Double getSavlbStockQty() {
+		return savlbStockQty;
+	}
+
+	public void setSavlbStockQty(Double savlbStockQty) {
+		this.savlbStockQty = savlbStockQty;
+	}
+
+	public Double getSresvStockQty() {
+		return sresvStockQty;
+	}
+
+	public void setSresvStockQty(Double sresvStockQty) {
+		this.sresvStockQty = sresvStockQty;
+	}
+
+	public Double getSstockQty() {
+		return sstockQty;
+	}
+
+	public void setSstockQty(Double sstockQty) {
+		this.sstockQty = sstockQty;
+	}
+
+	public Double getSborrowQty() {
+		return sborrowQty;
+	}
+
+	public void setSborrowQty(Double sborrowQty) {
+		this.sborrowQty = sborrowQty;
+	}
+
+	public Double getSrentQty() {
+		return srentQty;
+	}
+
+	public void setSrentQty(Double srentQty) {
+		this.srentQty = srentQty;
+	}
+
+	public String getSmvtDocYyMm() {
+		return smvtDocYyMm;
+	}
+
+	public void setSmvtDocYyMm(String smvtDocYyMm) {
+		this.smvtDocYyMm = smvtDocYyMm;
+	}
+
+	public String getSmvtDocNo() {
+		return smvtDocNo;
+	}
+
+	public void setSmvtDocNo(String smvtDocNo) {
+		this.smvtDocNo = smvtDocNo;
+	}
+
+	public int getSmvtDocLineNo() {
+		return smvtDocLineNo;
+	}
+
+	public void setSmvtDocLineNo(int smvtDocLineNo) {
+		this.smvtDocLineNo = smvtDocLineNo;
+	}
+
+	public String getInvcStatCdNm() {
+		return invcStatCdNm;
+	}
+
+	public void setInvcStatCdNm(String invcStatCdNm) {
+		this.invcStatCdNm = invcStatCdNm;
+	}
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

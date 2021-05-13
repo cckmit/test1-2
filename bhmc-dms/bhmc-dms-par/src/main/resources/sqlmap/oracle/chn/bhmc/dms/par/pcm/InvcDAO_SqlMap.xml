@@ -3532,7 +3532,45 @@
     
     <!-- 电子发票/待入库清单的Excel导出  wangc 2021年5月12日20:15:51-->
     <select id="selectInvcsByConditionExcel" parameterType="InvcSearchVO" resultType="InvcExcelVO">
-        select invc.*,invcs.* from (
+        select invc.*
+        ,(select t.CMM_CD_NM from CM_0303T t where t.CMM_GRP_CD = 'PAR213' and t.CMM_CD=invc.INVC_STAT_CD) as INVC_STAT_CD_NM
+        ,invcs.DLR_CD as SDLR_CD
+        ,invcs.INVC_DOC_LINE_NO as SINVC_DOC_LINE_NO
+        ,invcs.MOBIS_INVC_NO as SMOBIS_INVC_NO
+        ,invcs.MOBIS_INVC_LINE_NO as SMOBIS_INVC_LINE_NO
+        ,invcs.PURC_ORD_NO as SPURC_ORD_NO
+        ,invcs.INVC_IF_ORD_NO as SINVC_IF_ORD_NO
+        ,invcs.INVC_IF_ORD_LN as SINVC_IF_ORD_LN
+        ,invcs.PURC_ORD_LINE_NO as SPURC_ORD_LINE_NO
+        ,invcs.PURC_ORD_LINE_DETL_NO as SPURC_ORD_LINE_DETL_NO
+        ,invcs.ITEM_CD as SITEM_CD
+        ,invcs.ITEM_NM as SITEM_NM
+        ,invcs.INVC_QTY as SINVC_QTY
+        ,invcs.INVC_UNIT_CD as SINVC_UNIT_CD
+        ,invcs.INVC_PRC as SINVC_PRC
+        ,invcs.TAX_DDCT_PRC as STAX_DDCT_PRC
+        ,invcs.INVC_AMT as SINVC_AMT
+        ,invcs.VAT_AMT as SVAT_AMT
+        ,invcs.INVC_TOT_AMT as SINVC_TOT_AMT
+        ,invcs.PURC_REG_DT as SPURC_REG_DT
+        ,(select t.CMM_CD_NM from CM_0303T t where t.CMM_GRP_CD = 'PAR203' and t.CMM_CD=invcs.PURC_ORD_TP) as SPURC_ORD_TP
+        ,invcs.BP_CD as SBP_CD
+        ,invcs.BP_NM as SBP_NM
+        ,invcs.CLAIM_QTY as SCLAIM_QTY
+        ,invcs.DEBIT_CREDIT_DSTIN_CD as SDEBIT_CREDIT_DSTIN_CD
+        ,invcs.REF_INVC_DOC_NO as SREF_INVC_DOC_NO
+        ,invcs.REF_INVC_DOC_LINE_NO as SREF_INVC_DOC_LINE_NO
+        ,(select t.CMM_CD_NM from CM_0303T t where t.CMM_GRP_CD = 'PAR214' and t.CMM_CD=invcs.DL_PDC_CD) as SDL_PDC_CD
+        ,invcs.GR_STRGE_CD as SGR_STRGE_CD
+        ,invcs.GR_LOC_CD as SGR_LOC_CD
+        ,invcs.INVC_GR_DT as SINVC_GR_DT
+        ,invcs.REQ_CONT as SREQ_CONT
+        ,invcs.AVLB_STOCK_QTY as SAVLB_STOCK_QTY
+        ,invcs.BORROW_QTY as SBORROW_QTY
+        ,invcs.RENT_QTY as SRENT_QTY
+        ,invcs.RESV_STOCK_QTY as SRESV_STOCK_QTY
+        ,invcs.STOCK_QTY as SSTOCK_QTY
+        from (
         SELECT A.*
           FROM
             (

@@ -31,6 +31,7 @@ import chn.bhmc.dms.core.datatype.BaseSaveVO;
 import chn.bhmc.dms.core.support.camel.CamelClient;
 import chn.bhmc.dms.core.support.camel.CamelClientFactory;
 import chn.bhmc.dms.core.support.excel.JxlsSupport;
+import chn.bhmc.dms.core.util.DateUtil;
 import chn.bhmc.dms.core.util.LoginUtil;
 import chn.bhmc.dms.core.util.ObjectUtil;
 import chn.bhmc.dms.par.pcm.service.ClaimService;
@@ -39,6 +40,7 @@ import chn.bhmc.dms.par.pcm.service.PurcOrdService;
 import chn.bhmc.dms.par.pcm.service.PurcRqstService;
 import chn.bhmc.dms.par.pcm.service.ReceiveEtcService;
 import chn.bhmc.dms.par.pcm.service.dao.InvcDAO;
+import chn.bhmc.dms.par.pcm.vo.InvcExcelVO;
 import chn.bhmc.dms.par.pcm.vo.InvcItemVO;
 import chn.bhmc.dms.par.pcm.vo.InvcSearchVO;
 import chn.bhmc.dms.par.pcm.vo.InvcVO;
@@ -2285,8 +2287,21 @@ public class InvcServiceImpl extends HService implements InvcService, JxlsSuppor
         	//sServiceName是新增字段，判断是否是电子发票信息或待入库清单信息 属性为invc
         	if("invc".equals(params.get("sServiceName").toString())){
         		InvcSearchVO searchVO = new InvcSearchVO();//查询的是电子发票信息或待入库清单信息
+        		ObjectUtil.convertMapToObject(params, searchVO, "beanName", "templateFile", "fileName");
+        		if(!StringUtils.isBlank(params.get("sInvcDtFr").toString())&&!"null".equals(params.get("sInvcDtFr").toString())){
+        			String sInvcDtFr = params.get("sInvcDtFr").toString();
+    	            java.util.Date invcDtFr = DateUtil.convertToDate(sInvcDtFr);
+    	            searchVO.setsInvcDtFr(invcDtFr);;//确认日期开始
+    	        }
         		
-        		
+        		if(!StringUtils.isBlank(params.get("sInvcDtTo").toString())&&!"null".equals(params.get("sInvcDtTo").toString())){
+        			String sInvcDtTo = params.get("sInvcDtTo").toString();
+    	            java.util.Date invcDtTo = DateUtil.convertToDate(sInvcDtTo);
+    	            searchVO.setsInvcDtTo(invcDtTo);//确认日期结束
+    	        }
+        		searchVO.setsDlrCd(LoginUtil.getDlrCd());
+        		List<InvcExcelVO> list = invcDAO.selectInvcsByConditionExcel(searchVO);
+        		context.putVar("items", list);
         	}
         }
         
