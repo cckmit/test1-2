@@ -85,8 +85,8 @@
                      <button type="button" class="btn_m" id="btnQuit" ><spring:message code="ser.mnu.refund" /></button><!-- 退票 -->
                      </dms:access> 
                      <dms:access viewId="VIEW-I-13294" hasPermission="${dms:getPermissionMask('READ')}"> 
-                     <button type="button" class="btn_m" id="btReceive" ><spring:message code="global.lbl.receipt" /></button><!-- 收票 -->
-                      </dms:access>
+                     <button type="button" class="btn_m" id="btReceive" ><spring:message code="global.lbl.receive" /></button><!-- 收票 -->
+                     </dms:access>
                 </div>
             </div>
             <!--  结算单列表按钮结束 -->
