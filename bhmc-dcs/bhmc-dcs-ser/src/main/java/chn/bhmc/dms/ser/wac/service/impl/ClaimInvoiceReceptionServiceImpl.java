@@ -1,5 +1,7 @@
 package chn.bhmc.dms.ser.wac.service.impl;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -25,6 +27,7 @@ import chn.bhmc.dms.ser.wac.vo.ClaimInvoiceExcelVO;
 import chn.bhmc.dms.ser.wac.vo.ClaimInvoiceSearchVO;
 import chn.bhmc.dms.ser.wac.vo.ClaimInvoiceVO;
 import able.com.util.fmt.StringUtil;
+import java.text.ParseException;
 /**
  * 
  *<p>Title:索赔发票接收</p>
@@ -216,16 +219,29 @@ public class ClaimInvoiceReceptionServiceImpl extends HService implements ClaimI
 	@Override
 	public void initJxlsContext(Context context, HMap params) throws Exception {
 		ClaimInvoiceSearchVO searchVO = new ClaimInvoiceSearchVO();
-    	 
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
         if(!StringUtils.isBlank(params.get("sinvcsFromDt").toString())&&!"null".equals(params.get("sinvcsFromDt").toString())){
             String sFromRoDt = params.get("sinvcsFromDt").toString();
-            Date dFromRoDt = DateUtil.convertToDate(sFromRoDt);
-            searchVO.setSinvcsFromDt(dFromRoDt);//结算报表年月日开始时间
+            Date dFromRoDt = null;
+            try {
+                // 注意格式需要与上面一致，不然会出现异常
+            	dFromRoDt = sdf.parse(sFromRoDt);
+            	 searchVO.setSinvcsFromDt(dFromRoDt);//结算报表年月日开始时间
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+           
         }
         if(!StringUtils.isBlank(params.get("sinvcsToDt").toString())&&!"null".equals(params.get("sinvcsToDt").toString())){
             String sToRoDt = params.get("sinvcsToDt").toString();
-            Date dToRoDt = DateUtil.convertToDate(sToRoDt);
-            searchVO.setSinvcsToDt(dToRoDt);//结算报表年月日结束时间
+            Date dToRoDt = null;
+            try {
+                // 注意格式需要与上面一致，不然会出现异常
+            	dToRoDt = sdf.parse(sToRoDt);
+            	searchVO.setSinvcsToDt(dToRoDt);//结算报表年月日开始时间
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
        
         ObjectUtil.convertMapToObject(params, searchVO, "beanName", "templateFile", "fileName");
