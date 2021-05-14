@@ -128,7 +128,7 @@ public class ClaimInvoiceReceptionServiceImpl extends HService implements ClaimI
 		}else{
 			ClaimInvoiceVO claimInvoiceVO = claimInvoiceVOList.get(0);//正常就应该是一条索赔结算单信息
 			//3、判断是否已经取消了，取消了不可以再退票
-			if("Y".equals(claimInvoiceVO.getCancelYn())){
+			if("Y".equals(claimInvoiceVO.getCancelYn())||"01".equals(claimInvoiceVO.getReceiptTp())){
 				result = "当前结算单状态已取消，不可以在退票！";
 			}else{
 				//4、判断当前的开票状态是否是已退票状态，如果是，则不可以再退票，如果不是，才可以退票
@@ -183,14 +183,14 @@ public class ClaimInvoiceReceptionServiceImpl extends HService implements ClaimI
 		}else{
 			ClaimInvoiceVO claimInvoiceVO = claimInvoiceVOList.get(0);//正常就应该是一条索赔结算单信息
 			//3、判断是否已经取消了，取消了不可以再收票
-			if("Y".equals(claimInvoiceVO.getCancelYn())){
+			if("Y".equals(claimInvoiceVO.getCancelYn())||"01".equals(claimInvoiceVO.getReceiptTp())){
 				result = "当前结算单状态已取消，不可以在收票！";
 			}else{
 				//4、判断当前的开票状态是否是已退票状态，如果是，则不可以再退票，如果不是，才可以退票
 				if("03".equals(claimInvoiceVO.getReceiptTp())){
 					result = "当前结算单状态已退票，不可以在收票！";
 				//4、判断当前的开票状态是否是已收票状态，如果是，则不可以再收票，如果不是，才可以收票
-				}else if("02".equals(claimInvoiceVO.getReceiptTp())){
+				}else if("02".equals(claimInvoiceVO.getReceiptTp())&&"03".equals(claimInvoiceVO.getTrsfTp())){
 					result = "当前结算单状态已收票，不可以在收票！";
 				}else{
 					//5、开票状态为“已开票”/快递状态为“车厂接收”

@@ -557,18 +557,21 @@
                 };
 
                 if(dms.string.isEmpty(lPurcOrdTp)){
-                    //구매오더 유형은 필수 입력 사항입니다.
-                    dms.notification.warning("<spring:message code='par.lbl.purcOrdTp' var='purcOrdTp' /><spring:message code='global.info.required.field' arguments='${purcOrdTp}'/>");
+                    //구매오더 유형은 필수 입력 사항입니다. 修改提示错误信息 wangc 2021年5月14日14:07:01
+                    alert(1+"<spring:message code='par.lbl.purcOrdTp' var='purcOrdTp' /><spring:message code='global.info.required.field' arguments='${purcOrdTp}'/>");
+                    dms.notification.warning("<spring:message code='par.lbl.purcOrdTp' var='purcOrdTp' /><spring:message code='global.info.required.field' arguments='${purcOrdTp}'/>","alert");
                     return false;
                 }
                 if(dms.string.isEmpty($("#trsfTp").data("kendoExtDropDownList").value())){
                     //운송유형은 필수 입력 사항입니다.
-                    dms.notification.warning("<spring:message code='par.lbl.trsfTp' var='trsfTp' /><spring:message code='global.info.required.field' arguments='${trsfTp}'/>");
+                    alert(2+<spring:message code='par.lbl.trsfTp' var='trsfTp' /><spring:message code='global.info.required.field' arguments='${trsfTp}'/>)
+                    dms.notification.warning("<spring:message code='par.lbl.trsfTp' var='trsfTp' /><spring:message code='global.info.required.field' arguments='${trsfTp}'/>","alert");
                     return false;
                 }
                 if(dms.string.isEmpty($("#bpCd").val())){
                     //거래처정보는 필수 입력 사항입니다.
-                    dms.notification.warning("<spring:message code='par.lbl.bpCd' var='bpCd' /><spring:message code='global.info.required.field' arguments='${bpCd}'/>");
+                     alert(3+<spring:message code='par.lbl.trsfTp' var='trsfTp' /><spring:message code='global.info.required.field' arguments='${trsfTp}'/>)
+                    dms.notification.warning("<spring:message code='par.lbl.bpCd' var='bpCd' /><spring:message code='global.info.required.field' arguments='${bpCd}'/>","alert");
                     return false;
                 }
 

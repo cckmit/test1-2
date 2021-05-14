@@ -300,6 +300,7 @@ $(document).ready(function(){
         },
 
         warning:function(messages, options) {
+        	alert("123")
             this.show(messages, "warning", options);
         },
 

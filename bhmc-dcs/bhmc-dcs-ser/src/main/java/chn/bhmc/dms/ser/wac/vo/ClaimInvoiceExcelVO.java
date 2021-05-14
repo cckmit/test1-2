@@ -93,6 +93,11 @@ public class ClaimInvoiceExcelVO {
     private String senderAddr;
     
     /**
+     * 是否取消 Y是 N否
+     */
+    private String cancelYn;
+    
+    /**
      * 发票代码
      */
     private String receiptCd;
@@ -312,6 +317,14 @@ public class ClaimInvoiceExcelVO {
 
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	public String getCancelYn() {
+		return cancelYn;
+	}
+
+	public void setCancelYn(String cancelYn) {
+		this.cancelYn = cancelYn;
 	}
     
     

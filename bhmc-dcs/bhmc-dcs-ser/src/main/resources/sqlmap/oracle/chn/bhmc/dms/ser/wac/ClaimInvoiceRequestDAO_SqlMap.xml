@@ -198,12 +198,13 @@
 		      (select CMM_CD_NM from CM_0303T where CMM_CD = invoices.EXPS_CMP_NM and CMM_GRP_CD='SEF009') as EXPS_CMP_NM,
 		      (select CMM_CD_NM from CM_0303T where CMM_CD = invoices.TRSF_TP and CMM_GRP_CD='SEF005') as TRSF_TP,
 		      (select CMM_CD_NM from CM_0303T where CMM_CD = invoices.FAIL_MSG and CMM_GRP_CD='SEF006') as FAIL_MSG,
+		      (select CMM_CD_NM from CM_0303T where CMM_CD = invoices.CANCEL_YN and CMM_GRP_CD='SEF008') as CANCEL_YN,
 		      invoices.SENDER_NM,invoices.SENDER_TELNO,invoices.SENDER_ADDR, t.RECEIPT_CD,t.BUY_NM,t.TAXPAYER_ID_CD,
 		      t.RECEIPT_ISS_DT,t.SUM_AMT,t.REMARK
 		from 
 		(select invoice.DLR_CD,(select DLR_NM from CM_0101T where DLR_CD = invoice.DLR_CD) as DLR_NM,invoice.INVC_NO,
 		        invoice.RECEIPT_TP,invoice.RECIP_DT,invoice.FAIL_DT,pack.invc_Dt,pack.invc_Claim_Tot_Amt,pack.ddct_Tot_Amt,
-		        pack.confirm_Tot_Amt,invoice.TRSF_NO,invoice.EXPS_CMP_NM,invoice.TRSF_TP,invoice.FAIL_MSG,invoice.FAIL_REMARK,
+		        pack.confirm_Tot_Amt,invoice.TRSF_NO,invoice.EXPS_CMP_NM,invoice.TRSF_TP,invoice.FAIL_MSG,invoice.FAIL_REMARK,invoice.CANCEL_YN,
 		        invoice.SENDER_NM,invoice.SENDER_TELNO,invoice.SENDER_ADDR
 		from SE_0960T invoice 
 		left join se_0930t pack on invoice.INVC_NO=pack.INVC_NO
