@@ -46,7 +46,6 @@ import chn.bhmc.dms.core.support.excel.ExcelUploadError;
 import chn.bhmc.dms.core.support.excel.ExcelUploadStatus;
 import chn.bhmc.dms.core.util.DateUtil;
 import chn.bhmc.dms.core.util.LoginUtil;
-
 import chn.bhmc.dms.par.pcm.service.InvcService;
 import chn.bhmc.dms.par.pcm.vo.InvcItemVO;
 import chn.bhmc.dms.par.pcm.vo.InvcListVO;
@@ -82,7 +81,6 @@ public class InvcController extends HController {
      */
     @Resource(name="invcService")
     InvcService invcService;
-    
 
     /**
      * 거래처 서비스
@@ -1159,24 +1157,14 @@ public class InvcController extends HController {
         SearchResult result = new SearchResult();
         List<InvcItemVO> list = new ArrayList<InvcItemVO>();
         List<InvcItemVO> resultList = new ArrayList<InvcItemVO>();
-        InvcItemVO chkInvcItem = new InvcItemVO();
+        InvcItemVO       chkInvcItem = new InvcItemVO();
         List<ExcelUploadError> errors = new ArrayList<ExcelUploadError>();
         ExcelUploadStatus status = new ExcelUploadStatus();
         int totErrCnt = 0;
         String msg;
 
-        StorageSearchVO storageSearchVO = new StorageSearchVO();
-        List<StorageVO> storageList = new ArrayList<StorageVO>();
-
-        storageSearchVO.setsPltCd(LoginUtil.getPltCd());
-        storageSearchVO.setsDlrCd(LoginUtil.getDlrCd());
-        storageSearchVO.setsStrgeSaleAccYn("Y");//용품창고 제외.
-        storageList = storageService.selectStoragesByCondition(storageSearchVO);
-
-        HashMap<String, String> storageMap = new HashMap<String, String>();
-        for( StorageVO storageVO : storageList ){
-            storageMap.put(storageVO.getStrgeCd(), storageVO.getStrgeNm());
-        }
+        StorageSearchVO storageSearchVO    = new StorageSearchVO();
+        int chkStrgeCd = 0;
 
         VenderMasterVO venderMasterVO = new VenderMasterVO();
         venderMasterVO = venderMasterService.selectBHMCVenderMaster(LoginUtil.getDlrCd());
@@ -1199,7 +1187,7 @@ public class InvcController extends HController {
                 for(int i = 0, listLen = list.size(); i < listLen ; i = i + 1){
 
                     chkInvcItem = new InvcItemVO();
-                    errors = new ArrayList<ExcelUploadError>();
+                    errors         = new ArrayList<ExcelUploadError>();
 
                    if( list.get(i).getErrorCount() > 0){
                        totErrCnt = totErrCnt + 1;
@@ -1212,43 +1200,50 @@ public class InvcController extends HController {
                        resultList.add(list.get(i));
                    }else{
 
-                       //창고코드 검색 -> 창고이름 검색으로 수정. 20170914
-                       if(!storageMap.containsValue(list.get(i).getExcelStrgeNm())){
-                           list.get(i).setErrorCount(1);
+                       //입력된 창고가 있는 경우 검증
+                       if(StringUtils.isNoneBlank(list.get(i).getExcelStrgeCd())){
+                           storageSearchVO    = new StorageSearchVO();
 
-                           msg = messageSource.getMessage(
-                                   "par.info.notStorgeMsg"
-                                   , new String[]{}
-                                   , LocaleContextHolder.getLocale()
-                               );
+                           storageSearchVO.setsPltCd(LoginUtil.getPltCd());
+                           storageSearchVO.setsDlrCd(LoginUtil.getDlrCd());
+                           storageSearchVO.setsStrgeCd(list.get(i).getExcelStrgeCd());
 
-                               errors.add(new ExcelUploadError(i, 0, list.get(i).getExcelStrgeNm(), msg));
+                           chkStrgeCd = storageService.selectStoragesByConditionCnt(storageSearchVO);
 
-                           list.get(i).setErrors(errors);
+                           //창고마스터에 없는 창고인경우
+                           if(chkStrgeCd  == 0){
+                               list.get(i).setErrorCount(1);
 
-                           if(list.get(i).getExcelPrc().equals("-999")){
-                               list.get(i).setExcelPrc("");
-                           }
-                           if(list.get(i).getExcelTaxDdctPrc().equals("-999")){
-                               list.get(i).setExcelTaxDdctPrc("");
-                           }
+                               msg = messageSource.getMessage(
+                                       "global.info.emptyParamInfo"
+                                       , new String[]{
+                                               messageSource.getMessage("cmm.title.strgeInfo", null, LocaleContextHolder.getLocale())
+                                       }
+                                       , LocaleContextHolder.getLocale()
+                                   );
 
-                           totErrCnt = totErrCnt + 1;
-                           resultList.add(list.get(i));
+                                   errors.add(new ExcelUploadError(i, 0, list.get(i).getExcelStrgeCd(), msg));
 
-                           continue;
-                       }else{
-                           for( StorageVO storageVO : storageList ){
-                               if(storageVO.getStrgeNm().equals(list.get(i).getExcelStrgeNm())){
-                                   list.get(i).setExcelStrgeCd(storageVO.getStrgeCd());
+                               list.get(i).setErrors(errors);
+
+                               if(list.get(i).getExcelPrc().equals("-999")){
+                                   list.get(i).setExcelPrc("");
                                }
+                               if(list.get(i).getExcelTaxDdctPrc().equals("-999")){
+                                   list.get(i).setExcelTaxDdctPrc("");
+                               }
+
+                               totErrCnt = totErrCnt + 1;
+                               resultList.add(list.get(i));
+
+                               continue;
                            }
                        }
 
                        list.get(i).setDlrCd(LoginUtil.getDlrCd());
                        list.get(i).setBpCd(venderMasterVO.getBpCd());
 
-                       chkInvcItem = invcService.selectInvcReceiveEtcItemExcelUploadByKey(list.get(i));
+                       chkInvcItem =   invcService.selectInvcReceiveEtcItemExcelUploadByKey(list.get(i));
 
                        if(list.get(i).getExcelPrc().equals("-999")){
                            list.get(i).setExcelPrc("");
@@ -1279,6 +1274,47 @@ public class InvcController extends HController {
                            continue;
                        }
 
+                       //공급처가  없는 부품인경우
+                       //if(chkInvcItem.getBpCd() == null){
+                       /*if(bpTp.equals("01") && !chkInvcItem.getSpyrCd().equals("01")){
+                           list.get(i).setErrorCount(1);
+
+                           msg = messageSource.getMessage(
+                                   "sal.info.notEqualSupplyBp"
+                                   //"global.err.chkBpCdIsBMP"
+                                   , new String[]{}
+                                   , LocaleContextHolder.getLocale()
+                               );
+
+                               errors.add(new ExcelUploadError(i, 0, list.get(i).getItemCd(), msg));
+
+                           list.get(i).setErrors(errors);
+
+                           totErrCnt = totErrCnt + 1;
+                           resultList.add(list.get(i));
+
+                           continue;
+                       }*/
+
+                       /*if(!bpTp.equals("01") && chkInvcItem.getSpyrCd().equals("01")){
+                           list.get(i).setErrorCount(1);
+
+                           msg = messageSource.getMessage(
+                                   "sal.info.notEqualSupplyBp"
+                                   , new String[]{}
+                                   , LocaleContextHolder.getLocale()
+                               );
+
+                               errors.add(new ExcelUploadError(i, 0, list.get(i).getItemCd(), msg));
+
+                           list.get(i).setErrors(errors);
+
+                           totErrCnt = totErrCnt + 1;
+                           resultList.add(list.get(i));
+
+                           continue;
+                       }*/
+
                        list.get(i).setGrStrgeCd(chkInvcItem.getGrStrgeCd());
                        list.get(i).setItemNm(chkInvcItem.getItemNm());
                        list.get(i).setInvcUnitCd(chkInvcItem.getInvcUnitCd());
@@ -1307,6 +1343,11 @@ public class InvcController extends HController {
                     result.setTotal(resultList.size());
                     result.setData(resultList);
 
+                //엑셀 업로드 시 에러 라인이 없는 경우
+                //}else{
+                //    result.setTotal(-999);
+                //    result.setData(resultList);
+                //}
             }catch(ExcelDataBindingException e){
                 log.error(e.getMessage(), e);
                 status.addError(e.getRowNo(), e.getColNo(), e.getFieldValue(), e.getMessage());
