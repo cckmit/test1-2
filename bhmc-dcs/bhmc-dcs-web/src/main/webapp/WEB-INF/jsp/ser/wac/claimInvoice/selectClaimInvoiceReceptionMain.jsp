@@ -421,9 +421,9 @@ $(document).ready(function (e){
                    , attributes :{"class":"ac"}
                    , format:"{0:yyyy-MM}"
                 }//结算报表年月
-               ,{field:"confirmTotAmt",title:"<spring:message code='ser.lbl.invcClaimTotAmt' />", width:110, attributes :{"class":"al"} }//确定金额
-               ,{field:"ddctTotAmt",title:"<spring:message code='crm.lbl.payBackAmt' />", width:110, attributes :{"class":"al"} }//扣减金额
-               ,{field:"invcClaimTotAmt",title:"<spring:message code='ser.lbl.calcAmt' />", width:110, attributes :{"class":"al"} }//结算金额
+               ,{field:"invcClaimTotAmt",title:"<spring:message code='ser.lbl.invcClaimTotAmt' />", width:110, attributes :{"class":"al"} }//确定金额
+               ,{field:"ddctTotAmt",title:"<spring:message code='crm.lbl.payBackAmt' />", width:110, attributes :{"class":"al"} }//扣减金额 
+               ,{field:"confirmTotAmt",title:"<spring:message code='ser.lbl.calcAmt' />", width:110, attributes :{"class":"al"} }//结算金额
                ,{field:"trsfNo",title:"<spring:message code='ser.lbl.trsfNo' />", width:110, attributes :{"class":"al"} }//快递单号
                ,{field:"expsCmpNm",title:"<spring:message code='ser.lbl.trsfCmpCd' />", width:80
                    ,attributes :{"class":"ac"}

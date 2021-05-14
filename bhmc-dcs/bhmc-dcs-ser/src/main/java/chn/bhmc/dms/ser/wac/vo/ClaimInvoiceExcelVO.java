@@ -36,12 +36,12 @@ public class ClaimInvoiceExcelVO {
     private Date invcDt;
     
     /**
-     * 结算金额
+     * 确认金额
      */
     private double invcClaimTotAmt;
     
     /**
-     * 确认金额
+     * 结算金额
      */
     private double confirmTotAmt; 
     

@@ -141,7 +141,7 @@ public class ClaimInvoiceVO extends BaseVO {
     private double ddctTotAmt;
     
     /**
-     * 确认金额---结算金额
+     * 结算金额
      */
     private double confirmTotAmt; 
     
@@ -158,7 +158,7 @@ public class ClaimInvoiceVO extends BaseVO {
      */
     private Date invcDt;
     /**
-     * 结算金额 --确认金额
+     * 确认金额
      */
     private double invcClaimTotAmt;
     
