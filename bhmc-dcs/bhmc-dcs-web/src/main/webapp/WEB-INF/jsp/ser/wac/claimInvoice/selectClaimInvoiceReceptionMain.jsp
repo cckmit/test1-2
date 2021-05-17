@@ -567,7 +567,7 @@ $(document).ready(function (e){
     //结算单列表点击之后赋值退票信息
     setResultData = function (result){
     	//如果是已经退票了，则退票信息置灰，按钮置灰，否则不用置灰
-    	if(result.receiptTp=="03"){
+    	if(result.receiptTp=="03"||result.cancelYn=='Y'){
     		//按钮隐藏
             $("#btReceive").data("kendoButton").enable(false);//收票隐藏
             $("#btnQuit").data("kendoButton").enable(false);  //退票隐藏
@@ -657,8 +657,12 @@ $(document).ready(function (e){
           	var expsCmpNm = $("#expsCmpNm").val();
           	//if(!(/^\d{13}$/.test(trsfNo))){ 
           	if(!(/^[0-9a-zA-Z_]*$/.test(trsfNo))){ 
-           	dms.notification.warning("<spring:message code='ser.info.wEmsNoIsNm' />");
+           	   dms.notification.warning("<spring:message code='ser.info.wEmsNoIsNm' />");
                return false; 
+            }
+          	if(dms.string.isEmpty($("#trsfNo").val())){ 
+               	dms.notification.warning("<spring:message code='ser.info.wEmsNoIsNm' />");
+                return false; 
             }
     		//校验手机号 11位数字
        	  	var phone = $("#senderTelno").val();
