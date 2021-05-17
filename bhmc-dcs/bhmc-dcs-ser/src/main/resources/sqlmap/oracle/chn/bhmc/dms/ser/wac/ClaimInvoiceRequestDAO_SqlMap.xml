@@ -28,10 +28,10 @@
 		    ) w
 		    where 1 = 1
 		    <if test='sdlrCd != null and sdlrCd != "" '>
-            AND w.DLR_CD =  LIKE '%'||#{sdlrCd}||'%'
+            AND w.DLR_CD LIKE '%'||#{sdlrCd}||'%'
             </if>
             <if test='sdlrNm != null and sdlrNm != "" '>
-            AND w.DLR_NM =  LIKE '%'||#{sdlrNm}||'%'
+            AND w.DLR_NM LIKE '%'||#{sdlrNm}||'%'
             </if>
             <if test='sinvcNo != null and sinvcNo != "" '>
             AND w.INVC_NO = #{sinvcNo}
@@ -79,10 +79,10 @@
 		    ) w
 		    where 1 = 1
             <if test='sdlrCd != null and sdlrCd != "" '>
-            AND w.DLR_CD =  LIKE '%'||#{sdlrCd}||'%'
+            AND w.DLR_CD LIKE '%'||#{sdlrCd}||'%'
             </if>
             <if test='sdlrNm != null and sdlrNm != "" '>
-            AND w.DLR_NM =  LIKE '%'||#{sdlrNm}||'%'
+            AND w.DLR_NM LIKE '%'||#{sdlrNm}||'%'
             </if>
             <if test='sinvcNo != null and sinvcNo != "" '>
             AND w.INVC_NO = #{sinvcNo}
@@ -217,10 +217,10 @@
 			) w
 			where 1 = 1
 			<if test='sdlrCd != null and sdlrCd != "" '>
-            AND w.DLR_CD =  LIKE '%'||#{sdlrCd}||'%'
+            AND w.DLR_CD LIKE '%'||#{sdlrCd}||'%'
             </if>
             <if test='sdlrNm != null and sdlrNm != "" '>
-            AND w.DLR_NM =  LIKE '%'||#{sdlrNm}||'%'
+            AND w.DLR_NM LIKE '%'||#{sdlrNm}||'%'
             </if>
 			<if test='sinvcNo != null and sinvcNo != "" '>
 			AND w.INVC_NO = #{sinvcNo}
