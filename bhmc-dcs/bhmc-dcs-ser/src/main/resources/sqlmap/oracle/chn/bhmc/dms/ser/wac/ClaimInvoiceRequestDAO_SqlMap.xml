@@ -18,35 +18,37 @@
      FROM (    
         select ROWNUM AS RNUM , T1.* 
 		from(
-		    select invoice.DLR_CD,(select DLR_NM from CM_0101T where DLR_CD = invoice.DLR_CD) as DLR_NM,invoice.INVC_NO,
-		           invoice.RECEIPT_TP,invoice.RECIP_DT,invoice.FAIL_DT,pack.invc_Dt,pack.invc_Claim_Tot_Amt,pack.ddct_Tot_Amt,
-		           pack.confirm_Tot_Amt,invoice.TRSF_NO,invoice.EXPS_CMP_NM,invoice.TRSF_TP,invoice.FAIL_MSG,invoice.SENDER_NM,
-		           invoice.SENDER_TELNO,invoice.SENDER_ADDR
-		    from SE_0960T invoice 
-		    left join se_0930t pack on invoice.INVC_NO=pack.INVC_NO
+			select * from (
+			    select invoice.DLR_CD,(select DLR_NM from CM_0101T where DLR_CD = invoice.DLR_CD) as DLR_NM,invoice.INVC_NO,
+			           invoice.RECEIPT_TP,invoice.RECIP_DT,invoice.FAIL_DT,pack.invc_Dt,pack.invc_Claim_Tot_Amt,pack.ddct_Tot_Amt,
+			           pack.confirm_Tot_Amt,invoice.TRSF_NO,invoice.EXPS_CMP_NM,invoice.TRSF_TP,invoice.FAIL_MSG,invoice.SENDER_NM,
+			           invoice.SENDER_TELNO,invoice.SENDER_ADDR
+			    from SE_0960T invoice 
+			    left join se_0930t pack on invoice.INVC_NO=pack.INVC_NO
+		    ) w
 		    where 1 = 1
 		    <if test='sdlrCd != null and sdlrCd != "" '>
-            AND invoice.DLR_CD = #{sdlrCd}
+            AND w.DLR_CD = #{sdlrCd}
             </if>
             <if test='sdlrNm != null and sdlrNm != "" '>
-            AND DLR_NM = #{sdlrNm}
+            AND w.DLR_NM = #{sdlrNm}
             </if>
             <if test='sinvcNo != null and sinvcNo != "" '>
-            AND invoice.INVC_NO = #{sinvcNo}
+            AND w.INVC_NO = #{sinvcNo}
             </if>
             <if test='sinvcsFromDt !=null'>
-            AND pack.invc_Dt <![CDATA[>=]]> #{sinvcsFromDt}
+            AND w.invc_Dt <![CDATA[>=]]> #{sinvcsFromDt}
             </if>
             <if test='sinvcsToDt !=null'>
-            AND pack.invc_Dt <![CDATA[<]]> #{sinvcsToDt}+1
+            AND w.invc_Dt <![CDATA[<=]]> ADD_MONTHS(#{sinvcsToDt}, 1)
             </if>
             <if test='sreceiptTp != null and sreceiptTp != "" '>
-            AND invoice.RECEIPT_TP = #{sreceiptTp}
+            AND w.RECEIPT_TP = #{sreceiptTp}
             </if>
             <if test='strsfTp != null and strsfTp != "" '>
-            AND invoice.TRSF_TP = #{strsfTp}
+            AND w.TRSF_TP = #{strsfTp}
             </if>
-		    ORDER BY pack.invc_Dt desc
+		    ORDER BY w.invc_Dt desc
 		) T1
 		<where>
             <if test='firstIndex != -1 and lastIndex != -1'>
@@ -67,35 +69,37 @@
      FROM (    
         select ROWNUM AS RNUM , T1.* 
 		from(
-		    select invoice.DLR_CD,(select DLR_NM from CM_0101T where DLR_CD = invoice.DLR_CD) as DLR_NM,invoice.INVC_NO,
-		           invoice.RECEIPT_TP,invoice.RECIP_DT,invoice.FAIL_DT,pack.invc_Dt,pack.invc_Claim_Tot_Amt,pack.ddct_Tot_Amt,
-		           pack.confirm_Tot_Amt,invoice.TRSF_NO,invoice.EXPS_CMP_NM,invoice.TRSF_TP,invoice.FAIL_MSG,invoice.FAIL_REMARK,
-		           invoice.SENDER_NM,invoice.SENDER_TELNO,invoice.SENDER_ADDR,invoice.CANCEL_YN
-		    from SE_0960T invoice 
-		    left join se_0930t pack on invoice.INVC_NO=pack.INVC_NO
+			select * from (
+			    select invoice.DLR_CD,(select DLR_NM from CM_0101T where DLR_CD = invoice.DLR_CD) as DLR_NM,invoice.INVC_NO,
+			           invoice.RECEIPT_TP,invoice.RECIP_DT,invoice.FAIL_DT,pack.invc_Dt,pack.invc_Claim_Tot_Amt,pack.ddct_Tot_Amt,
+			           pack.confirm_Tot_Amt,invoice.TRSF_NO,invoice.EXPS_CMP_NM,invoice.TRSF_TP,invoice.FAIL_MSG,invoice.FAIL_REMARK,
+			           invoice.SENDER_NM,invoice.SENDER_TELNO,invoice.SENDER_ADDR,invoice.CANCEL_YN
+			    from SE_0960T invoice 
+			    left join se_0930t pack on invoice.INVC_NO=pack.INVC_NO
+		    ) w
 		    where 1 = 1
 		    <if test='sdlrCd != null and sdlrCd != "" '>
-            AND invoice.DLR_CD = #{sdlrCd}
+            AND w.DLR_CD = #{sdlrCd}
             </if>
             <if test='sdlrNm != null and sdlrNm != "" '>
-            AND DLR_NM = #{sdlrNm}
+            AND w.DLR_NM = #{sdlrNm}
             </if>
             <if test='sinvcNo != null and sinvcNo != "" '>
-            AND invoice.INVC_NO = #{sinvcNo}
+            AND w.INVC_NO = #{sinvcNo}
             </if>
             <if test='sinvcsFromDt !=null'>
-            AND pack.invc_Dt <![CDATA[>=]]> #{sinvcsFromDt}
+            AND w.invc_Dt <![CDATA[>=]]> #{sinvcsFromDt}
             </if>
             <if test='sinvcsToDt !=null'>
-            AND pack.invc_Dt <![CDATA[<]]> #{sinvcsToDt}+1
+            AND w.invc_Dt <![CDATA[<=]]> ADD_MONTHS(#{sinvcsToDt}, 1)
             </if>
             <if test='sreceiptTp != null and sreceiptTp != "" '>
-            AND invoice.RECEIPT_TP = #{sreceiptTp}
+            AND w.RECEIPT_TP = #{sreceiptTp}
             </if>
             <if test='strsfTp != null and strsfTp != "" '>
-            AND invoice.TRSF_TP = #{strsfTp}
+            AND w.TRSF_TP = #{strsfTp}
             </if>
-		    ORDER BY pack.invc_Dt desc
+		    ORDER BY w.invc_Dt desc
 		) T1
 		<where>
             <if test='firstIndex != -1 and lastIndex != -1'>
@@ -202,34 +206,37 @@
 		      invoices.SENDER_NM,invoices.SENDER_TELNO,invoices.SENDER_ADDR, t.RECEIPT_CD,t.BUY_NM,t.TAXPAYER_ID_CD,
 		      t.RECEIPT_ISS_DT,t.SUM_AMT,t.REMARK
 		from 
-		(select invoice.DLR_CD,(select DLR_NM from CM_0101T where DLR_CD = invoice.DLR_CD) as DLR_NM,invoice.INVC_NO,
-		        invoice.RECEIPT_TP,invoice.RECIP_DT,invoice.FAIL_DT,pack.invc_Dt,pack.invc_Claim_Tot_Amt,pack.ddct_Tot_Amt,
-		        pack.confirm_Tot_Amt,invoice.TRSF_NO,invoice.EXPS_CMP_NM,invoice.TRSF_TP,invoice.FAIL_MSG,invoice.FAIL_REMARK,invoice.CANCEL_YN,
-		        invoice.SENDER_NM,invoice.SENDER_TELNO,invoice.SENDER_ADDR
-		from SE_0960T invoice 
-		left join se_0930t pack on invoice.INVC_NO=pack.INVC_NO
-		where 1 = 1
-		<if test='sdlrCd != null and sdlrCd != "" '>
-		AND invoice.DLR_CD = #{sdlrCd}
-		</if>
-		<if test='sdlrNm != null and sdlrNm != "" '>
-		AND DLR_NM = #{sdlrNm}
-		</if>
-		<if test='sinvcNo != null and sinvcNo != "" '>
-		AND invoice.INVC_NO = #{sinvcNo}
-		</if>
-		<if test='sinvcsFromDt !=null'>
-		AND pack.invc_Dt <![CDATA[>=]]> #{sinvcsFromDt}
-		</if>
-		<if test='sinvcsToDt !=null'>
-		AND pack.invc_Dt <![CDATA[<]]> #{sinvcsToDt}+1
-		</if>
-		<if test='sreceiptTp != null and sreceiptTp != "" '>
-        AND invoice.RECEIPT_TP = #{sreceiptTp}
-		</if>
-		<if test='strsfTp != null and strsfTp != "" '>
-		AND invoice.TRSF_TP = #{strsfTp}
-		</if>
+		(
+			select * from (
+				select invoice.DLR_CD,(select DLR_NM from CM_0101T where DLR_CD = invoice.DLR_CD) as DLR_NM,invoice.INVC_NO,
+				        invoice.RECEIPT_TP,invoice.RECIP_DT,invoice.FAIL_DT,pack.invc_Dt,pack.invc_Claim_Tot_Amt,pack.ddct_Tot_Amt,
+				        pack.confirm_Tot_Amt,invoice.TRSF_NO,invoice.EXPS_CMP_NM,invoice.TRSF_TP,invoice.FAIL_MSG,invoice.FAIL_REMARK,invoice.CANCEL_YN,
+				        invoice.SENDER_NM,invoice.SENDER_TELNO,invoice.SENDER_ADDR
+				from SE_0960T invoice 
+				left join se_0930t pack on invoice.INVC_NO=pack.INVC_NO
+			) w
+			where 1 = 1
+			<if test='sdlrCd != null and sdlrCd != "" '>
+			AND w.DLR_CD = #{sdlrCd}
+			</if>
+			<if test='sdlrNm != null and sdlrNm != "" '>
+			AND w.DLR_NM = #{sdlrNm}
+			</if>
+			<if test='sinvcNo != null and sinvcNo != "" '>
+			AND w.INVC_NO = #{sinvcNo}
+			</if>
+			<if test='sinvcsFromDt !=null'>
+			AND w.invc_Dt <![CDATA[>=]]> #{sinvcsFromDt}
+			</if>
+			<if test='sinvcsToDt !=null'>
+			AND w.invc_Dt <![CDATA[<=]]> ADD_MONTHS(#{sinvcsToDt}, 1)
+			</if>
+			<if test='sreceiptTp != null and sreceiptTp != "" '>
+	        AND w.RECEIPT_TP = #{sreceiptTp}
+			</if>
+			<if test='strsfTp != null and strsfTp != "" '>
+			AND w.TRSF_TP = #{strsfTp}
+			</if>
 		) invoices
 		left join SA_0502T t on  t.SETTLEMENT_NO = invoices.INVC_NO
     

@@ -409,17 +409,17 @@ $(document).ready(function (e){
                        $('<span class="k-invalid-msg" data-for="receiptTp"></span>').appendTo(container);
                       }
                  }//开票状态
-               ,{field:"recipDt" , title:"<spring:message code='ser.lbl.wrefundDt' />", width:125
+               ,{field:"recipDt" , title:"<spring:message code='ser.lbl.wcheckDt' />", width:125 
                    , attributes :{"class":"ac"}
                    , format:"{0:<dms:configValue code='dateFormat' /> HH:mm}"
                 }//收票日期
-               ,{field:"invcDt" , title:"<spring:message code='ser.lbl.wcheckDt' />", width:125
+               ,{field:"failDt" , title:"<spring:message code='ser.lbl.wrefundDt' />", width:125
                    , attributes :{"class":"ac"}
                    , format:"{0:<dms:configValue code='dateFormat' /> HH:mm}"
                 }//退票日期
-               ,{field:"failDt" , title:"<spring:message code='ser.lbl.invcDt' />", width:125
+               ,{field:"invcDt" , title:"<spring:message code='ser.lbl.invcDt' />", width:125
                    , attributes :{"class":"ac"}
-                   , format:"{0:yyyy-MM}"
+               	   , format:"{0:yyyy-MM}"
                 }//结算报表年月
                ,{field:"invcClaimTotAmt",title:"<spring:message code='ser.lbl.invcClaimTotAmt' />", width:110, attributes :{"class":"al"} }//确定金额
                ,{field:"ddctTotAmt",title:"<spring:message code='crm.lbl.payBackAmt' />", width:110, attributes :{"class":"al"} }//扣减金额 
