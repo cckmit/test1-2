@@ -736,7 +736,7 @@
                      ,template:'#= changePurcOrdTp(purcOrdTp)#'
                 }//오더유형
                 ,{field:"purcReqDt" ,title:"<spring:message code='par.lbl.ordReqDt' />" ,format:"{0:<dms:configValue code='dateFormat' />}" ,attributes:{ "class":"ac"} ,width:90}//처리일자
-                ,{field:"invcIfOrdNo", title:"BMP <spring:message code='par.lbl.purcOrdNo' />" ,width:100}//BMP구매오더번호   BMP订单编号
+                ,{field:"invcIfOrdNo", title:"BMP <spring:message code='par.lbl.purcOrdNo' />" ,width:100}//BMP구매오더번호   BMP订单编号     wangc 2021年5月17日14:29:20
                 ,{field:"purcOrdNo" ,title:"<spring:message code='par.lbl.purcOrdNo' />" ,width:100}//구매오더번호    订单编号
                 ,{field:"bpNm" ,title:"<spring:message code='par.lbl.supplyNo' />" ,width:140}//공급업체
                 ,{field:"itemCd" ,title:"<spring:message code='par.lbl.itemCd' />" ,width:100}//부품번호

@@ -1178,7 +1178,7 @@
         </where>
     </select>
 
-    <!-- 구매오더 정보 카운트를 조회한다. -->
+    <!-- 구매오더 정보 카운트를 조회한다.  新增了一个BMP的过滤查询条件  wangc 2021-5-17 15:25:342-->
     <select id="selectPurcOrdsByConditionCnt" parameterType="PurcOrdSearchVO" resultType="int">
         /* [chn.bhmc.dms.par.pcm.service.dao.PurcOrdDAO.selectPurcOrdsByConditionCnt] */
             SELECT
@@ -1277,6 +1277,10 @@
                         </if>
                         <if test='sItemDstinCd != null and sItemDstinCd != ""'>
                             AND B.ITEM_DSTIN_CD = #{sItemDstinCd}
+                        </if>
+                        <!-- BMP的 订单号查询 wangc 2021年5月17日15:26:46-->
+                        <if test='sBmpOrdNo != null and sBmpOrdNo != ""'>
+                            AND A.BMP_ORD_NO = #{sBmpOrdNo}
                         </if>
                         GROUP BY A.DLR_CD ,A.PURC_ORD_NO
                     ) C ON A.DLR_CD = C.DLR_CD AND A.PURC_ORD_NO = C.PURC_ORD_NO

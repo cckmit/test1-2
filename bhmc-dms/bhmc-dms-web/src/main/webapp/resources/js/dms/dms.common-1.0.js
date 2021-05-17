@@ -300,14 +300,42 @@ $(document).ready(function(){
         },
 
         warning:function(messages, options) {
-        	alert("123")
             this.show(messages, "warning", options);
         },
 
         error:function(messages, options) {
             this.show(messages, "error", options);
-        }
+        },
+        //弹出的框不自动消失开始  wangc 2021年5月17日10:07:33 
+        buttonclose:function(messages, options){
+        	var msg = messages;
+        	var notificationType = "warning";
+        	var settings = {
+                 stacking: "up"
+                 ,button: true
+                 ,position: {
+                    bottom: 35,
+                    right: 12
+                 }
+                 ,hideOnClick: true
+                 ,autoHideAfter: 1200000
+                 ,templates: [
+                    {type: "info", template: this.messageTemplate}
+                    ,{type: "warning", template: this.messageTemplate}
+                    ,{type: "error", template: this.messageTemplate}
+                    ,{type: "success", template: this.messageTemplate}
+                  ]
+                };
+        	var element;
+        	
+        	element = window.parent.$("#globalFooterNotification");
+        	
+        	this.notification = element.kendoNotification(settings).data("kendoNotification");
 
+            this.notification.show({title:notificationType, message:msg}, notificationType);
+        	
+        }
+        //弹出的框不自动消失结束  wangc 2021年5月17日10:07:33 
 	};
 
 	dms.window = {

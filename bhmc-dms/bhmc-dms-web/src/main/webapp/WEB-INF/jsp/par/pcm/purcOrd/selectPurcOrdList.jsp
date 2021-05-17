@@ -33,7 +33,7 @@
                     <col style="width:15%;">
                     <col style="width:10%;">
                     <col style="width:15%;">
-                    <col>
+                    <col style="width:15%;">  <!-- 增加BMP订单编码查询  wangc 2021年5月17日15:07:59-->
                 </colgroup>
                 <tbody>
                     <tr>
@@ -47,6 +47,10 @@
                             <input type="text" id="sBpNm" class="form_input form_readonly hidden" readonly/>
                             <input type="text" id="sBpCd" class="form_input hidden"/>
                         </td>
+                        <th scope="row"><spring:message code="par.lbl.bmpOrdNo" /><!-- 增加BMP订单编号 wangc 2021年5月17日18:19:23--></th>
+                        <td>
+                            <input id="sBmpOrdNo" class="form_input">
+                        </td>
                         <th scope="row"><spring:message code="par.lbl.sendDt" /><!-- 오더전송일자 --></th>
                         <td>
                              <div class="form_float">
@@ -59,6 +63,8 @@
                                 </div>
                             </div>
                         </td>
+                   </tr>
+                    <tr>
                         <th scope="row"><spring:message code="par.lbl.ordReqDt" /><!-- 구매신청일 --></th>
                         <td>
                             <div class="form_float">
@@ -71,8 +77,8 @@
                                 </div>
                             </div>
                         </td>
-                    </tr>
-                    <tr>
+                    
+                   
                         <th scope="row"><spring:message code="par.lbl.purcOrdStatCd" /><!-- 구매오더상태 --></th>
                         <td>
                             <input id="sPurcOrdStatCd" type="text" data-type="multicombo" class="form_comboBox" />
@@ -89,6 +95,8 @@
                         <td class="required_area">
                             <input id="sTrsfTp" data-type="combo" class="form_comboBox" />
                         </td>
+                     </tr>
+                     <tr>
                         <th scope="row"><spring:message code="par.lbl.ordTotAmt" /><!--오더총금액 --></th>
                         <td>
                             <div class="form_float">
@@ -492,6 +500,8 @@
                             params["sArrvDtFr"]          = $("#sArrvDtFr").data("kendoExtMaskedDatePicker").value();
                             params["sArrvDtTo"]          = $("#sArrvDtTo").data("kendoExtMaskedDatePicker").value();
                             params["sPurcOrdStatLst"]    = sPurcOrdStatCdLst;
+                            
+                            params["sBmpOrdNo"]       = $("#sBmpOrdNo").val();//增加BMP页面的查询信息  wangc 2021年5月17日18:20:19
 
                             return kendo.stringify(params);
                         }
@@ -565,22 +575,22 @@
                       ,attributes:{ "class":"ac"}
                       ,template  :"#= ++rowNumber #"
                       ,width:40
-                      ,hidden:true}  //라인번호
+                      ,hidden:true}  //라인번호  
                  ,{field:"purcOrdTp"
                       ,title:"<spring:message code='par.lbl.purcOrdTp' />"
                       ,template:'#= changePurcOrdTp(purcOrdTp)#'
                       ,attributes:{ "class":"ac"}
-                      ,width:160}                //오더유형
+                      ,width:160}                //오더유형  订单类型  wangc 2021年5月17日14:48:47
                  ,{field:"purcRegDt"
                       ,title:"<spring:message code='par.lbl.ordReqDt' />"
                       ,format:"{0:<dms:configValue code='dateFormat' />}"
                       ,attributes:{ "class":"ac"}
-                      ,width:90 }                //구매신청일
+                      ,width:90 }                //구매신청일  订单申请日期  wangc  2021年5月17日14:49:13
                  ,{field:"arrvDate"
                       ,title:"<spring:message code='par.lbl.sendDt' />"
                       ,format:"{0:<dms:configValue code='dateFormat' />}"
                       ,attributes:{ "class":"ac"}
-                      ,width:90 }                //구매신청일
+                      ,width:90 }                //구매신청일  传送日期 wangc 2021年5月17日14:49:24
                  ,{field:"purcOrdNo"
                       ,title:"<spring:message code='par.lbl.purcOrdNo' />"
                       ,template  :function(dataItem){
@@ -590,17 +600,17 @@
 
                            return spanObj;
                        }
-                     ,width:90 }   //구매오더번호
+                     ,width:90 }   //구매오더번호  订单编号 wangc 2021年5月17日14:49:56
                  ,{field:"bmpOrdNo"
                       ,title:"<spring:message code='par.lbl.bmpOrdNo' />"
-                     ,width:120 }   //bmp오더번호
+                     ,width:120 }   //bmp오더번호  BMP订单编号 wangc  2021年5月17日14:50:17
                  ,{field:"bpCd"
                      ,title:"<spring:message code='par.lbl.bpCd' />"
                      ,width:105
-                     ,hidden:true}  //거래처 코드
+                     ,hidden:true}  //거래처 코드  
                  ,{field:"bpNm"
                      ,title:"<spring:message code='par.lbl.supplyNo' />"
-                     ,width:140 }  //공급업체
+                     ,width:140 }  //공급업체   供应商 wangc 2021年5月17日14:52:16
                  ,{field:"itemCnt"
                      ,title:"<spring:message code='par.lbl.itemCnt' />"
                      ,width:90
@@ -608,7 +618,7 @@
                      ,format:"{0:n2}"
                      ,aggregates:["sum"]
                      ,footerTemplate:"<div class='ar'>#= setSumData(sum)#</div>"
-                  }      //건수
+                  }      //건수  配件品种 wangc 2021年5月17日14:52:34
                  ,{field:"totPurcQty"
                      ,title:"<spring:message code='par.lbl.ordTotQty' />"
                      ,width:90
@@ -616,7 +626,7 @@
                      ,format:"{0:n2}"
                      ,aggregates:["sum"]
                      ,footerTemplate:"<div class='ar'>#= setSumData(sum)#</div>"
-                  }      //수량
+                  }      //수량 配件数量 wangc  2021年5月17日14:53:33
                  ,{field:"totPurcAmt"
                      ,title:"<spring:message code='par.lbl.ordTotAmt' />"
                      ,width:90
@@ -624,7 +634,7 @@
                      ,format:"{0:n2}"
                      ,aggregates:["sum"]
                      ,footerTemplate:"<div class='ar'>#= setSumData(sum)#</div>"
-                  }      //구매총금액
+                  }      //구매총금액  订单总金额 wangc 2021年5月17日14:53:51
                  ,{field:"totTaxDdctAmt"
                      ,title:"<spring:message code='par.lbl.taxDdctAmt' />"
                      ,width:90
@@ -632,7 +642,7 @@
                      ,format:"{0:n2}"
                      ,aggregates:["sum"]
                      ,footerTemplate:"<div class='ar'>#= setSumData(sum)#</div>"
-                  }      //구매총금액(세금제외)
+                  }      //구매총금액(세금제외)   税前金额 wangc 2021年5月17日14:54:03
                  ,{field:"purcOrdStatCd"
                      ,title:"<spring:message code='par.lbl.purcOrdStatCd' />"
                      ,width:100
@@ -661,22 +671,22 @@
                           }
                           return spanObj;
                       }
-                  }                //구매오더상태
+                  }                //구매오더상태 订单状态 wangc 2021年5月17日14:54:16
                  ,{field:"trsfTp"
                      ,title:"<spring:message code='par.lbl.trsfType' />"
                      ,template:'#= changeTrsfTp(trsfTp)#'
                      ,attributes:{ "class":"ac"}
-                     ,width:140}                //운송유형
+                     ,width:140}                //운송유형  运输类型  wangc 2021年5月17日14:54:56
                  ,{field:"confirmDt"
                      ,title:"<spring:message code='par.lbl.ordConfirmDt' />"
                      ,format:"{0:<dms:configValue code='dateFormat' />}"
                      ,attributes:{ "class":"ac"}
                      ,width:90
-                     ,hidden:true}                //처리일자
+                     ,hidden:true}                //처리일자  
                  ,{field:"remark"
                      ,title:"<spring:message code='par.lbl.ordTag' />"
                      ,width:140
-                     ,hidden:true}  //오더태그(비고)
+                     ,hidden:true}  //오더태그(비고) 
                  , {   //오더신청자
                      title:"<spring:message code='par.lbl.ordRegId' />"
                      ,field:"regUsrId"
@@ -686,7 +696,7 @@
                  , {   //오더신청자
                      title:"<spring:message code='par.lbl.ordRegId' />"
                      ,field:"regUsrNm"
-                     ,width:120
+                     ,width:120    //订单申请者 wangc 2021年5月17日14:58:31
                    }
                  ,{field:"boCnt"
                      ,title:"<spring:message code='par.lbl.backOrderCnt' />"
@@ -695,7 +705,7 @@
                           if(dataItem.boCnt > 0){
 						    spanObj = "<a class='k-link' onclick=\"fn_linkBoPurcOrd('" + dataItem.purcOrdNo + "'); \">"+dataItem.boCnt+"&nbsp;&nbsp;&nbsp;&nbsp;</a>";
                           }
-                          return spanObj;
+                          return spanObj;  //缺件品种 wangc 2021年5月17日14:58:48
                       }
                     ,width:90 }   //구매오더번호
                  ,{field :"boQty", title:"<spring:message code='par.lbl.boQty' />", attributes:{"class":"ar"}, format:"{0:n0}", decimal:0, width:80} 
