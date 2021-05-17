@@ -76,5 +76,18 @@ public interface ClaimInvoiceReceptionService {
     */
 	public String takerClaimInvoiceReception(String invcNo);
 	
+	/**
+	 * 
+	 * @MethodName: selectReqHpNo
+	 * <p>Title: 根据登录人的id获取登录人手机号</p >
+	 * @Description: TODO
+	 * @author wangc
+	 * @param userId
+	 * @return Object
+	 * @date 2021-04-26 03:39:30 
+	 * @param userId
+	 */
+	public String selectReqHpNo(String userId);
+	
 
 }

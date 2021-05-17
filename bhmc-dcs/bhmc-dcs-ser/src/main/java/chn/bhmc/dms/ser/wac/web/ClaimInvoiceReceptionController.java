@@ -17,6 +17,7 @@ import able.com.web.HController;
 import chn.bhmc.dms.cmm.sci.service.CommonCodeService;
 import chn.bhmc.dms.core.datatype.SearchResult;
 import chn.bhmc.dms.core.util.DateUtil;
+import chn.bhmc.dms.core.util.LoginUtil;
 import chn.bhmc.dms.ser.svi.service.LaborCodeManageService;
 import chn.bhmc.dms.ser.svi.vo.LtsModelSearchVO;
 import chn.bhmc.dms.ser.wac.service.ClaimInvoiceReceptionService;
@@ -55,6 +56,8 @@ public class ClaimInvoiceReceptionController extends HController{
 	 @RequestMapping(value="/ser/wac/claimInvoice/selectClaimInvoiceReceptionMain.do")
 	 public String selectLaborManageMain(Model model)throws Exception{
 		 String langCd = LocaleContextHolder.getLocale().getLanguage();
+		 
+		 String reqHpNo ="";//登录人手机号
 		 //1、页面时间赋值
 		 model.addAttribute("sinvcsFromDt", DateUtil.getDate(DateUtil.add(new Date(), Calendar.DATE, -31), "yyyy-MM") );//结算报表年月日开始时间
 	     model.addAttribute("sinvcsToDt", DateUtil.getDate("yyyy-MM"));//结算报表年月日结束时间
@@ -65,6 +68,10 @@ public class ClaimInvoiceReceptionController extends HController{
 	     model.addAttribute("failMsgDs", commonCodeService.selectCommonCodesByCmmGrpCd("SEF007", null, langCd));//退票原因
 	     model.addAttribute("cancelYnDs", commonCodeService.selectCommonCodesByCmmGrpCd("SEF008", null, langCd));//是否取消
 	     model.addAttribute("expsCmpNmDs", commonCodeService.selectCommonCodesByCmmGrpCd("SEF009", null, langCd));//快递公司
+	     model.addAttribute("sreqUsrId", LoginUtil.getUserId());//登录人ID
+	     model.addAttribute("sreqUsrNm", LoginUtil.getUserNm());//登录人姓名
+	     reqHpNo = claimInvoiceReceptionService.selectReqHpNo(LoginUtil.getUserId());//根据登录人id查询手机号
+		 model.addAttribute("reqHpNo", reqHpNo);//申请人手机号
 	     return "/ser/wac/claimInvoice/selectClaimInvoiceReceptionMain";
 	 }
 	 

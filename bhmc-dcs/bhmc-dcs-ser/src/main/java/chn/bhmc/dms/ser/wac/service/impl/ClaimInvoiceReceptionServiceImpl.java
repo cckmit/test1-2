@@ -129,21 +129,21 @@ public class ClaimInvoiceReceptionServiceImpl extends HService implements ClaimI
 			ClaimInvoiceVO claimInvoiceVO = claimInvoiceVOList.get(0);//正常就应该是一条索赔结算单信息
 			//3、判断是否已经取消了，取消了不可以再退票
 			if("Y".equals(claimInvoiceVO.getCancelYn())||"01".equals(claimInvoiceVO.getReceiptTp())){
-				result = "当前结算单状态已取消，不可以在退票！";
+				result = "当前结算单特约店已经取消提报，不能退票！";
 			}else{
 				//4、判断当前的开票状态是否是已退票状态，如果是，则不可以再退票，如果不是，才可以退票
 				if("03".equals(claimInvoiceVO.getReceiptTp())){
-					result = "当前结算单状态已退票，不可以再退票！";
+					result = "当前结算单开票状态已退票，不能再退票！";
 				}else{
 					//5、修改开票状态变为已退票/快递状态为已邮寄等退票信息
 					claimInvoiceVO.setReceiptTp("03");//已退票
 					claimInvoiceVO.setTrsfTp("02");//已邮寄
 					claimInvoiceVO.setFailMsg(searchVO.getSfailMsg());//退票原因
 					claimInvoiceVO.setFailRemark(searchVO.getSfailRemark());//退票备注
-					//claimInvoiceVO.setTrsfNo(searchVO.getStrsfNo());//快递单号
-					//claimInvoiceVO.setExpsCmpNm(searchVO.getSexpsCmpNm());//快递公司
-					//claimInvoiceVO.setSenderNm(searchVO.getSsenderNm());//寄件人
-					//claimInvoiceVO.setSenderTelno(searchVO.getSsenderTelno());//寄件人联系电话
+					claimInvoiceVO.setTrsfNo(searchVO.getStrsfNo());//快递单号
+					claimInvoiceVO.setExpsCmpNm(searchVO.getSexpsCmpNm());//快递公司
+					claimInvoiceVO.setSenderNm(searchVO.getSsenderNm());//寄件人
+					claimInvoiceVO.setSenderTelno(searchVO.getSsenderTelno());//寄件人联系电话
 				    claimInvoiceReceptionDAO.updateClaimInvoiceRefund(claimInvoiceVO);//退票存储
 				    //6、下发DMS
 				    claimInvoiceReceptionDAO.updateInvoiceService(claimInvoiceVO);//下发DMS
@@ -184,14 +184,14 @@ public class ClaimInvoiceReceptionServiceImpl extends HService implements ClaimI
 			ClaimInvoiceVO claimInvoiceVO = claimInvoiceVOList.get(0);//正常就应该是一条索赔结算单信息
 			//3、判断是否已经取消了，取消了不可以再收票
 			if("Y".equals(claimInvoiceVO.getCancelYn())||"01".equals(claimInvoiceVO.getReceiptTp())){
-				result = "当前结算单状态已取消，不可以在收票！";
+				result = "当前结算单特约店已经取消提报，不能收票！";
 			}else{
 				//4、判断当前的开票状态是否是已退票状态，如果是，则不可以再退票，如果不是，才可以退票
 				if("03".equals(claimInvoiceVO.getReceiptTp())){
-					result = "当前结算单状态已退票，不可以在收票！";
+					result = "当前结算单开票状态已退票，不能收票！";
 				//4、判断当前的开票状态是否是已收票状态，如果是，则不可以再收票，如果不是，才可以收票
 				}else if("02".equals(claimInvoiceVO.getReceiptTp())&&"03".equals(claimInvoiceVO.getTrsfTp())){
-					result = "当前结算单状态已收票，不可以在收票！";
+					result = "当前结算单开票状态已收票，不能再收票！";
 				}else{
 					//5、开票状态为“已开票”/快递状态为“车厂接收”
 				    claimInvoiceReceptionDAO.updateClaimInvoiceTaker(invcNo);//收票存储
@@ -250,4 +250,19 @@ public class ClaimInvoiceReceptionServiceImpl extends HService implements ClaimI
 	}
 	
 	
+	
+	/**
+	 * @MethodName: selectReqTskNm
+	 * <p>Title: 根据岗位编码查询岗位名称</p >
+	 * @Description: TODO
+	 * @author wangc
+	 * @param tskCd
+	 * @param params
+	 * @date 2021年4月21日20:54:20 
+	 */
+	@Override
+	public String selectReqHpNo(String userId) {
+		
+		return claimInvoiceReceptionDAO.selectReqHpNo(userId);
+	}
 }

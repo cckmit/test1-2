@@ -140,21 +140,21 @@
                             </td>
                         </tr>
                         <tr>
-                        	<th scope="row"><spring:message code="ser.lbl.trsfNo" /></th><!-- 快递单号 -->
+                        	<th scope="row"><span class="bu_required"><spring:message code="ser.lbl.trsfNo" /></th><!-- 快递单号 -->
                             <td>
-                                <input id="trsfNo" type="text" class="form_input form_readonly" readonly/>
+                                <input id="trsfNo" type="text" class="form_input" />
                             </td>
                         	<th scope="row"><spring:message code="ser.lbl.trsfCmpCd" /></th><!-- 快递公司 -->
-                        	<td class="readonly_area" id="expsCmpNmtd">
-                            	<input type="text" id="expsCmpNm" name="expsCmpNm" class="form_comboBox" readonly data-json-obj="true" />
+                        	<td id="expsCmpNmtd">
+                            	<input type="text" id="expsCmpNm" name="expsCmpNm" class="form_comboBox" data-json-obj="true" />
                         	</td>
                         	<th scope="row"><spring:message code="ser.lbl.senderId" /></th> <!-- 寄件人 -->
                             <td>
-                                <input id="senderNm" type="text" class="form_input form_readonly" readonly/>
+                                <input id="senderNm" type="text" class="form_input" value="${sreqUsrNm}"/>
                             </td>
                             <th scope="row"><spring:message code="sal.lbl.telNumber" /></th> <!-- 联系电话 -->
                             <td>
-                                <input id="senderTelno" type="text" class="form_input form_readonly" readonly/>
+                                <input id="senderTelno" type="text" class="form_input" value="${reqHpNo}"/>
                             </td>
                         </tr>
                     </tbody>
@@ -169,7 +169,10 @@
 
 <script type="text/javascript">
 var rowinvcNo;//默认的结算单信息，主要是为了接收和退票之后的返显
-var gridRow ;//默认不选
+var gridRow;//默认不选
+
+var userphone = $("#senderTelno").val();//登录人联系电话 wangc 2021年5月17日20:53:00
+var username =$("#senderNm").val();//登录人姓名 wangc 2021年5月17日20:53:05
 //发票状态下拉列表赋值 wangc 2021年4月12日11:04:53
 var receiptTpDsList = [];
 <c:forEach var="obj" items="${receiptTpDs}">
@@ -303,7 +306,6 @@ $(document).ready(function (e){
         dataTextField:"cmmCdNm"
        ,dataValueField:"cmmCd"
        ,dataSource:expsCmpNmList
-       ,optionLabel:" " 
        ,index:0
        ,valuePrimitive:true
     });
@@ -421,9 +423,9 @@ $(document).ready(function (e){
                    , attributes :{"class":"ac"}
                	   , format:"{0:yyyy-MM}"
                 }//结算报表年月
-               ,{field:"invcClaimTotAmt",title:"<spring:message code='ser.lbl.invcClaimTotAmt' />", width:110, attributes :{"class":"al"} }//确定金额
-               ,{field:"ddctTotAmt",title:"<spring:message code='crm.lbl.payBackAmt' />", width:110, attributes :{"class":"al"} }//扣减金额 
-               ,{field:"confirmTotAmt",title:"<spring:message code='ser.lbl.calcAmt' />", width:110, attributes :{"class":"al"} }//结算金额
+               ,{field:"invcClaimTotAmt",title:"<spring:message code='ser.lbl.invcClaimTotAmt' />",format:"{0:n2}", width:110, attributes :{"class":"ar"} }//确定金额
+               ,{field:"ddctTotAmt",title:"<spring:message code='crm.lbl.payBackAmt' />", format:"{0:n2}",width:110, attributes :{"class":"ar"} }//扣减金额 
+               ,{field:"confirmTotAmt",title:"<spring:message code='ser.lbl.calcAmt' />", format:"{0:n2}",width:110, attributes :{"class":"ar"} }//结算金额
                ,{field:"trsfNo",title:"<spring:message code='ser.lbl.trsfNo' />", width:110, attributes :{"class":"al"} }//快递单号
                ,{field:"expsCmpNm",title:"<spring:message code='ser.lbl.trsfCmpCd' />", width:80
                    ,attributes :{"class":"ac"}
@@ -553,12 +555,12 @@ $(document).ready(function (e){
                ,{field:"receiptCd",title:"<spring:message code='ser.lbl.InvoiceClaimNo' />", width:110, attributes :{"class":"al"} }//发票号
                ,{field:"buyNm",title:"<spring:message code='ser.lbl.InvoiceClaimTitle' />", width:110, attributes :{"class":"al"} }//发票抬头
                ,{field:"taxpayerIdCd",title:"<spring:message code='sal.lbl.PinNo' />", width:110, attributes :{"class":"al"} }//纳税人识别号
-               ,{field:"sumAmt",title:"<spring:message code='ser.lbl.InvoiceClaimAmt' />", width:110, attributes :{"class":"al"} }//发票金额
+               ,{field:"sumAmt",title:"<spring:message code='ser.lbl.InvoiceClaimAmt' />",format:"{0:n2}", width:110, attributes :{"class":"ar"} }//发票金额
                ,{field:"receiptIssDt" , title:"<spring:message code='crm.lbl.invoiceDt' />", width:125
                    , attributes :{"class":"ac"}
                    , format:"{0:<dms:configValue code='dateFormat' /> HH:mm}"
                 }//发票日期
-               ,{field:"remark",title:"<spring:message code='crm.lbl.remark' />", width:110, attributes :{"class":"al"} }//备注
+               ,{field:"remark",title:"<spring:message code='ser.lbl.InvoiceClaimRemark' />", width:110, attributes :{"class":"al"} }//备注
              ]
     });
     
@@ -573,10 +575,16 @@ $(document).ready(function (e){
             $("#failMsg").attr("readonly",true).addClass("form_readonly");//退票原因不可编辑
             $("#failMsgtd").addClass("readonly_area");//退票原因不可编辑
             $("#failRemark").attr("readonly",true).addClass("form_readonly");///退票备注不可编辑
-            /* $("#trsfNo").attr("readonly",true).addClass("form_readonly");//快递单号不可编辑
+            $("#trsfNo").attr("readonly",true).addClass("form_readonly");//快递单号不可编辑
             $("#expsCmpNm").attr("readonly",true).addClass("form_readonly");//快递公司不可编辑
+            $("#expsCmpNmtd").addClass("readonly_area"); //提报原因分类 置灰
             $("#senderNm").attr("readonly",true).addClass("form_readonly");//寄件人不可编辑
-            $("#senderTelno").attr("readonly",true).addClass("form_readonly");//联系电话不可编辑 */
+            $("#senderTelno").attr("readonly",true).addClass("form_readonly");//联系电话不可编辑 
+            //退过票，就不可以再编辑了
+            $("#trsfNo").val(result.trsfNo);//快递单号
+            $("#expsCmpNm").data("kendoExtDropDownList").value(result.expsCmpNm);//快递公司
+            $("#senderNm").val(result.senderNm);//寄件人
+            $("#senderTelno").val(result.senderTelno);//联系电话
     	}else{
     		//按钮显示
             $("#btReceive").data("kendoButton").enable(true);//收票显示
@@ -584,13 +592,15 @@ $(document).ready(function (e){
             $("#failMsg").attr("readonly",false).removeClass("form_readonly");;//退票原因可编辑
             $("#failMsgtd").removeClass("readonly_area");//退票原因可编辑
             $("#failRemark").attr("readonly",false).removeClass("form_readonly");///退票备注可编辑
-           /*  $("#trsfNo").attr("readonly",false).removeClass("form_readonly");//快递单号可编辑
+            $("#trsfNo").attr("readonly",false).removeClass("form_readonly");//快递单号可编辑
             $("#expsCmpNm").attr("readonly",false).removeClass("form_readonly");//快递公司可编辑
+            $("#expsCmpNmtd").removeClass("readonly_area");//快递公司可编辑
             $("#senderNm").attr("readonly",false).removeClass("form_readonly");//寄件人可编辑
-            $("#senderTelno").attr("readonly",false).removeClass("form_readonly");//联系电话可编辑 */
-            
-          
-           
+            $("#senderTelno").attr("readonly",false).removeClass("form_readonly");//联系电话可编辑 
+            $("#trsfNo").val("");//快递单号清空
+            $("#expsCmpNm").data("kendoExtDropDownList").value("01");//快递公司
+            $("#senderNm").val(username);//寄件人
+            $("#senderTelno").val(userphone);//联系电话
     	}
     	//加载发票列表
     	$("#gridDetail").data("kendoExtGrid").dataSource.data([]);
@@ -598,10 +608,10 @@ $(document).ready(function (e){
     	//清空退票信息
         $("#failMsg").data("kendoExtDropDownList").value(result.failMsg);//退票原因
         $("#failRemark").val(result.failRemark);//退票备注
-        $("#trsfNo").val(result.trsfNo);//快递单号
-        $("#expsCmpNm").data("kendoExtDropDownList").value(result.expsCmpNm);//快递公司
-        $("#senderNm").val(result.senderNm);//寄件人
-        $("#senderTelno").val(result.senderTelno);//联系电话
+        //$("#trsfNo").val(result.trsfNo);//快递单号
+        //$("#expsCmpNm").data("kendoExtDropDownList").value(result.expsCmpNm);//快递公司
+        //$("#senderNm").val(result.senderNm);//寄件人
+        //$("#senderTelno").val(result.senderTelno);//联系电话
         
     }
     
@@ -642,6 +652,20 @@ $(document).ready(function (e){
                 dms.notification.warning("<spring:message code='ser.lbl.wrefundReason' var='wrefundReason' /><spring:message code='global.info.isNotNull' arguments='${wrefundReason}' />");
                 return;
             }//退票原因不能为空
+    		//校验快递单号
+          	var trsfNo = $("#trsfNo").val();
+          	var expsCmpNm = $("#expsCmpNm").val();
+          	//if(!(/^\d{13}$/.test(trsfNo))){ 
+          	if(!(/^[0-9a-zA-Z_]*$/.test(trsfNo))){ 
+           	dms.notification.warning("<spring:message code='ser.info.wEmsNoIsNm' />");
+               return false; 
+            }
+    		//校验手机号 11位数字
+       	  	var phone = $("#senderTelno").val();
+          	if(!(/^\d{11}$/.test(phone))){ 
+              dms.notification.warning("<spring:message code='ser.info.11wordsNum' />");
+              return false; 
+            }
     		var paramsQuit =  $.extend(
                 {"sinvcNo":rowinvcNo}//结算报表编号
                ,{"sreceiptTp":"03"}//开票状态--03准备退票
@@ -702,18 +726,19 @@ $(document).ready(function (e){
             $("#failRemark").val("");//退票备注
             $("#trsfNo").val("");//快递单号
             $("#expsCmpNm").data("kendoExtDropDownList").value("");//快递公司
-            $("#senderNm").val("");//寄件人
-            $("#senderTelno").val("");//联系电话
+            $("#senderNm").val(username);//寄件人
+            $("#senderTelno").val(userphone);//联系电话
             //相关显示出来
             $("#btReceive").data("kendoButton").enable(true);//收票显示
             $("#btnQuit").data("kendoButton").enable(true);  //退票显示
             $("#failMsg").attr("readonly",false).removeClass("form_readonly");;//退票原因可编辑
             $("#failMsgtd").removeClass("readonly_area");//退票原因可编辑
             $("#failRemark").attr("readonly",false).removeClass("form_readonly");///退票备注可编辑
-           /*  $("#trsfNo").attr("readonly",false).removeClass("form_readonly");//快递单号可编辑
+            $("#trsfNo").attr("readonly",false).removeClass("form_readonly");//快递单号可编辑
             $("#expsCmpNm").attr("readonly",false).removeClass("form_readonly");//快递公司可编辑
+            $("#expsCmpNmtd").removeClass("readonly_area");//快递公司可编辑
             $("#senderNm").attr("readonly",false).removeClass("form_readonly");//寄件人可编辑
-            $("#senderTelno").attr("readonly",false).removeClass("form_readonly");//联系电话可编辑 */
+            $("#senderTelno").attr("readonly",false).removeClass("form_readonly");//联系电话可编辑 
         }
     });
 

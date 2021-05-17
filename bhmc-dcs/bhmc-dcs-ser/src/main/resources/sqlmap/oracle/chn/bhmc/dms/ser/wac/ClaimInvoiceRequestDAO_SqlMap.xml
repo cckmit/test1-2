@@ -179,6 +179,10 @@
 	    	  , FAIL_CNT   		= FAIL_CNT+1
 	    	  , FAIL_MSG   		= #{failMsg}
 	    	  , FAIL_REMARK 	= #{failRemark}
+	    	  , TRSF_NO 		= #{trsfNo}
+	    	  , EXPS_CMP_NM 	= #{expsCmpNm}
+	    	  , SENDER_NM 		= #{senderNm}
+	    	  , SENDER_TELNO 	= #{senderTelno}
     		WHERE 1=1
     		AND INVC_NO 	= #{invcNo}
     </update>
@@ -260,4 +264,10 @@
     	se0960is.DLR_CD,se0960is.INVC_NO,'N',to_char(SYSDATE,'yyyyMMddHH24miss'),SYSDATE
     	)
     </update>
+    
+    
+   <!-- 根据用户的id查询手机号码  wangc  2021年4月26日15:51:27 -->
+   <select id="selectReqHpNo" parameterType="String" resultType="String">
+   	select HP_NO from cm_0801t t where t.USR_ID=#{userId}
+   </select>
 </mapper>
