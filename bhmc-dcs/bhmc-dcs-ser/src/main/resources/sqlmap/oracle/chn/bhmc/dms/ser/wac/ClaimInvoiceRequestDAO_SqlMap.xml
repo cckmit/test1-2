@@ -28,10 +28,10 @@
 		    ) w
 		    where 1 = 1
 		    <if test='sdlrCd != null and sdlrCd != "" '>
-            AND w.DLR_CD = #{sdlrCd}
+            AND w.DLR_CD =  LIKE '%'||#{sdlrCd}||'%'
             </if>
             <if test='sdlrNm != null and sdlrNm != "" '>
-            AND w.DLR_NM = #{sdlrNm}
+            AND w.DLR_NM =  LIKE '%'||#{sdlrNm}||'%'
             </if>
             <if test='sinvcNo != null and sinvcNo != "" '>
             AND w.INVC_NO = #{sinvcNo}
@@ -78,11 +78,11 @@
 			    left join se_0930t pack on invoice.INVC_NO=pack.INVC_NO
 		    ) w
 		    where 1 = 1
-		    <if test='sdlrCd != null and sdlrCd != "" '>
-            AND w.DLR_CD = #{sdlrCd}
+            <if test='sdlrCd != null and sdlrCd != "" '>
+            AND w.DLR_CD =  LIKE '%'||#{sdlrCd}||'%'
             </if>
             <if test='sdlrNm != null and sdlrNm != "" '>
-            AND w.DLR_NM = #{sdlrNm}
+            AND w.DLR_NM =  LIKE '%'||#{sdlrNm}||'%'
             </if>
             <if test='sinvcNo != null and sinvcNo != "" '>
             AND w.INVC_NO = #{sinvcNo}
@@ -217,11 +217,11 @@
 			) w
 			where 1 = 1
 			<if test='sdlrCd != null and sdlrCd != "" '>
-			AND w.DLR_CD = #{sdlrCd}
-			</if>
-			<if test='sdlrNm != null and sdlrNm != "" '>
-			AND w.DLR_NM = #{sdlrNm}
-			</if>
+            AND w.DLR_CD =  LIKE '%'||#{sdlrCd}||'%'
+            </if>
+            <if test='sdlrNm != null and sdlrNm != "" '>
+            AND w.DLR_NM =  LIKE '%'||#{sdlrNm}||'%'
+            </if>
 			<if test='sinvcNo != null and sinvcNo != "" '>
 			AND w.INVC_NO = #{sinvcNo}
 			</if>
