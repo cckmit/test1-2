@@ -387,10 +387,10 @@ $(document).ready(function() {
     $("#btnDownloadList").kendoButton({
 
         click:function(e){
-			//新版的Excel模板下载，可以自由添加属性值
+			//新版的Excel模板下载，可以自由添加属性值 ReceivedInfoList_Tpl.xlsx
             dms.ajax.excelExportFreedom({
                 "beanName"         :"advanceReceivedInfoDetailService"
-                ,"templateFile"    :"ReceivedInfoList_Tpl.xlsx"
+                ,"templateFile"    :"object_collection_template.xlsx"   
                 ,"fileName"        :"配件资金列表.xlsx"
                 ,"sDlrCd"			: $("#sDlrCd").val()//店代码
             });

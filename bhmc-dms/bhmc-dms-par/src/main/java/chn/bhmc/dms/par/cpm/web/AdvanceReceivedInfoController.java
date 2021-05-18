@@ -6,6 +6,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +32,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ibm.icu.text.SimpleDateFormat;
+
 import able.com.exception.BizException;
 import able.com.vo.HMap;
 import able.com.web.HController;
@@ -51,6 +55,7 @@ import chn.bhmc.dms.par.cpm.service.AdvanceReceivedInfoHeaderService;
 import chn.bhmc.dms.par.cpm.vo.AdvanceReceivedInfoDetailVO;
 import chn.bhmc.dms.par.cpm.vo.AdvanceReceivedInfoHeaderVO;
 import chn.bhmc.dms.par.cpm.vo.AdvanceReceivedInfoSearchVO;
+import chn.bhmc.dms.par.cpm.vo.Employee;
 
 /**
  * AdvanceReceivedInfo Controller
@@ -209,17 +214,39 @@ public class AdvanceReceivedInfoController extends HController {
 
             ObjectUtil.convertMapToObject(params, searchVO, "beanName", "templateFile", "fileName");
             
-            List<AdvanceReceivedInfoDetailVO> list = advanceReceivedInfoDetailService.selectAdvanceReceivedInfoDetailsByCondition(searchVO);
+            //List<AdvanceReceivedInfoDetailVO> list = advanceReceivedInfoDetailService.selectAdvanceReceivedInfoDetailsByCondition(searchVO);
+            
+            //Map<String , Object> model=new HashMap<String , Object>();
+            
+            
+            //model.put("dpstAmt", 10.10);//保证金
+            //model.put("calcAmt", 10.11);//工程中
+            //model.put("balAmt" , 10.12);//实际金额
+            //model.put("lmtAmt" , 10.13);//提示金额
+            
+            //model.put("data", list);//信息数据
+                
+            
+            List<Employee> employees = generateSampleEmployeeData();
+            
+            Map<String,Integer> obj = new HashMap<String,Integer>();
+            obj.put("NUM1", 112222);
+            obj.put("NUM2", 122222);
+            obj.put("NUM3333", 22);
+            obj.put("aa", 12322);
+            
+            Map<String,Object> obj1 = new HashMap<String,Object>();
+            obj1.put("test",11.55665);
+            obj1.put("test1","wosss");
+            
             
             Map<String , Object> model=new HashMap<String , Object>();
+            model.put("employees", employees);
+            model.put("employees1", employees);
+            model.put("nowdate", new Date());
             
-            
-            model.put("dpstAmt", 10.10);//保证金
-            model.put("calcAmt", 10.11);//工程中
-            model.put("balAmt" , 10.12);//实际金额
-            model.put("lmtAmt" , 10.13);//提示金额
-            
-            model.put("data", list);//信息数据
+            model.put("obj", obj);
+            model.put("obj1", obj1);
             
             JxlsUtils.exportExcel(new FileInputStream(destFile), os, model);
             os.close();
@@ -244,5 +271,16 @@ public class AdvanceReceivedInfoController extends HController {
         
 
        
+    }
+    
+    
+    public static List<Employee> generateSampleEmployeeData() {
+        List<Employee> employees = new ArrayList<Employee>();
+        employees.add( new Employee("Elsa", new Date(), 0, 0) );
+        employees.add( new Employee("Oleg", new Date(), 2300, 0.25) );
+        employees.add( new Employee("Neil", new Date(), 2500, 0.00) );
+        employees.add( new Employee("Maria", new Date(), 1700, 0.15) );
+        employees.add( new Employee("John", new Date(), 2800, 0.20) );
+        return employees;
     }
 }
