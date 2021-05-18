@@ -1080,6 +1080,39 @@ $(document).ready(function(){
                 });
             }, 500);
         },
+        
+        //新版的excel的模板下载，可以自由添加属性下载   wangc 2021年5月18日17:01:35
+        excelExportFreedom:function(params) {
+
+        	var excelExportId = dms.idGen.getId();
+            var queryString = "excelExportId="+excelExportId;
+
+            $.each(params, function(key, value){
+                queryString += "&" + key + "=" + encodeURIComponent(value);
+            });
+
+            dms.loading.show();
+
+            location.href = _contextPath + "/par/cpm/advanceReceivedInfo/excelDownloadFreedom.do?" + queryString; //修改的路径  wangc 2021年5月18日17:03:00
+
+            var interval = setInterval(function(){
+            	$.ajax({
+                    url:_contextPath + "/cmm/sci/excelDownloadStatus.do?excelExportId="+excelExportId
+                    ,type:'GET'
+                    ,dataType:'json'
+                    ,error:function(jqXHR, status, error) {
+                    	clearInterval(interval);
+                    	dms.loading.hide();
+                    }
+                    ,success:function(jqXHR, textStatus) {
+                    	if(jqXHR.status != 1 && jqXHR.status != 2){
+                    		clearInterval(interval);
+                    		dms.loading.hide();
+                    	}
+                    }
+                });
+            }, 500);
+        },
 
         excelProgressExport:function(params, maxRow, fileCnt, downCnt) {
 

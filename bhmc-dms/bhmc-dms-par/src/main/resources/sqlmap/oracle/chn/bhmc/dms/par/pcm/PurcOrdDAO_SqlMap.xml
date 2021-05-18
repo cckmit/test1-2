@@ -1079,6 +1079,10 @@
                         GROUP BY A.DLR_CD ,A.PURC_ORD_NO
                     ) C ON A.DLR_CD = C.DLR_CD AND A.PURC_ORD_NO = C.PURC_ORD_NO
                     WHERE A.DLR_CD = #{sDlrCd}
+                    -- BMP的 订单号查询 wangc 2021年5月17日15:26:46
+	                <if test='sBmpOrdNo != null and sBmpOrdNo != ""'>
+	                    AND A.BMP_ORD_NO LIKE '%'|| #{sBmpOrdNo} ||'%'
+	                </if>
                     <if test='sPurcOrdNo != null and sPurcOrdNo != ""'>
                         AND A.PURC_ORD_NO LIKE '%'||#{sPurcOrdNo}||'%'
                     </if><!-- 구매오더정보 -->
@@ -1278,13 +1282,13 @@
                         <if test='sItemDstinCd != null and sItemDstinCd != ""'>
                             AND B.ITEM_DSTIN_CD = #{sItemDstinCd}
                         </if>
-                        <!-- BMP的 订单号查询 wangc 2021年5月17日15:26:46-->
-                        <if test='sBmpOrdNo != null and sBmpOrdNo != ""'>
-                            AND A.BMP_ORD_NO = #{sBmpOrdNo}
-                        </if>
                         GROUP BY A.DLR_CD ,A.PURC_ORD_NO
                     ) C ON A.DLR_CD = C.DLR_CD AND A.PURC_ORD_NO = C.PURC_ORD_NO
                     WHERE A.DLR_CD = #{sDlrCd}
+                    -- BMP的 订单号查询 wangc 2021年5月17日15:26:46
+	                <if test='sBmpOrdNo != null and sBmpOrdNo != ""'>
+	                    AND A.BMP_ORD_NO LIKE '%'|| #{sBmpOrdNo} ||'%'
+	                </if>
                     <if test='sPurcOrdNo != null and sPurcOrdNo != ""'>
                         AND A.PURC_ORD_NO LIKE '%'||#{sPurcOrdNo}||'%'
                     </if><!-- 구매오더정보 -->

@@ -79,20 +79,20 @@
                 <tr>
                     <th scope="row"><spring:message code="par.lbl.acAmt" /></th>
                     <td>
-                        <input id="dpstAmt" class="form_numeric form_readonly ar" />
+                        <input id="dpstAmt" class="form_numeric form_readonly ar" /> <!-- 保证金 wangc 2021年5月18日15:50:17 -->
                     </td>
                     <th scope="row"><spring:message code="par.lbl.calcAmt" /></th>
                     <td>
-                        <input id="calcAmt" class="form_numeric form_readonly ar" />
+                        <input id="calcAmt" class="form_numeric form_readonly ar" /> <!-- 工程中 wangc 2021年5月18日15:50:17 -->
                     </td>
                     <th scope="row"><spring:message code="par.lbl.balAmt" /></th>
                     <td>
                         <input id="balAmt" name="balAmt" class="form_numeric form_readonly ar hidden" />
-                        <input id="useAmt" name="useAmt" class="form_numeric form_readonly ar" />
+                        <input id="useAmt" name="useAmt" class="form_numeric form_readonly ar" /> <!-- 实际金额  wangc 2021年5月18日15:50:17 -->
                     </td>
                     <th scope="row"><spring:message code="par.lbl.suggestAmt" /></th>
                     <td>
-                        <input id="lmtAmt" class="form_numeric ar" />
+                        <input id="lmtAmt" class="form_numeric ar" /> <!-- 提示金额 wangc 2021年5月18日15:50:17 -->
                     </td>
                 </tr>
             </tbody>
@@ -373,7 +373,7 @@ $(document).ready(function() {
     
     
     
-    //excel的下载
+    /* //excel的下载
     $("#btnDownloadList").kendoButton({
         click:function(e){
 			var url="<c:url value='/par/cpm/advanceReceivedInfo/advanceReceivedInfoExcel.do' />";
@@ -381,7 +381,24 @@ $(document).ready(function() {
 			alert(url);
 			//window.open(url);
         }
+    }); */
+    //selectAdvanceReceivedInfoMain
+    //Excel下载操作   wangc 2021年5月18日15:23:28
+    $("#btnDownloadList").kendoButton({
+
+        click:function(e){
+			//新版的Excel模板下载，可以自由添加属性值
+            dms.ajax.excelExportFreedom({
+                "beanName"         :"advanceReceivedInfoDetailService"
+                ,"templateFile"    :"ReceivedInfoList_Tpl.xlsx"
+                ,"fileName"        :"配件资金列表.xlsx"
+                ,"sDlrCd"			: $("#sDlrCd").val()//店代码
+            });
+        }
     });
+    
+    
+    
 });
 </script>
 <!-- //script -->
