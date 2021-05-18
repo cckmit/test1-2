@@ -214,41 +214,22 @@ public class AdvanceReceivedInfoController extends HController {
 
             ObjectUtil.convertMapToObject(params, searchVO, "beanName", "templateFile", "fileName");
             
-            //List<AdvanceReceivedInfoDetailVO> list = advanceReceivedInfoDetailService.selectAdvanceReceivedInfoDetailsByCondition(searchVO);
-            
-            //Map<String , Object> model=new HashMap<String , Object>();
-            
-            
-            //model.put("dpstAmt", 10.10);//保证金
-            //model.put("calcAmt", 10.11);//工程中
-            //model.put("balAmt" , 10.12);//实际金额
-            //model.put("lmtAmt" , 10.13);//提示金额
-            
-            //model.put("data", list);//信息数据
-                
-            
-            List<Employee> employees = generateSampleEmployeeData();
-            
-            Map<String,Integer> obj = new HashMap<String,Integer>();
-            obj.put("NUM1", 112222);
-            obj.put("NUM2", 122222);
-            obj.put("NUM3333", 22);
-            obj.put("aa", 12322);
-            
-            Map<String,Object> obj1 = new HashMap<String,Object>();
-            obj1.put("test",11.55665);
-            obj1.put("test1","wosss");
-            
+            List<AdvanceReceivedInfoDetailVO> list = advanceReceivedInfoDetailService.selectAdvanceReceivedInfoDetailsByCondition(searchVO);
             
             Map<String , Object> model=new HashMap<String , Object>();
-            model.put("employees", employees);
-            model.put("employees1", employees);
-            model.put("nowdate", new Date());
             
-            model.put("obj", obj);
-            model.put("obj1", obj1);
             
-            JxlsUtils.exportExcel(new FileInputStream(destFile), os, model);
+            model.put("dpstAmt", 10.10);//保证金
+            model.put("calcAmt", 10.11);//工程中
+            model.put("balAmt" , 10.12);//实际金额
+            model.put("lmtAmt" , 10.13);//提示金额
+            
+            model.put("items", list);//信息数据
+                
+            
+            
+            
+            JxlsUtils.exportExcel(is, os, model);
             os.close();
 
         } catch(Exception e) {
