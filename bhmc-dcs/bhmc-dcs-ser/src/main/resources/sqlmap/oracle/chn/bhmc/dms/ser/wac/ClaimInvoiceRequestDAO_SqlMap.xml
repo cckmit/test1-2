@@ -14,9 +14,7 @@
 	
 	<!-- 查询结算单数量 wangc 2021年4月12日21:03:04 -->
 	<select id="selectClaimInvoiceReceptionForInvoiceByInvoiceCnt" parameterType="chn.bhmc.dms.ser.wac.vo.ClaimInvoiceSearchVO" resultType="int">
-     SELECT count(*)
-     FROM (    
-        select ROWNUM AS RNUM , T1.* 
+    select count(*)
 		from(
 			select * from (
 			    select invoice.DLR_CD,(select DLR_NM from CM_0101T where DLR_CD = invoice.DLR_CD) as DLR_NM,invoice.INVC_NO,
@@ -50,16 +48,6 @@
             </if>
 		    ORDER BY w.invc_Dt desc
 		) T1
-		<where>
-            <if test='firstIndex != -1 and lastIndex != -1'>
-              AND ROWNUM <![CDATA[<=]]> #{lastIndex}
-            </if>
-        </where>
-    )<where>
-        <if test='firstIndex != -1 and lastIndex != -1'>
-            RNUM > #{firstIndex}
-        </if>
-    </where>
     </select>
 	
 	
@@ -140,9 +128,7 @@
     
     <!-- 查询发票单数量 wangc 2021年4月12日21:02:39 -->
     <select id="selectClaimInvoiceDetailForInvoiceByInvoiceCnt" parameterType="chn.bhmc.dms.ser.wac.vo.ClaimInvoiceDetailSearchVO" resultType="int">
-     SELECT count(*)
-     FROM (	
-    	select ROWNUM AS RNUM , T1.* 
+    	select count(*)
 		from(
 	    	select 
 			  t.RECEIPT_NO AS RECEIPT_CD,t.BUY_NM,t.TAXPAYER_ID_CD,
@@ -151,16 +137,7 @@
 			where t.RECEIPT_STATUS = '01'
 			and t.SETTLEMENT_NO = #{settlementNo}
     	) T1
-    	<where>
-            <if test='firstIndex != -1 and lastIndex != -1'>
-              AND ROWNUM <![CDATA[<=]]> #{lastIndex}
-            </if>
-        </where>
-    )<where>
-        <if test='firstIndex != -1 and lastIndex != -1'>
-            RNUM > #{firstIndex}
-        </if>
-    </where>
+    	
     </select>
     
     <!-- 根据结算报表编号查询结算单信息 wangc 2021年4月12日20:39:57 -->
