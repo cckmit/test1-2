@@ -152,7 +152,7 @@
                             <td>
                                 <input id="senderNm" type="text" class="form_input" value="${sreqUsrNm}"/>
                             </td>
-                            <th scope="row"><spring:message code="sal.lbl.telNumber" /></th> <!-- 联系电话 -->
+                            <th scope="row"><span class="bu_required"><spring:message code="sal.lbl.telNumber" /></th> <!-- 联系电话 -->
                             <td>
                                 <input id="senderTelno" type="text" class="form_input" value="${reqHpNo}"/>
                             </td>
@@ -667,6 +667,11 @@ $(document).ready(function (e){
     		//校验手机号 11位数字
        	  	var phone = $("#senderTelno").val();
           	if(!(/^\d{11}$/.test(phone))){ 
+              dms.notification.warning("<spring:message code='ser.info.11wordsNum' />");
+              return false; 
+            }
+          	
+          	if(dms.string.isEmpty($("#senderTelno").val())){
               dms.notification.warning("<spring:message code='ser.info.11wordsNum' />");
               return false; 
             }
